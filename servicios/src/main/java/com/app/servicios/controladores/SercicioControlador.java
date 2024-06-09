@@ -19,7 +19,7 @@ public class SercicioControlador {
     @Autowired
     private ServicioServicio servicioServicio;
 
-    @GetMapping
+    @GetMapping ("/listar")
     public String ListarServicio (Model model){
         model.addAttribute("servicios", servicioServicio.encontrarTodos());
         return "servicio";
@@ -38,7 +38,7 @@ public class SercicioControlador {
         return "FormularioServicio";
     }
 
-    @PostMapping
+    @PostMapping ("/crearServicio")
     public String guardarServicio(@ModelAttribute Servicio servicio){
         servicioServicio.guardar(servicio);
         return "redirect:/servicio";
