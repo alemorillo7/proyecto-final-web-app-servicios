@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.servicios.entidades.Servicio;
+import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.servicios.ServicioServicio;
 
 @Controller
@@ -21,39 +22,39 @@ public class SercicioControlador {
 
     @GetMapping
     public String ListarServicio (Model model){
-        model.addAttribute("servicios", servicioServicio.encontrarTodos());
+        model.addAttribute("servicios", servicioServicio.listarServiciosTodos());
         return "servicio";
     }
 
     @GetMapping("/{id}")
-    public String obtenerServicios(@PathVariable Long id, Model model){
-        Servicio servicio = servicioServicio.encontrarPorId(id);
+    public String obtenerServicios(@PathVariable String id, Model model){
+        Servicio servicio = servicioServicio.buscarServicio(id);
         model.addAttribute("servicio", servicio);
-        return "servicio";
+        return "servicio.html";
     }
 
     @GetMapping("/nuevo")
     public String nuevoServicio(Model model){
         model.addAttribute("servicio", new Servicio());
-        return "FormularioServicio";
+        return "formularioServicio";
     }
 
     @PostMapping
-    public String guardarServicio(@ModelAttribute Servicio servicio){
-        servicioServicio.guardar(servicio);
+    public String guardarServicio(@ModelAttribute String nombre) throws MiExcepcion{
+        servicioServicio.crearServicio(nombre);
         return "redirect:/servicio";
     }
 
     @GetMapping("/{id}/editar")
-    public String editarServicio(@PathVariable Long id, Model model){
-        Servicio servicio = servicioServicio.encontrarPorId(id);
+    public String editarServicio(@PathVariable String id, Model model){
+        Servicio servicio = servicioServicio.buscarServicio(id);
         model.addAttribute("Servicio", servicio);
         return "FormularioServicio";
     }
 
     @GetMapping("/{id}/eliminar")
-    public String eliminarServicio(@PathVariable Long id){
-        servicioServicio.eliminar(id);
+    public String eliminarServicio(@PathVariable String id){
+        servicioServicio.borrarServicio(id);
         return "redirect:/servicio";
     }
 
