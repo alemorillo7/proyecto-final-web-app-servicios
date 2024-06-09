@@ -58,7 +58,7 @@
                 <td th:text="${servicios.id}">ID</td>
                 <td th:text="${servicios.nombre}">Nombre</td>
                 <td>
-                    <a th:href="@{/servicios/editar/{id}(id=${servicios.id})}" class="btn btn-warning btn-sm">Modificar</a>
+                    <a th:href="@{/servicios/editar/{id}(id=${servicios.id})}" class="btn btn-primary btn-sm">Modificar</a>
                     <a th:href="@{/servicios/eliminar/{id}(id=${servicios.id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
