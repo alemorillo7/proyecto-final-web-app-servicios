@@ -3,6 +3,6 @@ img {
     width: 80px;
 }
 body {
-    background-image: url(/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/imagenes/backg.png);
+    background-image: url(/proyecto-final-web-app-servicios/servicios/src/main/resources/static/imagenes/backg.png);
     background-size: cover;
 }
