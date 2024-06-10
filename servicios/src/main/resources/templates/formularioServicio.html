@@ -12,12 +12,12 @@
     <div class="container mt-5">
         <div class="mt-4">
             <h2 class="mb-3">Formulario de Servicio</h2>
-            <form class="formulario" action="/servicios/crearServicio" method="post">
+            <form class="formulario" th:action="@{/servicios/guardar}" method="post">
                 <div class="form-group">
                     <label for="name">Nombre:</label>
-                    <input type="text" class="form-control" id="name" name="name" required placeholder="nombre">
+                    <input type="text" class="form-control" id="name" name="nombre" required placeholder="nombre">
                 </div>
-                <button type="button" class="btn btn-outline-primary">Crear</button>
+                <button type="submit" class="btn btn-outline-primary">Crear</button>
             </form>
         </div>
     </div>
