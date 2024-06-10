@@ -59,8 +59,9 @@
             <tr th:each="servicio : ${servicios}">
                 <td th:text="${servicio.id}">ID</td>
                 <td th:text="${servicio.nombre}">Nombre</td>
-                <td th:text="${servicio.activo}">Estado</td>
                 <td>
+                  <span th:if="${servicio.activo}" th:text="'Activo'">Activo</span>
+                  <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
                 </td>
             </tr>
         </tbody>
