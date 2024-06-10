@@ -3,6 +3,9 @@ img {
     width: 80px;
 }
 body {
-    background-image: url(/proyecto-final-web-app-servicios/servicios/src/main/resources/static/imagenes/backg.png);
-    background-size: cover;
+    background-image: url(imagenes/backg.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
