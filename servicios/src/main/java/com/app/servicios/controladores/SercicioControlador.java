@@ -20,7 +20,7 @@ public class SercicioControlador {
     @Autowired
     private ServicioServicio servicioServicio;
 
-    @GetMapping
+    @GetMapping ("/listar")
     public String ListarServicio (Model model){
         model.addAttribute("servicios", servicioServicio.listarServiciosTodos());
         return "servicio";
@@ -40,8 +40,8 @@ public class SercicioControlador {
     }
 
     @PostMapping
-    public String guardarServicio(@ModelAttribute String nombre) throws MiExcepcion{
-        servicioServicio.crearServicio(nombre);
+    public String guardarServicio(@ModelAttribute Servicio servicio){
+        servicioServicio.guardar(servicio);
         return "redirect:/servicio";
     }
 
