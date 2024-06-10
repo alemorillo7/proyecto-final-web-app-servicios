@@ -1,29 +1,32 @@
 package com.app.servicios.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.servicios.entidades.Servicio;
-import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.servicios.ServicioServicio;
 
 @Controller
 @RequestMapping("/servicios")
-public class SercicioControlador {
+public class ServicioControlador {
 
     @Autowired
     private ServicioServicio servicioServicio;
 
     @GetMapping ("/listar")
-    public String ListarServicio (Model model){
-        model.addAttribute("servicios", servicioServicio.listarServiciosTodos());
-        return "servicio";
+    public String ListarServicio (ModelMap modelo){
+        List<Servicio> servicios = servicioServicio.listarServiciosTodos();
+        modelo.put("servicios", servicios);
+        return "tablaServicios";
     }
 
     @GetMapping("/{id}")
@@ -34,15 +37,20 @@ public class SercicioControlador {
     }
 
     @GetMapping("/nuevo")
-    public String nuevoServicio(Model model){
-        model.addAttribute("servicio", new Servicio());
+    public String nuevoServicio(){
+        
         return "formularioServicio";
     }
 
-    @PostMapping
-    public String guardarServicio(@ModelAttribute Servicio servicio){
-        servicioServicio.guardar(servicio);
-        return "redirect:/servicio";
+    @PostMapping("/guardar")
+    public String guardarServicio(@RequestParam String nombre, ModelMap modelo){
+        try {
+            servicioServicio.crearServicio(nombre);
+            return "redirect:/servicios/listar";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "formularioServicio";
+        }
     }
 
     @GetMapping("/{id}/editar")
