@@ -12,12 +12,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@SuppressWarnings("deprecation")
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 public class Servicio {
-    @SuppressWarnings("deprecation")
+    
     @Id
     @GeneratedValue(generator= "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
