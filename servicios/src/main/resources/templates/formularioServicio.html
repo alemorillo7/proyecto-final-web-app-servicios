@@ -11,10 +11,24 @@
             background: url('/imagenes/backg.png') no-repeat center center fixed;
             background-size: cover;
         }
+
         .form-container {
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
             padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -31,7 +45,8 @@
                         <form class="formulario" th:action="@{/servicios/guardar}" method="post">
                             <div class="form-group">
                                 <label for="name">Nombre:</label>
-                                <input type="text" class="form-control" id="name" name="nombre" required placeholder="Ingrese el nombre del servicio">
+                                <input type="text" class="form-control" id="name" name="nombre" required
+                                    placeholder="Ingrese el nombre del servicio">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Crear</button>
                         </form>
@@ -51,6 +66,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
 </body>
 
 </html>
