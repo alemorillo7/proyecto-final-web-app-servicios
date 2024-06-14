@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Servicios</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilosForm.css">
+</head>
+<style>
+
+</style>
+<body class="form-body">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 mx-auto">
+                <div class="card form-container">
+                    <div class="card-header">
+                        <h2 class="mb-0">Regístrate como Usuario</h2>
+                    </div>
+                    <div class="card-body">
+                        <form class="formulario" th:action="@{/usuario/crear}" method="post">
+                            <div class="form-group">
+                                <label for="nombre">Nombre y Apellido:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre y apellido">
+                            </div>
+                            <div class="form-group">
+                                <label for="dni">DNI:</label>
+                                <input type="number" class="form-control" id="dni" name="dni" required placeholder="Documento de Identidad">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-MAIL:</label>
+                                <input type="email" class="form-control" id="email" name="email" required placeholder="ejemplo@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Número de teléfono">
+                            </div>
+                            <div class="form-group">
+                                <label for="localidad">Localidad:</label>
+                                <input type="text" class="form-control" id="localidad" name="localidad" required placeholder="Localidad">
+                            </div>
+                            <div class="form-group">
+                                <label for="barrio">Barrio:</label>
+                                <select class="form-control" id="barrio" name="barrio" required>
+                                    <option value="">Seleccione su barrio</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label >
+                                <input type="text" class="form-control" id="direccion" name="direccion" required placeholder="Calle 123">
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Imagen:</label>
+                                <input type="file" class="form-control" id="img" name="imagen" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password" required placeholder="mín. 8 caracteres">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Repetir Contraseña:</label>
+                                <input type="password" class="form-control" id="confirm-password" name="confirm_password" required placeholder="mín. 8 caracteres">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Crear usuario</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-right mb-1">
+                <a th:href="@{/}">Volver a la página principal</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <!-- <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script> -->
+</body>
+
+</html>
