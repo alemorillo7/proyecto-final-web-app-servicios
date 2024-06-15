@@ -1,0 +1,68 @@
+.form-body {
+    background: url('/servicios/src/main/resources/static/imagenes/backg.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.formulario {
+    background-color:rgba(89, 143, 146, 0.2); /* Fondo con transparencia */
+    border-radius: 10px;
+    padding: 20px;
+    animation: fadeIn 1.5s ease-in-out; /* Aplicar la animación */
+   
+
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+.card-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    
+}
+
+/* ESTILOS AL SCROLL */
+.card-body::-webkit-scrollbar {
+    width: 12px;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+    background-color: rgba(89, 143, 146, 0.8);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+.card-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(89, 143, 146, 1);
+}
+
+.card-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
