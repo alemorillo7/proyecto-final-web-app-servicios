@@ -3,9 +3,10 @@ img {
     width: 80px;
 }
 body {
-    background-image: url(imagenes/backg.png);
+    background-image: url(/imagenes/backg.png);
     background-size:contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
 }
+
