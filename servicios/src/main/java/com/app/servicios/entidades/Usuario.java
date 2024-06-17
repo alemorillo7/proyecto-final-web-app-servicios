@@ -47,7 +47,7 @@ public class Usuario {
 
     private String barrio;
 
-    private Integer telefono;
+    private String telefono;
 
     @Column(name = "imagen")
     @Lob
@@ -65,4 +65,6 @@ public class Usuario {
     private Integer experiencia;
 
     private String descripcion;
+
+    private Boolean estado;
 }

@@ -75,7 +75,7 @@ public class ServicioServicios {
 
 
     @Transactional (readOnly = true)
-    public List<Servicio> traerServiciosInactivos() {
+    public List<Servicio> listarServiciosInactivos() {
         List<Servicio> serviciosInactivos = servicioRepositorio.buscarServiciosInactivos();
         return serviciosInactivos;
     }

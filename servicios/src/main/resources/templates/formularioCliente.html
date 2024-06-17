@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Servicios</title>
+    <title>Registrate</title>
     
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="estilosForm.css">
@@ -21,22 +21,23 @@
                         <h2 class="mb-0">Regístrate como Usuario</h2>
                     </div>
                     <div class="card-body">
-                        <form class="formulario" th:action="@{/usuario/crear}" method="post">
+                        <form class="formulario" th:action="@{/registroCliente}" method="post">
                             <div class="form-group">
-                                <label for="nombre">Nombre y Apellido:</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre y apellido">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre">
                             </div>
                             <div class="form-group">
-                                <label for="dni">DNI:</label>
-                                <input type="number" class="form-control" id="dni" name="dni" required placeholder="Documento de Identidad">
+                                <label for="apellido">Apellido:</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" required placeholder="Ingrese su apellido">
                             </div>
+                            
                             <div class="form-group">
                                 <label for="email">E-MAIL:</label>
                                 <input type="email" class="form-control" id="email" name="email" required placeholder="ejemplo@gmail.com">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono:</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Número de teléfono">
+                                <input type="tel" class="form-control" id="telefono" name="telefono"  placeholder="Número de teléfono">
                             </div>
                             <div class="form-group">
                                 <label for="localidad">Localidad:</label>
@@ -46,9 +47,9 @@
                                 <label for="barrio">Barrio:</label>
                                 <select class="form-control" id="barrio" name="barrio" required>
                                     <option value="">Seleccione su barrio</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option value="Barrio 1">1</option>
+                                    <option value="Barrio 2">2</option>
+                                    <option value="Barrio 3">3</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -56,7 +57,7 @@
                                 <input type="text" class="form-control" id="direccion" name="direccion" required placeholder="Calle 123">
                             </div>
                             <div class="form-group">
-                                <label for="direccion">Imagen:</label>
+                                <label for="imagen">Imagen:</label>
                                 <input type="file" class="form-control" id="img" name="imagen" required>
                             </div>
                             <div class="form-group">
@@ -65,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="confirm-password">Repetir Contraseña:</label>
-                                <input type="password" class="form-control" id="confirm-password" name="confirm_password" required placeholder="mín. 8 caracteres">
+                                <input type="password" class="form-control" id="confirm-password" name="password2" required placeholder="mín. 8 caracteres">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Crear usuario</button>
                         </form>
