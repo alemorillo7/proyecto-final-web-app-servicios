@@ -141,7 +141,7 @@ public String login(@RequestParam(required = false) String error, ModelMap model
 @PreAuthorize ("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE')")
 @GetMapping("/inicio")
 public String inicio() {
-    return "inicio.html:";
+    return "inicio.html";
 }
 
 }
