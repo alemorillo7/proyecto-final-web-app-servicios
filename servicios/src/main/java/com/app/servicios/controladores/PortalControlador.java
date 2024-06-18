@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +52,7 @@ public String registrarClientePost(@RequestParam String nombre, @RequestParam St
 
     try {
         usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, imagen);
-        return "inicio.html";
+        return "login.html";
     } catch (Exception ex) {
         modelo.put("error", ex.getMessage());
         return "redirect:/registrarCliente";
@@ -94,7 +95,7 @@ ModelMap modelo) {
         }
         }
         usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, imagen, dni, experiencia, descripcion, servicios);
-        return "inicio.html";
+        return "login.html";
     } catch (Exception ex) {
         modelo.put("error", ex.getMessage());
         return "redirect:/registrarProveedor";
@@ -135,6 +136,12 @@ public String login(@RequestParam(required = false) String error, ModelMap model
     modelo.put("error", "Email o contraseña incorrectos");
     }
     return "login.html";
+}
+
+@PreAuthorize ("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE')")
+@GetMapping("/inicio")
+public String inicio() {
+    return "inicio.html:";
 }
 
 }
