@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.app.servicios.entidades.Servicio;
 
 @Repository
-public interface ServicioRepositorio extends JpaRepository<Servicio, String>{
+public interface ServicioRepositorio extends JpaRepository<Servicio, String> {
+    
     @Query("SELECT s FROM Servicio s WHERE s.nombre = :nombre")
-    public Servicio buscarServicio(@Param("nombre")String nombre);
+    public Servicio buscarServicioPorNombre(@Param("nombre") String nombre);
 
     @Query("SELECT s FROM Servicio s WHERE s.activo = true")
     public List<Servicio> buscarServiciosActivos();
@@ -20,6 +21,3 @@ public interface ServicioRepositorio extends JpaRepository<Servicio, String>{
     @Query("SELECT s FROM Servicio s WHERE s.activo = false")
     public List<Servicio> buscarServiciosInactivos();
 }
-
-
-

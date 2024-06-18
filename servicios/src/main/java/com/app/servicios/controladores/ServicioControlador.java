@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,57 +12,87 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.servicios.entidades.Servicio;
-import com.app.servicios.servicios.ServicioServicio;
+import com.app.servicios.servicios.ServicioServicios;
 
-@Controller
-@RequestMapping("/servicios")
+@Controller@RequestMapping("/servicios")
 public class ServicioControlador {
 
     @Autowired
-    private ServicioServicio servicioServicio;
+    private ServicioServicios servicioServicios;
 
-    @GetMapping ("/listar")
-    public String ListarServicio (ModelMap modelo){
-        List<Servicio> servicios = servicioServicio.listarServiciosTodos();
-        modelo.put("servicios", servicios);
+
+    //Controlador de lista de servicios//
+    @GetMapping("/listar")
+    public String listarServicios(ModelMap modelo) {
+
+        List<Servicio> listaServicios = servicioServicios.listarServiciosTodos();
+        modelo.put("servicios", listaServicios);
         return "tablaServicios";
-    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @GetMapping("/{id}")
-    public String obtenerServicios(@PathVariable String id, Model model){
-        Servicio servicio = servicioServicio.buscarServicio(id);
-        model.addAttribute("servicio", servicio);
-        return "servicio.html";
-    }
-
+    //Controlador para formulario de registar servicio nuevo//
     @GetMapping("/nuevo")
-    public String nuevoServicio(){
-        
+    public String crearServicio(ModelMap modelo) {
         return "formularioServicio";
     }
 
     @PostMapping("/guardar")
-    public String guardarServicio(@RequestParam String nombre, ModelMap modelo){
+    public String guardarServicio(@RequestParam String nombre, ModelMap modelo) throws Exception {
+
         try {
-            servicioServicio.crearServicio(nombre);
+            servicioServicios.crearServicio(nombre);
             return "redirect:/servicios/listar";
-        } catch (Exception e) {
-            modelo.put("error", e.getMessage());
-            return "formularioServicio";
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/servicios/nuevo";
         }
     }
 
-    @GetMapping("/{id}/editar")
-    public String editarServicio(@PathVariable String id, Model model){
-        Servicio servicio = servicioServicio.buscarServicio(id);
-        model.addAttribute("Servicio", servicio);
-        return "FormularioServicio";
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Controlador para editar servicio//
+    @GetMapping("/modificar/{id}")
+    public String editarServicio(@PathVariable String id, ModelMap modelo) {
+        Servicio servicio = servicioServicios.buscarServicioPorId(id);
+        modelo.put("servicio", servicio);
+        return "modificarServicio";
     }
 
-    @GetMapping("/{id}/eliminar")
-    public String eliminarServicio(@PathVariable String id){
-        servicioServicio.borrarServicio(id);
-        return "redirect:/servicio";
+    @PostMapping("/modificar/{id}")
+    public String modificarServicio(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) throws Exception {
+        try {
+            servicioServicios.modificarServicio(id, nombre);
+            return "redirect:/servicios/listar";
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/servicios/modificar/" + id;
+        }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Controlador para desactivar servicio//
+    @GetMapping("/desactivar/{id}")
+    public String desactivarServicio(@PathVariable String id, ModelMap modelo) throws Exception {
+        try {
+            servicioServicios.desactivarServicio(id);
+            return "redirect:/servicios/listar";
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/servicios/listar";
+        }
+    }
+
+    @PostMapping("/desactivar/{id}")
+    public String desactivarServicio(@PathVariable String id) throws Exception {
+        try {
+            servicioServicios.desactivarServicio(id);
+            return "redirect:/servicios/listar";
+        } catch (Exception ex) {
+            return "redirect:/servicios/listar";
+        }
+    }
+    
 }
+

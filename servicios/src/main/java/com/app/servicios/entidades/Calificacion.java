@@ -2,10 +2,10 @@ package com.app.servicios.entidades;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,18 +15,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Servicio {
+public class Calificacion {
     
-    @Id
+
+@Id
     @GeneratedValue (generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    
+    private Integer puntaje;
 
-    @Column (unique = true, nullable = false)
-    private String nombre;
+    private String comentario;
 
-    @Column (nullable = false)
-    private Boolean activo;
+    @ManyToOne
+    private Usuario cliente;
 
-
+    @ManyToOne
+    private Usuario proveedor;
 }

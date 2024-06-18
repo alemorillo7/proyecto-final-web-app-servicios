@@ -1,5 +1,5 @@
 package com.app.servicios.controladores;
 
-public class UsuarioControlador {
-
+public class CalificacionControlador {
+    
 }
