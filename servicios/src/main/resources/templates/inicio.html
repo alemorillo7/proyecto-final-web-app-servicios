@@ -17,9 +17,10 @@
 
 <body>
     <header>
+        
     </header>
     <main>
-        <button>Registrarse como Cliente</button>
+        <h1 th:if="${session.usuariosession != null}" th:text="'¡Hola ' + ${session.usuariosession.nombre}"></h1>
     </main>
     
 
