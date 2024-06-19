@@ -32,4 +32,6 @@ public class Calificacion {
 
     @ManyToOne
     private Usuario proveedor;
+
+    private boolean activo;
 }

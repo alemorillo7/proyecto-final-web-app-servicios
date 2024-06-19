@@ -1,0 +1,100 @@
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+}
+
+.form-body {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-container {
+    background: var(--color-secondary);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    background: var(--color-primary);
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+    overflow-y: auto;
+   background: var(--color-background); 
+    
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--color-senary);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-quaternary);
+}
+
+footer a {
+    color: var(--color-primary);
+}
+
+footer a:hover {
+    color: var(--color-quaternary);
+}
+
+/* Estilos para el scrollbar del formulario */
+.formulario {
+    max-height: 400px; /* Ajusta esta altura según tus necesidades */
+    overflow-y: auto;
+    padding-right: 15px; /* Espacio para el scrollbar */
+}
+
+/* Personalización del scrollbar */
+.formulario::-webkit-scrollbar {
+    width: 10px;
+}
+
+.formulario::-webkit-scrollbar-track {
+    background: #D3D9D9; /* Color de fondo del track */
+    border-radius: 10px;
+}
+
+.formulario::-webkit-scrollbar-thumb {
+    background-color: #647F86; /* Color del pulgar */
+    border-radius: 10px;
+    border: 3px solid #D3D9D9; /* Espacio alrededor del pulgar */
+}
+
+.formulario::-webkit-scrollbar-thumb:hover {
+    background-color: #455B66; /* Color del pulgar al pasar el mouse */
+}
+
+/* Estilos para otros navegadores */
+.formulario {
+    scrollbar-width: thin;
+    scrollbar-color: #647F86 #D3D9D9;
+}
