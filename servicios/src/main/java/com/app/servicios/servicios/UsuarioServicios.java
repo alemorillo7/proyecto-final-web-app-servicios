@@ -1,12 +1,22 @@
 package com.app.servicios.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
@@ -14,10 +24,12 @@ import com.app.servicios.enumeraciones.Rol;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.UsuarioRepositorio;
 
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Service
-public class UsuarioServicios{
+public class UsuarioServicios implements UserDetailsService{
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -37,7 +49,7 @@ public class UsuarioServicios{
         cliente.setBarrio(barrio);
         cliente.setTelefono(telefono);
         cliente.setEmail(email);
-        cliente.setPassword(password);
+        cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
         cliente.setImagen(imagen);
         cliente.setEstado(true);
@@ -60,7 +72,7 @@ public class UsuarioServicios{
         proveedor.setBarrio(barrio);
         proveedor.setTelefono(telefono);
         proveedor.setEmail(email);
-        proveedor.setPassword(password);
+        proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
         proveedor.setRol(Rol.PROVEEDOR);
         proveedor.setImagen(imagen);
         proveedor.setExperiencia(experiencia);
@@ -84,7 +96,7 @@ public class UsuarioServicios{
         cliente.setBarrio(barrio);
         cliente.setTelefono(telefono);
         cliente.setEmail(email);
-        cliente.setPassword(password);
+        cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
         cliente.setImagen(imagen);
         
@@ -103,7 +115,7 @@ public class UsuarioServicios{
         proveedor.setBarrio(barrio);
         proveedor.setTelefono(telefono);
         proveedor.setEmail(email);
-        proveedor.setPassword(password);
+        proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
         proveedor.setRol(Rol.PROVEEDOR);
         proveedor.setImagen(imagen);
         proveedor.setExperiencia(experiencia);
@@ -265,6 +277,33 @@ public class UsuarioServicios{
         }
         if (servicios.isEmpty()){
             throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
+        }
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+
+        if (usuario != null){
+
+            @SuppressWarnings({ "rawtypes", "unchecked" })
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", usuario);
+
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+
+        }else{
+            return null;
         }
     }
 
