@@ -15,11 +15,11 @@ import com.app.servicios.enumeraciones.EstadoTrabajo;
 public interface OrdenTrabajoRepositorio extends JpaRepository<OrdenTrabajo, String> {
     
     @Query("SELECT o FROM OrdenTrabajo o WHERE o.cliente.id = :id")
-    public List<OrdenTrabajo> buscarPorCliente(@Param("id") String id);
+    public List<OrdenTrabajo> buscarOrdenPorCliente(@Param("id") String id);
     @Query ("SELECT o FROM OrdenTrabajo o WHERE o.proveedor.id = :id")
-    public List<OrdenTrabajo> buscarPorProveedor(@Param("id") String id);
+    public List<OrdenTrabajo> buscarOrdenPorProveedor(@Param("id") String id);
     @Query ("SELECT o FROM OrdenTrabajo o WHERE o.servicios.id = :id")
-    public List<OrdenTrabajo> buscarPorServicio(@Param("id") String id);
+    public List<OrdenTrabajo> buscarOrdenPorServicio(@Param("id") String id);
     @Query ("SELECT o FROM OrdenTrabajo o WHERE o.estadoOrden = :estadoOrden")
     public List<OrdenTrabajo> buscarPorEstadoOrden(@Param("estadoOrden") EstadoOrden estadoOrden);
     @Query ("SELECT o FROM OrdenTrabajo o WHERE o.estadoTrabajo = :estadoTrabajo")
