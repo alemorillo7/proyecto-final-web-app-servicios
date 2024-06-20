@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrate</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/servicios/src/main/resources/static/css/estilosForm.css">
+    <link rel="stylesheet" href="/servicios/src/main/resources/static/css/icon-font.css">
+    <link rel="stylesheet" href="/servicios/src/main/resources/static/css/fancybox.min.css">
+    <link rel="stylesheet" href="/servicios/src/main/resources/static/css/swiper.min.css">
+    <link rel="stylesheet" href="/servicios/src/main/resources/static/css/odometer.min.css">
+    <link rel="stylesheet" href="/servicios/src/main/resources/static/css/flaticon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body class="form-body">
+        
+    <header>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-12 mx-auto">
+                    <div class="card form-container" id="formCard">
+                        <div class="card-header form-header">
+                            <h2 class="mb-0">Solicitud Trabajo</h2>
+                        </div>
+                        <div class="card-body">
+                            <form class="formulario" th:action="@{/proveedor/crear}" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="titulo">Título del Trabajo:</label>
+                                    <input type="text" class="form-control" id="titulo" name="titulo" required placeholder="Ingrese el título del trabajo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción:</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" required placeholder="Descripción del trabajo" maxlength="1000"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagen">Imagen:</label>
+                                    <input type="file" class="form-control" id="imagen" name="imagen" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="video">Video:</label>
+                                    <input type="file" class="form-control" id="video" name="video" accept="video/*" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block mt-4">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-right mb-1">
+                <a th:href="@{/}">Volver a la página principal</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/team.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/fancybox.min.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/swiper.min.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/odometer.min.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/wow.min.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/3d.jquery.js"></script>
+    <script src="/servicios/src/main/resources/static/javascript/pointer.js"></script>
+
+    <script>
+        // function addDarkmodeWidget() {
+        //     new Darkmode().showWidget();
+        // }
+        // window.addEventListener('load', addDarkmodeWidget);
+
+        // Initialize WOW.js for animations on scroll
+        new WOW().init();
+
+        // Initialize Fancybox for any elements with the data-fancybox attribute
+        $('[data-fancybox]').fancybox();
+
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Initialize Odometer
+        let el = document.querySelector('.odometer');
+        if (el) {
+            el.innerHTML = 12345; // example number
+        }
+
+        // Move form card based on mouse movement
+        document.addEventListener('mousemove', function(e) {
+            let card = document.getElementById('formCard');
+            let mouseX = e.clientX / window.innerWidth;
+            let mouseY = e.clientY / window.innerHeight;
+            let moveX = (mouseX - 0.5) * 30;
+            let moveY = (mouseY - 0.5) * 30;
+            card.style.transform = `translate(${moveX}px, ${moveY}px) rotateY(${moveX * 0.1}deg) rotateX(${moveY * -0.1}deg)`;
+        });
+    </script>
+</body>
+
+</html>
