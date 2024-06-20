@@ -6,4 +6,5 @@ public enum Rol {
     CLIENTE,
     PROVEEDOR,
     CLIENTEPROVEEDOR,
+    SUPERADMIN
 }
