@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Proveedor presupuesta la orden -->
+    <form th:action="@{/orden/presupuestar}" method="post">
+        <input type="hidden" name="orden_id" th:value="${orden_id}">
+        <input type="hidden" name="estado_2" value="PRESUPUESTADO">
+        <button type="submit" class="btn btn-primary">Enviar Presupuesto</button>
+      </form>
+
+      <!-- Cliente acepta o rechaza el presupuesto -->
+      <form id="aceptar-form" th:action="@{/orden/aceptar}" method="post" style="display: none;">
+        <input type="hidden" name="orden_id" th:value="${orden_id}">
+        <input type="hidden" name="estado_2" value="ACEPTADO">
+      </form>
+      
+
+      <form id="rechazar-form" th:action="@{/orden/rechazar}" method="post" style="display: none;">
+        <input type="hidden" name="orden_id" th:value="${orden_id}">
+        <input type="hidden" name="estado_2" value="RECHAZADO">
+      </form>
+      
+      <div>
+        <button type="button" class="btn btn-success" onclick="document.getElementById('aceptar-form').submit();">Aceptar Presupuesto</button>
+        <button type="button" class="btn btn-danger" onclick="document.getElementById('rechazar-form').submit();">Rechazar Presupuesto</button>
+      </div>
+
+      <!-- Formulario para finalizar el trabajo: -->
+      <form th:action="@{/orden/finalizar}" method="post">
+        <input type="hidden" name="orden_id" th:value="${orden_id}">
+        <input type="hidden" name="estado_2" value="FINALIZADO">
+        <button type="submit" class="btn btn-primary">Finalizar Trabajo</button>
+      </form>
+
+      <!-- Formulario para calificar el trabajo: -->
+      <form th:action="@{/orden/calificar}" method="post">
+        <input type="hidden" name="orden_id" th:value="${orden_id}">
+        <div class="form-group">
+          <label for="calificacion">Calificación:</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="calificacion" value="5" /><label for="star5" title="5 estrellas">☆</label>
+            <input type="radio" id="star4" name="calificacion" value="4" /><label for="star4" title="4 estrellas">☆</label>
+            <input type="radio" id="star3" name="calificacion" value="3" /><label for="star3" title="3 estrellas">☆</label>
+            <input type="radio" id="star2" name="calificacion" value="2" /><label for="star2" title="2 estrellas">☆</label>
+            <input type="radio" id="star1" name="calificacion" value="1" /><label for="star1" title="1 estrella">☆</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar Calificación</button>
+      </form>
+      
+    <script src="/javascript/formScript"></script>
+</body>
+</html>
