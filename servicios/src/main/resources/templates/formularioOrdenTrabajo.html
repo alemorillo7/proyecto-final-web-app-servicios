@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrate</title>
-    
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/servicios/src/main/resources/static/css/estilosForm.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/servicios/src/main/resources/static/css/icon-font.css">
     <link rel="stylesheet" href="/servicios/src/main/resources/static/css/fancybox.min.css">
     <link rel="stylesheet" href="/servicios/src/main/resources/static/css/swiper.min.css">
@@ -19,38 +18,32 @@
 <body class="form-body">
         
     <header>
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-12 mx-auto">
-                    <div class="card form-container" id="formCard">
-                        <div class="card-header form-header">
-                            <h2 class="mb-0">Solicitud Trabajo</h2>
-                        </div>
-                        <div class="card-body">
-                            <form class="formulario" th:action="@{/proveedor/crear}" method="post" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label for="titulo">Título del Trabajo:</label>
-                                    <input type="text" class="form-control" id="titulo" name="titulo" required placeholder="Ingrese el título del trabajo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción:</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" required placeholder="Descripción del trabajo" maxlength="1000"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="imagen">Imagen:</label>
-                                    <input type="file" class="form-control" id="imagen" name="imagen" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="video">Video:</label>
-                                    <input type="file" class="form-control" id="video" name="video" accept="video/*" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block mt-4">Enviar</button>
-                            </form>
-                        </div>
-                    </div>
+        <div class="form-wrapper d-flex align-items-center justify-content-center">
+            <div class="form card p-4">
+              <div class="header">
+                <h1>Solicitud de Trabajo</h1>
+              </div>
+              <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="titulo">Título del Trabajo:</label>
+                  <input type="text" class="form-control" id="titulo" name="titulo" required placeholder="Título del trabajo">
                 </div>
+                <div class="form-group">
+                  <label for="descripcion">Descripción:</label>
+                  <textarea class="form-control" id="descripcion" name="descripcion" required placeholder="Descripción de los servicios" maxlength="500"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="imagen">Imagen:</label>
+                  <input type="file" class="form-control file-input" id="imagen" name="imagen" required>
+                </div>
+                <div class="form-group">
+                  <label for="video">Cargar Video</label>
+                  <input type="file" class="form-control file-input" id="video" name="video" accept="video/*" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Enviar</button>
+              </form>
             </div>
-        </div>
+          </div>
     </header>
     
     
@@ -73,45 +66,8 @@
     <script src="/servicios/src/main/resources/static/javascript/wow.min.js"></script>
     <script src="/servicios/src/main/resources/static/javascript/3d.jquery.js"></script>
     <script src="/servicios/src/main/resources/static/javascript/pointer.js"></script>
-
-    <script>
-        // function addDarkmodeWidget() {
-        //     new Darkmode().showWidget();
-        // }
-        // window.addEventListener('load', addDarkmodeWidget);
-
-        // Initialize WOW.js for animations on scroll
-        new WOW().init();
-
-        // Initialize Fancybox for any elements with the data-fancybox attribute
-        $('[data-fancybox]').fancybox();
-
-        // Initialize Swiper
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-
-        // Initialize Odometer
-        let el = document.querySelector('.odometer');
-        if (el) {
-            el.innerHTML = 12345; // example number
-        }
-
-        // Move form card based on mouse movement
-        document.addEventListener('mousemove', function(e) {
-            let card = document.getElementById('formCard');
-            let mouseX = e.clientX / window.innerWidth;
-            let mouseY = e.clientY / window.innerHeight;
-            let moveX = (mouseX - 0.5) * 30;
-            let moveY = (mouseY - 0.5) * 30;
-            card.style.transform = `translate(${moveX}px, ${moveY}px) rotateY(${moveX * 0.1}deg) rotateX(${moveY * -0.1}deg)`;
-        });
-    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
 </body>
 
 </html>

@@ -1,106 +1,193 @@
+@import "https://fonts.googleapis.com/css?family=Raleway:300,400,500,900,700,300|Montserrat:300,400,700";
+
 :root {
-    --color-primary: #0683C2;
-    --color-secondary: #96B8CD;
-    --color-tertiary: #AED5D6;
-    --color-quaternary: #598F92;
-    --color-quinary: #647F86;
-    --color-senary: #455B66;
-    --color-background: #D3D9D9;
+  --color-primary: #0683C2;
+  --color-secondary: #96B8CD;
+  --color-tertiary: #AED5D6;
+  --color-quaternary: #598F92;
+  --color-quinary: #647F86;
+  --color-senary: #455B66;
+  --color-background: #D3D9D9;
 }
 
 .form-body {
-    background-color: black;
-    height: 100vh;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(310deg, #0683C2, #598F92, #598F92, #647F86);
+  background-size: 600% 600%;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  animation: oscillateBG 10s ease infinite;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-wrapper {
+    margin-top: 50px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%; /* Cambiar de 100vh a 100% para mejor ajuste */
+  position: relative;
+  z-index: 10;
+}
+
+.form-wrapper .form {
+  max-width: 700px; /* Asegura un mayor ancho si es necesario */
+  max-height: 700px;
+  width: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow-y: auto; /* Permite el desplazamiento en dispositivos móviles */
+}
+
+
+.form-wrapper h1 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  margin: 0 0 0 0; /* Ajuste de margen */
+}
+
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="file"],
+input[type="password"] {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  color: inherit;
+  padding: 14px 20px; /* Reduce el padding para ajustar el tamaño */
+  position: relative;
+  line-height: 1.2em;
+  font-size: 16px; /* Reduce el tamaño de fuente */
+  font-weight: 300;
+  border: solid 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+  background: transparent;
+  outline: none;
+  user-select: none;
+  margin-bottom: 20px; /* Reduce el margen inferior */
+  color: #fff;
+  height: auto;
+  border-radius: 50px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="file"]:focus,
+input[type="password"]:focus {
+  border-color: #2cffce;
+}
+
+button.btn.btn-primary.btn-block.mt-4 {
+  background: linear-gradient(310deg, #96B8CD, #AED5D6, #598F92, #0683C2);
+  background-size: 600% 600%;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.btn.btn-primary.btn-block.mt-4:hover {
+  background-position: 100% 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes oscillateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Estilo para la barra de desplazamiento */
+.form-wrapper .form::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .form-wrapper .form::-webkit-scrollbar-track {
+    background: var(--color-quinary); /* Color de fondo del track */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  .form-wrapper .form::-webkit-scrollbar-thumb {
+    background: var(--color-primary); /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  .form-wrapper .form::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  .form-wrapper .form {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  .form-wrapper .form {
+    max-height: 80vh; /* Limitar la altura máxima del formulario para permitir el desplazamiento */
+    overflow-y: auto; /* Habilitar el desplazamiento vertical */
+  }
+
+
+/* estilos form calificacion */
+
+.star-rating {
     display: flex;
-    align-items: center;
+    flex-direction: row-reverse;
     justify-content: center;
-    padding: 20px;
-}
-
-.form-container {
-    background: var(--color-secondary);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 100%;
-    max-width: 500px;
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-header {
-    background: var(--color-primary);
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
-
-.card-body {
-    padding: 20px;
-    overflow-y: auto;
-   background: var(--color-background); 
-    
-}
-
-.form-group label {
-    font-weight: bold;
-    color: var(--color-senary);
-}
-
-.btn-primary {
-    background-color: var(--color-primary);
-    border: none;
-    transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-    background-color: var(--color-quaternary);
-}
-
-footer a {
-    color: var(--color-primary);
-}
-
-footer a:hover {
-    color: var(--color-quaternary);
-}
-
-/* Estilos para el scrollbar del formulario */
-.formulario {
-    max-height: 400px; /* Ajusta esta altura según tus necesidades */
-    overflow-y: auto;
-    padding-right: 15px; /* Espacio para el scrollbar */
-}
-
-/* Personalización del scrollbar */
-.formulario::-webkit-scrollbar {
-    width: 10px;
-}
-
-.formulario::-webkit-scrollbar-track {
-    background: #D3D9D9; /* Color de fondo del track */
-    border-radius: 10px;
-}
-
-.formulario::-webkit-scrollbar-thumb {
-    background-color: #647F86; /* Color del pulgar */
-    border-radius: 10px;
-    border: 3px solid #D3D9D9; /* Espacio alrededor del pulgar */
-}
-
-.formulario::-webkit-scrollbar-thumb:hover {
-    background-color: #455B66; /* Color del pulgar al pasar el mouse */
-}
-
-/* Estilos para otros navegadores */
-.formulario {
-    scrollbar-width: thin;
-    scrollbar-color: #647F86 #D3D9D9;
-}
-
-/* estilosForm.css */
-
+  }
+  
+  .star-rating input[type="radio"] {
+    display: none;
+  }
+  
+  .star-rating label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    padding: 0 0.1rem;
+    transition: color 0.2s;
+  }
+  
+  .star-rating input[type="radio"]:checked ~ label {
+    color: #FFD700;
+  }
+  
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: #FFD700;
+  }
+  
 
 
 
