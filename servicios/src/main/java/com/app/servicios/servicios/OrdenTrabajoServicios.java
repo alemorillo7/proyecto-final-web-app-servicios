@@ -111,11 +111,7 @@ public class OrdenTrabajoServicios {
     }
 
     // VERQUERY//
-    @Transactional(readOnly = true)
-    public List<OrdenTrabajo> listarOrdenesTrabajoPorServicio(String id) {
-        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenPorServicio(id);
-        return ordenesTrabajo;
-    }
+    
 
     @Transactional(readOnly = true)
     public List<OrdenTrabajo> listarOrdenesAbierto() {
