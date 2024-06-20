@@ -21,9 +21,12 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     public Usuario buscarPorEmail(@Param("email")String email);
+<<<<<<< HEAD
 
     //definir metodo donde se obtenga los UsuariosProveedores que esten listados en un servicio especifico.
     @Query("SELECT u FROM Usuario u JOIN u.servicio s WHERE s.id= :id")
     List<Usuario> buscarProveedorPorIdServicio(@Param ("id")String id);
     
+=======
+>>>>>>> 83e35a1b1e3567aa4f28c0f5b50ccdf4598d6448
 }
