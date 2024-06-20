@@ -154,4 +154,14 @@ public class PortalControlador {
         }
         return "inicio.html";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE')")
+    @GetMapping("/panelUsuario")
+    public String panelUsuario(HttpSession session, ModelMap modelo) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            return "redirect:/admin";
+        }
+        return "panelUsuario.html";
+    }
 }
