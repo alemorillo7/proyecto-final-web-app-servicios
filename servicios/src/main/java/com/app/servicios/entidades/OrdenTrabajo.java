@@ -39,8 +39,7 @@ public class OrdenTrabajo {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordenSecuencial")
-    @SequenceGenerator(name = "ordenSecuencial", sequenceName = "ordenSecuencial", allocationSize = 1)
+    
     private Integer numeroDeOrden;
 
     private String titulo;
