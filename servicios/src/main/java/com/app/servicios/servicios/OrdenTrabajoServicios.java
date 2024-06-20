@@ -100,20 +100,20 @@ public class OrdenTrabajoServicios {
 
     @Transactional(readOnly = true)
     public List<OrdenTrabajo> listarOrdenesTrabajoPorCliente(String id) {
-        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenesTrabajoPorCliente(id);
+        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenPorCliente(id);
         return ordenesTrabajo;
     }
 
     @Transactional(readOnly = true)
     public List<OrdenTrabajo> listarOrdenesTrabajoPorProveedor(String id) {
-        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenesTrabajoPorProveedor(id);
+        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenPorProveedor(id);
         return ordenesTrabajo;
     }
 
     // VERQUERY//
     @Transactional(readOnly = true)
     public List<OrdenTrabajo> listarOrdenesTrabajoPorServicio(String id) {
-        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenesTrabajoPorServicio(id);
+        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarOrdenPorServicio(id);
         return ordenesTrabajo;
     }
 
