@@ -24,8 +24,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
 
     //definir metodo donde se obtenga los UsuariosProveedores que esten listados en un servicio especifico.
-    @Query("SELECT u FROM Usuario u JOIN u.servicio s WHERE s.id= :id")
-    List<Usuario> buscarProveedorPorIdServicio(@Param ("id")String id);
+    
     
 
 }
