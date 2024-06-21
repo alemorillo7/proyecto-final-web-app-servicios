@@ -145,13 +145,29 @@ public class PortalControlador {
         return "login.html";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin";
         }
+        if (logueado.getRol().toString().equals("SUPERADMIN")) {
+            return "redirect:/superadmin";
+        }
         return "inicio.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
+    @GetMapping("/panelUsuario")
+    public String panelUsuario(HttpSession session, ModelMap modelo) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            return "redirect:/admin";
+        }
+        if (logueado.getRol().toString().equals("SUPERADMIN")) {
+            return "redirect:/superadmin";
+        }
+        return "panelUsuario.html";
     }
 }
