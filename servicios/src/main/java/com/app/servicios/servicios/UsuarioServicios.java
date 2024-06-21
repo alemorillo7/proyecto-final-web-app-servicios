@@ -26,17 +26,16 @@ import com.app.servicios.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Service
-public class UsuarioServicios implements UserDetailsService{
+public class UsuarioServicios implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
-    //Crear Clientes y Proveedores//
+    // Crear Clientes y Proveedores//
     @Transactional
-    public void crearCliente(String nombre, String apellido, String direccion, String localidad, String barrio, String telefono, String email, String password, String password2, byte[] imagen) throws MiExcepcion{
+    public void crearCliente(String nombre, String apellido, String direccion, String localidad, String barrio,
+            String telefono, String email, String password, String password2, byte[] imagen) throws MiExcepcion {
 
         validarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2);
 
@@ -53,14 +52,16 @@ public class UsuarioServicios implements UserDetailsService{
         cliente.setRol(Rol.CLIENTE);
         cliente.setImagen(imagen);
         cliente.setEstado(true);
-        
+
         usuarioRepositorio.save(cliente);
     }
 
+    public void crearProveedor(String nombre, String apellido, String direccion, String localidad, String barrio,
+            String telefono, String email, String password, String password2, byte[] imagen, Integer dni,
+            Integer experiencia, String descripcion, Set<Servicio> servicios) throws MiExcepcion {
 
-    public void crearProveedor(String nombre, String apellido, String direccion, String localidad, String barrio, String telefono, String email, String password, String password2, byte[] imagen, Integer dni, Integer experiencia, String descripcion, Set<Servicio> servicios) throws MiExcepcion{
-        
-        validarProveedor(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, dni, experiencia, descripcion, servicios);
+        validarProveedor(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, dni,
+                experiencia, descripcion, servicios);
 
         Usuario proveedor = new Usuario();
 
@@ -79,15 +80,17 @@ public class UsuarioServicios implements UserDetailsService{
         proveedor.setDescripcion(descripcion);
         proveedor.setServicios(servicios);
         proveedor.setEstado(true);
-        
+
         usuarioRepositorio.save(proveedor);
     }
 
-    //Modificar Cliente y Proveedor//
-    
+    // Modificar Cliente y Proveedor//
+
     @Transactional
-    public void modificarCliente(String nombre, String apellido, String direccion, String localidad, String barrio, String telefono, String email, String password, String password2, byte[] imagen, String id) throws MiExcepcion{
-        
+    public void modificarCliente(String nombre, String apellido, String direccion, String localidad, String barrio,
+            String telefono, String email, String password, String password2, byte[] imagen, String id)
+            throws MiExcepcion {
+
         Usuario cliente = usuarioRepositorio.findById(id).orElse(null);
         cliente.setNombre(nombre);
         cliente.setApellido(apellido);
@@ -99,12 +102,14 @@ public class UsuarioServicios implements UserDetailsService{
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
         cliente.setImagen(imagen);
-        
+
         usuarioRepositorio.save(cliente);
-}
+    }
 
     @Transactional
-    public void modificarProveedor(String nombre, String apellido, String direccion, String localidad, String barrio, String telefono, String email, String password, String password2, byte[] imagen, Integer dni, Integer experiencia, String descripcion, Set<Servicio> servicios, String id) throws MiExcepcion{
+    public void modificarProveedor(String nombre, String apellido, String direccion, String localidad, String barrio,
+            String telefono, String email, String password, String password2, byte[] imagen, Integer dni,
+            Integer experiencia, String descripcion, Set<Servicio> servicios, String id) throws MiExcepcion {
 
         Usuario proveedor = usuarioRepositorio.findById(id).orElse(null);
         proveedor.setNombre(nombre);
@@ -121,13 +126,14 @@ public class UsuarioServicios implements UserDetailsService{
         proveedor.setExperiencia(experiencia);
         proveedor.setDescripcion(descripcion);
         proveedor.setServicios(servicios);
-        
+
         usuarioRepositorio.save(proveedor);
     }
 
     @Transactional
-    public void crearClienteProveedor(Integer experiencia, String descripcion, Integer dni, Set<Servicio> servicios, String id) throws MiExcepcion{
-        
+    public void crearClienteProveedor(Integer experiencia, String descripcion, Integer dni, Set<Servicio> servicios,
+            String id) throws MiExcepcion {
+
         validarClienteProveedor(experiencia, descripcion, dni, servicios);
 
         Usuario clienteProveedor = usuarioRepositorio.findById(id).orElse(null);
@@ -136,50 +142,51 @@ public class UsuarioServicios implements UserDetailsService{
         clienteProveedor.setDni(dni);
         clienteProveedor.setServicios(servicios);
         clienteProveedor.setRol(Rol.CLIENTEPROVEEDOR);
-        
+
         usuarioRepositorio.save(clienteProveedor);
     }
 
-    //Listar Usuarios//
+    // Listar Usuarios//
     @Transactional(readOnly = true)
-    public List<Usuario> listarTodos(){
+    public List<Usuario> listarTodos() {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         return usuarios;
     }
 
     @Transactional(readOnly = true)
-    public List<Usuario> listarClientes(){
+    public List<Usuario> listarClientes() {
         List<Usuario> clientes = usuarioRepositorio.buscarPorRol(Rol.CLIENTE);
         return clientes;
     }
 
     @Transactional(readOnly = true)
-    public List<Usuario> listarProveedores(){
+    public List<Usuario> listarProveedores() {
         List<Usuario> proveedores = usuarioRepositorio.buscarPorRol(Rol.PROVEEDOR);
         return proveedores;
     }
 
     @Transactional(readOnly = true)
-    public List<Usuario> listarClientesProveedores(){
+    public List<Usuario> listarClientesProveedores() {
         List<Usuario> clientesProveedores = usuarioRepositorio.buscarPorRol(Rol.CLIENTEPROVEEDOR);
         return clientesProveedores;
     }
 
-    //Buscar usuario//
+    // Buscar usuario//
 
     @Transactional(readOnly = true)
-    public void buscarUsuario(String id) throws MiExcepcion{
+    public Usuario buscarUsuario(String id) throws MiExcepcion {
         Optional<Usuario> usuario = usuarioRepositorio.findById(id);
-        if (usuario.isEmpty()){
+        if (usuario.isEmpty()) {
             throw new MiExcepcion("No existe el usuario");
         }
+        return usuario.get();
     }
 
-    //Activar o Desactivar Usuario//
+    // Activar o Desactivar Usuario//
     @Transactional
-    public void desactivarUsuario(String id) throws MiExcepcion{
+    public void desactivarUsuario(String id) throws MiExcepcion {
         Optional<Usuario> usuario = usuarioRepositorio.findById(id);
-        if (usuario.isEmpty()){
+        if (usuario.isEmpty()) {
             throw new MiExcepcion("No existe el usuario");
         }
         usuario.get().setEstado(false);
@@ -187,106 +194,113 @@ public class UsuarioServicios implements UserDetailsService{
     }
 
     @Transactional
-    public void activarUsuario(String id) throws MiExcepcion{
+    public void activarUsuario(String id) throws MiExcepcion {
         Optional<Usuario> usuario = usuarioRepositorio.findById(id);
-        if (usuario.isEmpty()){
+        if (usuario.isEmpty()) {
             throw new MiExcepcion("No existe el usuario");
         }
         usuario.get().setEstado(true);
         usuarioRepositorio.save(usuario.get());
     }
 
-    public void validarCliente(String nombre, String apellido, String direccion, String localidad, String barrio, String telefono, String email, String password, String password2) throws MiExcepcion{
+    public void validarCliente(String nombre, String apellido, String direccion, String localidad, String barrio,
+            String telefono, String email, String password, String password2) throws MiExcepcion {
 
-        if (nombre.isEmpty() || nombre == null){
+        if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("El nombre no puede ser vacio");
         }
-        if (apellido.isEmpty() || apellido == null){
+        if (apellido.isEmpty() || apellido == null) {
             throw new MiExcepcion("El apellido no puede ser vacio");
         }
-        if (direccion.isEmpty() || direccion == null){
+        if (direccion.isEmpty() || direccion == null) {
             throw new MiExcepcion("La direccion no puede ser vacia");
         }
-        if (localidad.isEmpty() || localidad == null){
+        if (localidad.isEmpty() || localidad == null) {
             throw new MiExcepcion("La localidad no puede ser vacia");
         }
-        if (barrio.isEmpty() || barrio == null){
+        if (barrio.isEmpty() || barrio == null) {
             throw new MiExcepcion("El barrio no puede ser vacio");
         }
-        if (email.isEmpty() || email == null){
+        if (email.isEmpty() || email == null) {
             throw new MiExcepcion("El email no puede ser vacio");
         }
-        if (password.isEmpty() || password == null){
+        if (password.isEmpty() || password == null) {
             throw new MiExcepcion("La contraseña no puede ser vacia");
         }
-        if (!password.equals(password2)){
+        if (!password.equals(password2)) {
             throw new MiExcepcion("Las contraseñas no coinciden");
         }
     }
 
-    public void validarProveedor(String nombre, String apellido, String direccion, String localidad, String barrio, String telefono, String email, String password, String password2, Integer dni, Integer experiencia, String descripcion, Set<Servicio> servicios) throws MiExcepcion{
+    public void validarProveedor(String nombre, String apellido, String direccion, String localidad, String barrio,
+            String telefono, String email, String password, String password2, Integer dni, Integer experiencia,
+            String descripcion, Set<Servicio> servicios) throws MiExcepcion {
 
-        if (nombre.isEmpty() || nombre == null){
+        if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("El nombre no puede ser vacio");
         }
-        if (apellido.isEmpty() || apellido == null){
+        if (apellido.isEmpty() || apellido == null) {
             throw new MiExcepcion("El apellido no puede ser vacio");
         }
-        if (direccion.isEmpty() || direccion == null){
+        if (direccion.isEmpty() || direccion == null) {
             throw new MiExcepcion("La direccion no puede ser vacia");
         }
-        if (localidad.isEmpty() || localidad == null){
+        if (localidad.isEmpty() || localidad == null) {
             throw new MiExcepcion("La localidad no puede ser vacia");
         }
-        if (barrio.isEmpty() || barrio == null){
+        if (barrio.isEmpty() || barrio == null) {
             throw new MiExcepcion("El barrio no puede ser vacio");
         }
-        if (email.isEmpty() || email == null){
+        if (email.isEmpty() || email == null) {
             throw new MiExcepcion("El email no puede ser vacio");
         }
-        if (password.isEmpty() || password == null){
+        if (password.isEmpty() || password == null) {
             throw new MiExcepcion("La contraseña no puede ser vacia");
         }
-        if (!password.equals(password2)){
+        if (!password.equals(password2)) {
             throw new MiExcepcion("Las contraseñas no coinciden");
         }
-        if (dni == null){
+        if (dni == null) {
             throw new MiExcepcion("El dni no puede ser vacio");
         }
-        if (experiencia == null){
+        if (experiencia == null) {
             throw new MiExcepcion("La experiencia no puede ser vacia");
         }
-        if (descripcion.isEmpty() || descripcion == null){
+        if (descripcion.isEmpty() || descripcion == null) {
             throw new MiExcepcion("La descripción no puede ser vacia");
         }
-        if (servicios.isEmpty()){
+        if (servicios.isEmpty()) {
             throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
         }
     }
 
-    public void validarClienteProveedor(Integer experiencia, String descripcion, Integer dni, Set<Servicio> servicios) throws MiExcepcion{
+    public void validarClienteProveedor(Integer experiencia, String descripcion, Integer dni, Set<Servicio> servicios)
+            throws MiExcepcion {
 
-        if (experiencia == null){
+        if (experiencia == null) {
             throw new MiExcepcion("La experiencia no puede ser vacia");
         }
-        if (descripcion.isEmpty() || descripcion == null){
+        if (descripcion.isEmpty() || descripcion == null) {
             throw new MiExcepcion("La descripción no puede ser vacia");
         }
-        if (dni == null){
+        if (dni == null) {
             throw new MiExcepcion("El dni no puede ser vacio");
         }
-        if (servicios.isEmpty()){
+        if (servicios.isEmpty()) {
             throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
         }
     }
 
+    public Usuario modificarUsuario(Usuario usuario) throws MiExcepcion {
+        return usuarioRepositorio.save(usuario);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        
+
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
 
-        if (usuario != null){
+        if (usuario != null) {
 
             @SuppressWarnings({ "rawtypes", "unchecked" })
             List<GrantedAuthority> permisos = new ArrayList();
@@ -302,7 +316,7 @@ public class UsuarioServicios implements UserDetailsService{
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
 
-        }else{
+        } else {
             return null;
         }
     }
