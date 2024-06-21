@@ -1,9 +1,11 @@
 package com.app.servicios.servicios;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,10 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.app.servicios.entidades.Calificacion;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
 import com.app.servicios.excepciones.MiExcepcion;
+import com.app.servicios.repositorios.CalificacionRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
@@ -291,10 +295,6 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
-    public Usuario modificarUsuario(Usuario usuario) throws MiExcepcion {
-        return usuarioRepositorio.save(usuario);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -319,6 +319,54 @@ public class UsuarioServicios implements UserDetailsService {
         } else {
             return null;
         }
+    }
+
+
+
+    // Metodos para manejar la logica de filtrado y ordenamiento:
+
+    public List<Usuario> obtenerListaProveedoresPorIdServicios(String id) {
+        return usuarioRepositorio.buscarProveedorPorIdServicio(id);
+    }
+        @Autowired
+        private CalificacionRepositorio calificacionRepositorio;
+
+        //Metodo para obtener el promedio de las calificaciones
+        public Double obtenerPromedioCalificacion(Usuario proveedor) {
+        List<Calificacion> calificaciones = calificacionRepositorio.buscarCalificacionesPorProveedoredor(proveedor);
+        if (calificaciones.isEmpty()) {
+            return 0.0;
+        }
+        int sumaPuntaje = 0;
+        for (Calificacion calificacion : calificaciones) {
+            sumaPuntaje += calificacion.getPuntaje();
+        }
+        return (double) sumaPuntaje / calificaciones.size();}
+
+    // ordenamiento:
+    public List<Usuario> obtenerProveedorPorFiltro(String id, String orden ){
+        List<Usuario> proveedores = usuarioRepositorio.buscarProveedorPorIdServicio(id);
+        switch (orden.toLowerCase()) {
+
+            case "nombre": //caso 1 filtrar por nombre de forma descendente y entregar una lista
+            return proveedores.stream().sorted(Comparator.comparing(Usuario::getNombre).reversed()).collect(Collectors.toList());
+            
+                 
+                case "calificacion"://caso 2 filtrar por el promedio obtenido de un metodo que dispara el resultado
+                // entre la suma de todas las calificaciones de cada provedor entre la cantidad de calidicaciones, 
+                //entrega una lista  
+                return proveedores.stream().sorted(Comparator.comparingDouble(this::obtenerPromedioCalificacion).reversed()).collect(Collectors.toList());
+                
+                
+                
+                case "Expeciencia": //caso 3 filtrar por los años de experiencia y devuelve una lista de forma descendente
+                return proveedores.stream().sorted(Comparator.comparing(Usuario :: getExperiencia).reversed()).collect(Collectors.toList());
+                
+        
+            default:
+                return proveedores;
+        }
+
     }
 
 }
