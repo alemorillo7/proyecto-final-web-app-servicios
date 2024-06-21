@@ -21,7 +21,7 @@
         <nav th:replace="~{fragments/navbar :: nav}"></nav>
     </header>
     <main>
-        <h1 th:if="${session.usuariosession != null}" th:text="'¡Hola ' + ${session.usuariosession.nombre}"></h1>
+        <h1 th:if="${session.usuariosession != null}" th:text="'¡Hola ' + ${session.usuariosession.nombre} + '!'" style="margin-top: 50px;"></h1>
 
         <div class="contenedor-servicios">
 
@@ -49,6 +49,7 @@
 
             <a href=""><img src="imagenes/servicios/aire-acondicionado.gif" alt="Aire acondicionado" id="aire-acondicionado"></a>
         </div>
+        
 
 
 

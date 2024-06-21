@@ -1,5 +1,5 @@
-tippy('#plomeria', {
-    content: 'Plomeria',
+tippy('#agua', {
+    content: 'Agua',
   });
 
   tippy('#carpinteria', {
@@ -46,4 +46,30 @@ tippy('#plomeria', {
     content: 'Aire acondicionado',
   });
 
+  tippy('#techo', {
+    content: 'Techo',
+  });
+
+  tippy('#decoracion', {
+    content: 'Decoración',
+  });
+
+  tippy('#herreria-soldadura', {
+    content: 'Herrería y Soldadura',
+  });
   
+  tippy('#plomeria', {
+    content: 'Plomeria',
+  });
+
+  tippy('#arquitectura-construccion', {
+    content: 'Arquitectura y Construcción',
+  });
+
+  tippy('#cerrajeria', {
+    content: 'Cerrajería',
+  });
+
+  tippy('#otros', {
+    content: 'Otros',
+  });
