@@ -325,8 +325,9 @@ public class UsuarioServicios implements UserDetailsService {
 
     // Metodos para manejar la logica de filtrado y ordenamiento:
 
+    /* Corregir todo esto porque no funciona
     public List<Usuario> obtenerListaProveedoresPorIdServicios(String id) {
-        return usuarioRepositorio.buscarProveedorPorIdServicio(id);
+        return usuarioRepositorio.buscarProveedorPorIdServicio(id);//
     }
         @Autowired
         private CalificacionRepositorio calificacionRepositorio;
@@ -367,6 +368,6 @@ public class UsuarioServicios implements UserDetailsService {
                 return proveedores;
         }
 
-    }
+    } */
 
 }
