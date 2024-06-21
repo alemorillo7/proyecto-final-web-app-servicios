@@ -60,11 +60,11 @@ public class UsuarioServicios implements UserDetailsService {
         usuarioRepositorio.save(cliente);
     }
 
-    public void crearProveedor(String nombre, String apellido, String direccion, String localidad, String barrio,
+    public void crearProveedor(String nombre, String apellido, String direccion, String localidad,
             String telefono, String email, String password, String password2, byte[] imagen, Integer dni,
             Integer experiencia, String descripcion, Set<Servicio> servicios) throws MiExcepcion {
 
-        validarProveedor(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, dni,
+        validarProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, dni,
                 experiencia, descripcion, servicios);
 
         Usuario proveedor = new Usuario();
@@ -74,7 +74,6 @@ public class UsuarioServicios implements UserDetailsService {
         proveedor.setDni(dni);
         proveedor.setDireccion(direccion);
         proveedor.setLocalidad(localidad);
-        proveedor.setBarrio(barrio);
         proveedor.setTelefono(telefono);
         proveedor.setEmail(email);
         proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -243,7 +242,7 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
-    public void validarProveedor(String nombre, String apellido, String direccion, String localidad, String barrio,
+    public void validarProveedor(String nombre, String apellido, String direccion, String localidad,
             String telefono, String email, String password, String password2, Integer dni, Integer experiencia,
             String descripcion, Set<Servicio> servicios) throws MiExcepcion {
 
@@ -258,9 +257,6 @@ public class UsuarioServicios implements UserDetailsService {
         }
         if (localidad.isEmpty() || localidad == null) {
             throw new MiExcepcion("La localidad no puede ser vacia");
-        }
-        if (barrio.isEmpty() || barrio == null) {
-            throw new MiExcepcion("El barrio no puede ser vacio");
         }
         if (email.isEmpty() || email == null) {
             throw new MiExcepcion("El email no puede ser vacio");
