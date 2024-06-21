@@ -82,7 +82,6 @@ public class PortalControlador {
                                          @RequestParam Integer dni,
                                          @RequestParam String direccion,
                                          @RequestParam String localidad,
-                                         @RequestParam String barrio,
                                          @RequestParam List<String> serviciosIds,
                                          @RequestParam String descripcion,
                                          @RequestParam String telefono,
@@ -99,7 +98,7 @@ public class PortalControlador {
                     servicios.add(servicio);
                 }
             }
-            usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, imagen, dni, experiencia, descripcion, servicios);
+            usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, imagen, dni, experiencia, descripcion, servicios);
             return "login.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
