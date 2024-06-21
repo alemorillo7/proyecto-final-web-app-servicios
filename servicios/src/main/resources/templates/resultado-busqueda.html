@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados de Búsqueda</title>
+</head>
+<body>
+    <h1>Proveedores del servicio</h1>
+    
+    <div th:if="${not #lists.isEmpty(proveedores)}">
+        <ul>
+            <li th:each="proveedor : ${proveedores}">
+                <h2 th:text="${proveedor.nombre + ' ' + proveedor.apellido}">Nombre Completo</h2>
+                <p th:text="${'Email: ' + proveedor.email}">Email</p>
+                <p th:text="${'Teléfono: ' + proveedor.telefono}">Teléfono</p>
+                <p th:text="${'Dirección: ' + proveedor.direccion + ', ' + proveedor.localidad + ', ' + proveedor.barrio}">Dirección</p>
+                <p th:text="${'Experiencia: ' + proveedor.experiencia + ' años'}">Experiencia</p>
+                <p th:text="${'Descripción: ' + proveedor.descripcion}">Descripción</p>
+                <p>Servicios:</p>
+                <ul>
+                    <li th:each="servicio : ${proveedor.servicios}" th:text="${servicio.nombre}">Nombre del Servicio</li>
+                </ul>
+                <!-- Si tienes una ruta para ver el perfil completo del proveedor -->
+                <a th:href="@{/perfil-proveedor(id=${proveedor.id})}">Ver perfil completo</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div th:if="${#lists.isEmpty(proveedores)}">
+        <p>No se encontraron proveedores para este servicio.</p>
+    </div>
+</body>
+</html>

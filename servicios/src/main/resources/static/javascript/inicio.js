@@ -73,3 +73,16 @@ tippy('#agua', {
   tippy('#otros', {
     content: 'Otros',
   });
+
+  document.querySelectorAll('.gif-hover').forEach(img => {
+    const staticSrc = img.src;
+    const gifSrc = img.dataset.gif;
+
+    img.addEventListener('mouseenter', () => {
+        img.src = gifSrc;
+    });
+
+    img.addEventListener('mouseleave', () => {
+        img.src = staticSrc;
+    });
+});

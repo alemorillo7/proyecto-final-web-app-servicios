@@ -175,6 +175,13 @@ public class UsuarioServicios implements UserDetailsService {
         return clientesProveedores;
     }
 
+    @Transactional(readOnly = true)
+    public List<Usuario> listarPorServicio(String servicio) {
+
+        return usuarioRepositorio.buscarPorServicio(servicio);
+        
+    }
+
     // Buscar usuario//
 
     @Transactional(readOnly = true)
