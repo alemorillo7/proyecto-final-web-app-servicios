@@ -172,7 +172,7 @@ public class PortalControlador {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
-    @GetMapping("/inicio/proveedores")
+    @GetMapping("/proveedores")
     public String vistaProveedores(@RequestParam String servicio, ModelMap modelo) {
         List<Usuario> proveedores = usuarioServicios.listarPorServicio(servicio);
         modelo.addAttribute("proveedores", proveedores);
