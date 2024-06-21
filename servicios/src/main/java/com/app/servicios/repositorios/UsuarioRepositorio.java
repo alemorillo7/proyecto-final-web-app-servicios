@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
 
@@ -24,8 +25,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
 
     //definir metodo donde se obtenga los UsuariosProveedores que esten listados en un servicio especifico.
-    @Query("SELECT u FROM Usuario u JOIN u.servicio s WHERE s.id= :id")
-    List<Usuario> buscarProveedorPorIdServicio(@Param ("id")String id);
+    @Query("SELECT DISTINCT u FROM Usuario u JOIN u.servicios s WHERE s.nombre = :servicio")
+    public List<Usuario> buscarPorServicio(@Param("servicio") String servicio);
     
 
 }

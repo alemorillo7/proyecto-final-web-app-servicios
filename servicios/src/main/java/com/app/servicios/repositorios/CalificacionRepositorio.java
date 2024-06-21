@@ -30,7 +30,7 @@ public interface CalificacionRepositorio extends JpaRepository<Calificacion, Str
     @Query("SELECT c FROM Calificacion c WHERE c.cliente = :cliente AND c.proveedor = :proveedor")
     public List<Calificacion> buscarCalificacionesPorClienteYPorProveedoredor(@Param("cliente")Usuario cliente, @Param("proveedor")Usuario proveedor);
 
-    public Double obtenerPromedioCalificacion (Usuario proveedor);
+   
 
 
 }

@@ -170,4 +170,12 @@ public class PortalControlador {
         }
         return "panelUsuario.html";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
+    @GetMapping("/inicio/proveedores")
+    public String vistaProveedores(@RequestParam String servicio, ModelMap modelo) {
+        List<Usuario> proveedores = usuarioServicios.listarPorServicio(servicio);
+        modelo.addAttribute("proveedores", proveedores);
+        return "resultado-busqueda.html";
+    }
 }

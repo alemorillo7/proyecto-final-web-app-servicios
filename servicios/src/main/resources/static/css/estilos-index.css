@@ -112,3 +112,7 @@
 .modal-content {
     font-family:"Montserrat", sans-serif;
 }
+
+.gif-hover {
+    cursor: pointer;
+}
