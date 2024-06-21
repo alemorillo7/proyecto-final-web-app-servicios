@@ -1,22 +1,19 @@
 package com.app.servicios.servicios;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.hibernate.mapping.Map;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.servicios.entidades.Calificacion;
 import com.app.servicios.entidades.Usuario;
-import com.app.servicios.enumeraciones.Rol;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.CalificacionRepositorio;
-import com.app.servicios.repositorios.UsuarioRepositorio;
+
 
 @Service
 public class CalificacionServicios {

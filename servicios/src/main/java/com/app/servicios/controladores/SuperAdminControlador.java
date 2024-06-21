@@ -84,7 +84,8 @@ public class SuperAdminControlador {
                 return "redirect:/superadmin/usuarios";
             }
             usuario.setRol(rol);
-            usuarioServicios.modificarUsuario(usuario);
+            //Corregir para que el metodo envie los parametros correspondientes//
+            //usuarioServicios.modificarUsuario(usuario);//
             return "redirect:/superadmin/usuarios";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
