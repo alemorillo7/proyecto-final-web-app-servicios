@@ -1,0 +1,13 @@
+.contenedor-servicios {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 80px;
+    justify-items: center;
+    align-items: center;
+    margin: 80px;
+}
+
+.contenedor-servicios img {
+    width: 100px;
+    height: 100px;
+}

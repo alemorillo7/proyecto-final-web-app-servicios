@@ -32,7 +32,7 @@ package com.app.servicios;
      )
      .logout((logout) -> logout
      .logoutUrl("/logout")
-     .logoutSuccessUrl("/login")
+     .logoutSuccessUrl("/")
      .permitAll()
      )
      .csrf(csrf -> csrf.disable());

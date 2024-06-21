@@ -178,11 +178,12 @@ public class UsuarioServicios implements UserDetailsService {
     // Buscar usuario//
 
     @Transactional(readOnly = true)
-    public void buscarUsuario(String id) throws MiExcepcion {
+    public Usuario buscarUsuario(String id) throws MiExcepcion {
         Optional<Usuario> usuario = usuarioRepositorio.findById(id);
         if (usuario.isEmpty()) {
             throw new MiExcepcion("No existe el usuario");
         }
+        return usuario.get();
     }
 
     // Activar o Desactivar Usuario//
