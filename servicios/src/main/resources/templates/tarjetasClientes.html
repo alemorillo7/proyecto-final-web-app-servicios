@@ -28,13 +28,13 @@
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasProveedores.html"><button class="btn btn-primary" type="button">Listar Proveedores</button></a>
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasClientes.html"><button class="btn btn-primary" type="button">Listar Clientes</button></a>
       </div>
-      <div class="card-group">
+      <div class="card-group mt-5">
         <div class="card">
-           <img src="..." class="card-img-top imagenproveedor" alt="...">
-           <div class="card-body">
-             <h5 class="card-title nombreServicio">Nombre</h5>
+           <img src="..." class="card-img-top imagencliente" alt="...">
+           <div class="card-body text-center">
+             <h5 class="card-title nombreCliente">Nombre</h5>
              <p class="card-text barrio">barrio</p>
-             <div class="switch-button d-grid gap-2 d-md-block mx-auto mt-5 d-md-flex justify-content-md-center ">
+             <div class="switch-button d-grid gap-2 d-md-block mx-auto mt-3">
                 <input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
                 <label for="switch-label" class="switch-button__label"></label>
                 <p>Administrador</p>
@@ -42,6 +42,7 @@
             <button type="button" class="btn btn-danger">Eliminar</button>
            </div>
          </div>
+         
       </div>
     </main>
     <div><footer th:replace="~{fragments/footer :: footer}"></footer></div>
