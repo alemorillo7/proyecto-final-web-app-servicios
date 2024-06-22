@@ -12,20 +12,27 @@
     border: 1px solid black;
 }
 
+body {
+    background-image: url(/imagenes/fondo.png)
+}
+
 .contenedor-servicios img {
     width: 100px;
     height: 100px;
+    background-color: white;
 }
 
 @media (max-width: 767px) {
     .contenedor-servicios {
         grid-template-columns: repeat(3, 1fr);
+        background-color: white;
     }
 }
 
 @media (max-width: 480px) {
     .contenedor-servicios {
         grid-template-columns: repeat(2, 0.1fr);
+        background-color: white;
     }
 }
 
