@@ -59,8 +59,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="servicios">Servicios:</label>
-                                <input th:each="servicio : ${servicios}" type="checkbox" class="form-control" id="servicios" name="serviciosIds" value="${servicio.id}" <span th:text="${servicio.nombre}"></span>
-                            </div>
+                                <div th:each="servicio : ${servicios}">
+                                    <input type="checkbox" class="form-control" id="servicios" name="serviciosIds" th:value="${servicio.id}" />
+                                    <span th:text="${servicio.nombre}"></span>
+                                </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción:</label>
                                 <textarea class="form-control" id="descripcion" name="descripcion" required placeholder="Descripción de los servicios" maxlength="500"></textarea>
