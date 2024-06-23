@@ -36,7 +36,7 @@
         <div class="form-wrapper d-flex align-items-center justify-content-center">
             <div class="form card p-6">
                 <div class="header">
-                    <h1>Formulario Proveedor</h1>
+                    <h1>Registrarse como proveedor</h1>
                 </div><br>
                 <form th:action="@{/registroProveedor}" method="POST">
                     <div class="row">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            < <div class="form-group">
+                            <div class="form-group">
                                 <label>Servicios:</label>
                                 <div th:each="servicio : ${servicios}" class="custom-checkbox">
                                     <input type="checkbox" class="form-control" id="servicios" name="serviciosIds" th:value="${servicio.id}" />

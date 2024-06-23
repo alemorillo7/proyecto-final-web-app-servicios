@@ -21,22 +21,35 @@
 </header>
     <main>
       <div class="center-block p-5 justify-content-center">
-        <div>
-      <h1 class="text-center">Administrador</h1>
-    </div>
-      <div class=" d-grid gap-2 d-md-block mx-auto mt-5 d-md-flex justify-content-md-center">
+        <div class=" d-grid gap-2 d-md-block mx-auto mt-5 d-md-flex justify-content-md-center">
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/formularioServicio.html"><button class="btn btn-primary hvr-grow" type="button">Crear Servicio</button></a>
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasServicios.html"><button class="btn btn-primary hvr-grow" type="button">Listar Servicios</button></a>
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasProveedores.html"><button class="btn btn-primary hvr-grow" type="button">Listar Proveedores</button></a>
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasClientes.html"><button class="btn btn-primary hvr-grow" type="button">Listar Clientes</button></a>
       </div>
     </div>
+    <div>
+        <h1 class="text-center comentarios">Comentarios de Nombre</h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title nombreCliente">Nombre del cliente</h5>
+              <p class="card-text contenido">Comentario</p>
+              <a href="#" class="btn btn-secondary">Desactivar vista</a>
+              <a href="#" class="btn btn-primary">Editar</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <div><footer th:replace="~{fragments/footer :: footer}"></footer></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-</body>
+    </body>
 
 
-</html>
+    </html>

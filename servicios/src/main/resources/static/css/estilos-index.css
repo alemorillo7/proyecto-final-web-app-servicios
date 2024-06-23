@@ -5,27 +5,36 @@
     justify-items: center;
     align-items: center;
     margin-top: 50px;
+    margin-bottom: 70px;
     margin-left: 20px;
     margin-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
     border: 1px solid black;
+    background-color: white;
+}
+
+body {
+    background-image: url(/imagenes/fondo.png)
 }
 
 .contenedor-servicios img {
     width: 100px;
     height: 100px;
+    background-color: white;
 }
 
 @media (max-width: 767px) {
     .contenedor-servicios {
         grid-template-columns: repeat(3, 1fr);
+        background-color: white;
     }
 }
 
 @media (max-width: 480px) {
     .contenedor-servicios {
         grid-template-columns: repeat(2, 0.1fr);
+        background-color: white;
     }
 }
 
@@ -92,7 +101,7 @@
     background-color: #0683C2;
 }
 .modal-title {
-    padding-left: 190px;
+    padding-left: 180px;
     font-weight: bolder;
 }
 .modal-body {
@@ -115,4 +124,96 @@
 
 .gif-hover {
     cursor: pointer;
+}
+
+.modal-fade {
+    font-family:"Montserrat", sans-serif;
+}
+
+.btnIngresar {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    background-color: #0683C2;
+}
+
+footer {
+    width: 100%;
+    height: 100%;
+    background-color: #455B66;
+    color: white;
+    font-family:"Montserrat", sans-serif;
+    padding: 20px;
+}
+.footer1 {
+    display: flex;
+
+}
+.presentacionFooter{
+    margin: 30px;
+    margin-bottom: 0px;
+}
+.usuarioFooter{
+    margin: 30px;
+    margin-bottom: 0px;
+}
+
+.ingresar {
+    text-decoration: none;
+}
+
+.sectionArribaWhat {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.item{
+    height: 60px;
+    padding: 0.5rem;
+    background-color: none;
+    margin-right: 1.5rem;
+    background-color:  #455B66;
+    border-radius: 40%;
+}
+
+
+.itemW{
+    height: 90px;
+    padding: 1.5rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 1rem;
+    opacity: 80%;
+}
+
+
+.sectionIcon {
+    list-style: none;
+    margin: 20px auto;
+    text-align: center;
+}
+.item1 {
+    list-style: none;
+    display: inline-block;
+    padding: 1rem;
+}
+.icono{
+    height: 30px;
+    justify-content: center;
+}
+.sectionLogo {
+    list-style: none;
+    text-align: center;
+}
+.logoFooter {
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    text-align: center;
+}
+.copyright {
+    font-size: small;
+    justify-content: center;
+    text-align: center;    
 }

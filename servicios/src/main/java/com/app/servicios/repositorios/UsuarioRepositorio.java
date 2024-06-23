@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.app.servicios.entidades.Servicio;
+
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
 
@@ -29,4 +29,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     public List<Usuario> buscarPorServicio(@Param("servicio") String servicio);
     
 
+    @Query("SELECT p FROM Usuario p JOIN p.servicios s WHERE s.id = :servicioId")
+    List<Usuario> buscarProveedoresPorIdServicio(@Param("servicioId") String servicioId);
 }
+

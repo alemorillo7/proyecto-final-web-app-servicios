@@ -1,11 +1,10 @@
 package com.app.servicios.servicios;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,12 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.app.servicios.entidades.Calificacion;
+
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
 import com.app.servicios.excepciones.MiExcepcion;
-import com.app.servicios.repositorios.CalificacionRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
@@ -177,7 +175,10 @@ public class UsuarioServicios implements UserDetailsService {
     @Transactional(readOnly = true)
     public List<Usuario> listarPorServicio(String servicio) {
 
-        return usuarioRepositorio.buscarPorServicio(servicio);
+        List<Usuario> proveedores = usuarioRepositorio.buscarProveedoresPorIdServicio(servicio);
+
+        return proveedores;
+        
         
     }
 
