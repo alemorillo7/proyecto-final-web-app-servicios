@@ -5,11 +5,13 @@
     justify-items: center;
     align-items: center;
     margin-top: 50px;
+    margin-bottom: 70px;
     margin-left: 20px;
     margin-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
     border: 1px solid black;
+    background-color: white;
 }
 
 body {
@@ -99,7 +101,7 @@ body {
     background-color: #0683C2;
 }
 .modal-title {
-    padding-left: 190px;
+    padding-left: 180px;
     font-weight: bolder;
 }
 .modal-body {
@@ -122,4 +124,35 @@ body {
 
 .gif-hover {
     cursor: pointer;
+}
+
+.modal-fade {
+    font-family:"Montserrat", sans-serif;
+}
+
+.btnIngresar {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    background-color: #0683C2;
+}
+
+footer {
+    width: 100%;
+    height: 100%;
+    background-color: #455B66;
+    color: white;
+    font-family:"Montserrat", sans-serif;
+    padding: 20px;
+}
+.footer1 {
+    display: flex;
+}
+.presentacionFooter{
+    margin-right: 20px;
+}
+.copyright {
+    font-size: small;
+    justify-content: center;
+    text-align: center;    
 }
