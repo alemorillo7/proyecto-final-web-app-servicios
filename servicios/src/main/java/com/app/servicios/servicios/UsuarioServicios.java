@@ -175,7 +175,10 @@ public class UsuarioServicios implements UserDetailsService {
     @Transactional(readOnly = true)
     public List<Usuario> listarPorServicio(String servicio) {
 
-        return usuarioRepositorio.buscarPorServicio(servicio);
+        List<Usuario> proveedores = usuarioRepositorio.buscarProveedoresPorIdServicio(servicio);
+
+        return proveedores;
+        
         
     }
 

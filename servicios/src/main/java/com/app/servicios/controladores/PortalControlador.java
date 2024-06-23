@@ -1,8 +1,10 @@
 package com.app.servicios.controladores;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -177,4 +179,43 @@ public class PortalControlador {
         modelo.addAttribute("proveedores", proveedores);
         return "resultado-busqueda.html";
     }
-}
+
+   
+
+    @GetMapping("/proveedores/{nombreServicio}")
+    public String mostrarCarpinteria(@PathVariable String nombreServicio, ModelMap modelo) {
+
+        System.out.println("nombreServicio: " + nombreServicio);
+        
+        Servicio servicio = new Servicio();
+
+        servicio = servicioServicios.buscarServicioPorNombre(nombreServicio);
+
+        System.out.println("servicio: " + servicio.toString());
+
+        String id = servicio.getId();
+        
+        System.out.println("id: " + id);
+
+        List<Usuario> proveedores = usuarioServicios.listarPorServicio(id);
+        
+        // Crear una lista de listas de nombres de servicios
+        List<List<String>> listaDeNombresDeServicios = new ArrayList<>();
+        
+        for (Usuario proveedor : proveedores) {
+            List<String> nombresServicios = proveedor.getServicios().stream()
+                                                     .map(Servicio::getNombre) // Suponiendo que tienes un método getNombre en tu entidad Servicio
+                                                     .collect(Collectors.toList());
+            listaDeNombresDeServicios.add(nombresServicios);
+        }
+    
+        modelo.addAttribute("proveedores", proveedores);
+        modelo.addAttribute("servicio", id);
+        modelo.addAttribute("listaDeNombresDeServicios", listaDeNombresDeServicios);
+    
+        return "vistaProveedorPorServicio.html";
+    }
+    
+        
+    }
+
