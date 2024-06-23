@@ -1,42 +1,48 @@
 <nav class="navbar fixed-top" style="background-color: #455B66">
-    <div class="container-fluid">
-      <a class="navbar-brand" style="color: #ffffff" href="#">ServiHogar</a>
+    <div class="container-fluid navInicio">
+      <div>
+        <img class="logo" src="imagenes/logo-fondo-transparente.png" alt="">
+        <a class="navbar-brand serviHogar" style="color: #ffffff" href="#">ServiHogar</a>
+      </div>
       <button class="navbar-toggler" style="color: #ffffff" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Administrador</h5>
+      <div class="offcanvas offcanvas-end desplegable" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header headerDesplegable">
+          <h5 class="offcanvas-title tituloDesplegable" id="offcanvasNavbarLabel">Bienvenidx Nombre</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <div class="offcanvas-body headerBody">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 listaBodyNV">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Crear Servicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Listar Servicios</a>
+            <a class="nav-link active text-light" aria-current="page" href="#">Órdenes nevas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Listar Proveedores</a>
+                <a class="nav-link active text-light" aria-current="page" href="#">Órdenes abiertas</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link active text-light" aria-current="page" href="#">Ver comentarios y calificaciones</a>
             </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Permisos
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Eliminar opinión</a></li>
-                <li><a class="dropdown-item" href="#">Otorgar roles</a></li>
-                <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
-              </ul>
+
+            <li class="nav-item">
+              <a class="nav-link active text-light" aria-current="page" href="#">Cambiar a rol proveedor</a>
             </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link active text-light" aria-current="page" href="#">Editar perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="#">Desactivar cuenta</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="#">Cerrar sesión</a>
+          </li>
           </ul>
           <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-outline-info btnBuscar" type="submit">Buscar</button>
           </form>
         </div>
       </div>
