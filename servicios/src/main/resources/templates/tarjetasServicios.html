@@ -26,13 +26,14 @@
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasProveedores.html"><button class="btn btn-primary" type="button">Listar Proveedores</button></a>
         <a href="/proyecto-final-web-app-servicios/servicios/src/main/resources/templates/tarjetasClientes.html"><button class="btn btn-primary" type="button">Listar Clientes</button></a>
       </div>
-      <div class="card-group">
-        <div class="card">
+      <div class="card-group mg-5">
+        <div class="card" th:each="servicio : ${servicios}">
            <img src="..." class="card-img-top imagenproveedor" alt="...">
            <div class="card-body">
-             <h5 class="card-title nombreServicio">Nombre</h5>
-             <boton class="btn btn-primary pedir">Editar</boton>
-             <button type="button" class="btn btn-danger">Eliminar</button>
+             <h5 th:text="${servicio.nombre}" class="card-title nombreServicio">Nombre</h5>
+             
+             <span th:if="${servicio.activo}" th:text="'Activo'">Activo</span>
+                  <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
            </div>
          </div>
       </div>
