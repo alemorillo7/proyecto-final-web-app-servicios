@@ -261,7 +261,18 @@ button.btn.btn-primary.btn-block.mt-4:hover {
     color: rgb(0, 0, 0);
     font-weight: 500;
   }
+  
+  .mensajeExito{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
 
+.mensajeError{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
 
 /* estilos form calificacion */
 
