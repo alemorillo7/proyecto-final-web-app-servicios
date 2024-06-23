@@ -11,6 +11,7 @@
     padding-bottom: 20px;
     border: 1px solid black;
     background-color: white;
+    margin-bottom: 100px;
 }
 
 body {
@@ -153,9 +154,6 @@ body {
 
 }
 
-.headerDesplegable {
-
-}
 
 .tituloDesplegable {
     color:aliceblue;
@@ -168,3 +166,84 @@ body {
     color: black;
 }
 
+footer {
+    width: 100%;
+    height: 25%;
+    background-color: #455B66;
+    color: white;
+    font-family:"Montserrat", sans-serif;
+    position: relative;
+    bottom: 0;
+}
+.footer1 {
+    display: flex;
+
+}
+.presentacionFooter{
+    margin: 30px;
+    margin-bottom: 0px;
+}
+.usuarioFooter{
+    margin: 30px;
+    margin-bottom: 0px;
+}
+
+.ingresar {
+    text-decoration: none;
+}
+
+.sectionArribaWhat {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.item{
+    height: 60px;
+    padding: 0.5rem;
+    background-color: none;
+    margin-right: 1.5rem;
+    background-color:  #455B66;
+    border-radius: 40%;
+}
+
+
+.itemW{
+    height: 90px;
+    padding: 1.5rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 1rem;
+    opacity: 80%;
+}
+
+
+.sectionIcon {
+    list-style: none;
+    margin: 20px auto;
+    text-align: center;
+}
+.item1 {
+    list-style: none;
+    display: inline-block;
+    padding: 1rem;
+}
+.icono{
+    height: 30px;
+    justify-content: center;
+}
+.sectionLogo {
+    list-style: none;
+    text-align: center;
+}
+.logoFooter {
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    text-align: center;
+}
+.copyright {
+    font-size: small;
+    justify-content: center;
+    text-align: center;    
+}
