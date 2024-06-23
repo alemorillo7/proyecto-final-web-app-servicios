@@ -86,7 +86,7 @@ public class ServicioServicios {
     @Transactional (readOnly = true)
     public Servicio buscarServicioPorNombre(String nombre) {
         Servicio servicio = new Servicio();
-        servicioRepositorio.buscarServicioPorNombre(nombre);
+        servicio = servicioRepositorio.buscarServicioPorNombre(nombre);
         return servicio;
     }
 
