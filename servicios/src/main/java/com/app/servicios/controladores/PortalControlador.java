@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
@@ -60,7 +61,7 @@ public class PortalControlador {
                                        @RequestParam String password, 
                                        @RequestParam String password2, 
                                        ModelMap modelo, 
-                                       @RequestParam byte[] imagen) throws Exception {
+                                       @RequestParam MultipartFile archivo) throws Exception {
         try {
             usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, imagen);
             return "login.html";
@@ -87,7 +88,7 @@ public class PortalControlador {
                                          @RequestParam List<String> serviciosIds,
                                          @RequestParam String descripcion,
                                          @RequestParam String telefono,
-                                         @RequestParam byte[] imagen,
+                                         @RequestParam MultipartFile archivo,
                                          @RequestParam Integer experiencia,
                                          @RequestParam String password,
                                          @RequestParam String password2,
@@ -215,7 +216,50 @@ public class PortalControlador {
     
         return "vistaProveedorPorServicio.html";
     }
-    
-        
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
+    @GetMapping("/perfil")
+    public String perfil(HttpSession session, ModelMap modelo) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("usuario", usuario);
+        return "perfilUsuario.html";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
+    @GetMapping("/actualizarPerfil/{id}")
+    public String actualizarPerfil(HttpSession session, ModelMap modelo) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado.getRol().toString().equals("PROVEEDOR")) {
+            return "redirect:/actualizarProveedor";
+        }
+        if (logueado.getRol().toString().equals("CLIENTEPROVEEDOR")) {
+            return "redirect:/actualizarClienteProveedor";
+        }
+        return "actualizarCliente.html";
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
+    @PostMapping("/perfil/{id}")
+    public String modificarCliente(@RequestParam String nombre, 
+                                @RequestParam String apellido, 
+                                @RequestParam String direccion, 
+                                @RequestParam String localidad, 
+                                @RequestParam String barrio, 
+                                @RequestParam String telefono, 
+                                @RequestParam String email, 
+                                @RequestParam String password, 
+                                @RequestParam String password2,
+                                MultipartFile archivo,
+                                @RequestParam String id,
+                                ModelMap modelo) {
+
+        try {
+            usuarioServicios.modificarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo, id);
+            return "redirect:/";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
+}
+    }
+}
 

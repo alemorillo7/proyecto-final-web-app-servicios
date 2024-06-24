@@ -18,8 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import com.app.servicios.entidades.Imagen;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
@@ -33,34 +34,54 @@ public class UsuarioServicios implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private ImagenServicios imagenServicios;
 
     // Crear Clientes y Proveedores//
     @Transactional
-    public void crearCliente(String nombre, String apellido, String direccion, String localidad, String barrio,
-            String telefono, String email, String password, String password2, byte[] imagen) throws MiExcepcion {
+    public void crearCliente(String nombre, String apellido, String direccion,
+            String localidad, String barrio,
+            String telefono, String email, String password,
+            String password2, 
+            MultipartFile archivo) throws MiExcepcion {
 
         validarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2);
 
         Usuario cliente = new Usuario();
 
         cliente.setNombre(nombre);
+
         cliente.setApellido(apellido);
+
         cliente.setDireccion(direccion);
+        
         cliente.setLocalidad(localidad);
+        
         cliente.setBarrio(barrio);
+        
         cliente.setTelefono(telefono);
+        
         cliente.setEmail(email);
+        
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
+        
         cliente.setRol(Rol.CLIENTE);
+
+        Imagen imagen = imagenServicios.guardarImagen(archivo);
+
         cliente.setImagen(imagen);
+       
         cliente.setEstado(true);
 
         usuarioRepositorio.save(cliente);
     }
 
-    public void crearProveedor(String nombre, String apellido, String direccion, String localidad,
-            String telefono, String email, String password, String password2, byte[] imagen, Integer dni,
-            Integer experiencia, String descripcion, Set<Servicio> servicios) throws MiExcepcion {
+    public void crearProveedor(String nombre, String apellido, String direccion, 
+                                String localidad,
+                                String telefono, String email, String password,
+                                String password2, MultipartFile archivo,
+                                Integer dni,Integer experiencia, String descripcion,
+                                Set<Servicio> servicios) throws MiExcepcion {
 
         validarProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, dni,
                 experiencia, descripcion, servicios);
@@ -76,7 +97,15 @@ public class UsuarioServicios implements UserDetailsService {
         proveedor.setEmail(email);
         proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
         proveedor.setRol(Rol.PROVEEDOR);
+
+        
+        
+        Imagen imagen = imagenServicios.guardarImagen(archivo);
+
         proveedor.setImagen(imagen);
+        
+        
+        
         proveedor.setExperiencia(experiencia);
         proveedor.setDescripcion(descripcion);
         proveedor.setServicios(servicios);
@@ -88,11 +117,19 @@ public class UsuarioServicios implements UserDetailsService {
     // Modificar Cliente y Proveedor//
 
     @Transactional
-    public void modificarCliente(String nombre, String apellido, String direccion, String localidad, String barrio,
-            String telefono, String email, String password, String password2, byte[] imagen, String id)
-            throws MiExcepcion {
+    public void modificarCliente(String nombre, String apellido, String direccion,
+                                    String localidad, String barrio,
+                                    String telefono, String email, String password,
+                                    String password2, MultipartFile archivo, String id)
+                                    throws MiExcepcion {
 
-        Usuario cliente = usuarioRepositorio.findById(id).orElse(null);
+        validarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2);
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+
+        Usuario cliente = respuesta.get();
         cliente.setNombre(nombre);
         cliente.setApellido(apellido);
         cliente.setDireccion(direccion);
@@ -102,15 +139,31 @@ public class UsuarioServicios implements UserDetailsService {
         cliente.setEmail(email);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
+
+        String idImagen = null;
+
+        if(cliente.getImagen() != null){
+            idImagen = cliente.getImagen().getId();
+            
+        }
+        
+        Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen); 
+
         cliente.setImagen(imagen);
+        
 
         usuarioRepositorio.save(cliente);
     }
+    }
 
     @Transactional
-    public void modificarProveedor(String nombre, String apellido, String direccion, String localidad, String barrio,
-            String telefono, String email, String password, String password2, byte[] imagen, Integer dni,
-            Integer experiencia, String descripcion, Set<Servicio> servicios, String id) throws MiExcepcion {
+    public void modificarProveedor(String nombre, String apellido, String direccion,
+                                    String localidad, String barrio,
+                                    String telefono, String email, String password,
+                                    String password2, MultipartFile archivo, Integer dni,
+                                    Integer experiencia, String descripcion,
+                                    Set<Servicio> servicios, String id)
+                                    throws MiExcepcion {
 
         Usuario proveedor = usuarioRepositorio.findById(id).orElse(null);
         proveedor.setNombre(nombre);
@@ -123,7 +176,20 @@ public class UsuarioServicios implements UserDetailsService {
         proveedor.setEmail(email);
         proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
         proveedor.setRol(Rol.PROVEEDOR);
+
+
+        String idImagen = null;
+
+        if(proveedor.getImagen() != null){
+            idImagen = proveedor.getImagen().getId();
+            
+        }
+        
+        Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen); 
+
         proveedor.setImagen(imagen);
+
+
         proveedor.setExperiencia(experiencia);
         proveedor.setDescripcion(descripcion);
         proveedor.setServicios(servicios);

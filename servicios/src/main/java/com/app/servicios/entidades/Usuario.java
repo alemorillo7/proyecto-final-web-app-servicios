@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,9 +50,8 @@ public class Usuario {
 
     private String telefono;
 
-    @Column(name = "imagen")
-    @Lob
-    private byte[] imagen;
+   @OneToOne
+   private Imagen imagen;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
