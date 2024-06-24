@@ -120,7 +120,7 @@ public class UsuarioServicios implements UserDetailsService {
     public void modificarCliente(String nombre, String apellido, String direccion,
                                     String localidad, String barrio,
                                     String telefono, String email, String password,
-                                    String password2, MultipartFile archivo, String id)
+                                    String password2, String id)
                                     throws MiExcepcion {
 
         validarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2);
@@ -140,18 +140,7 @@ public class UsuarioServicios implements UserDetailsService {
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
 
-        String idImagen = null;
-
-        if(cliente.getImagen() != null){
-            idImagen = cliente.getImagen().getId();
-            
-        }
-        
-        Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen); 
-
-        cliente.setImagen(imagen);
-        
-
+     
         usuarioRepositorio.save(cliente);
     }
     }

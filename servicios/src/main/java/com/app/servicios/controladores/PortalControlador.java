@@ -260,12 +260,11 @@ public class PortalControlador {
                                 @RequestParam String email, 
                                 @RequestParam String password, 
                                 @RequestParam String password2,
-                                MultipartFile archivo,
                                 @RequestParam String id,
                                 ModelMap modelo) {
 
         try {
-            usuarioServicios.modificarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo, id);
+            usuarioServicios.modificarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, id);
             return "inicio.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
