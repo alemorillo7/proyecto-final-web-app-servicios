@@ -63,7 +63,7 @@ public class PortalControlador {
                                        ModelMap modelo, 
                                        @RequestParam MultipartFile archivo) throws Exception {
         try {
-            usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, imagen);
+            usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo);
             return "login.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
@@ -101,7 +101,7 @@ public class PortalControlador {
                     servicios.add(servicio);
                 }
             }
-            usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, imagen, dni, experiencia, descripcion, servicios);
+            usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, archivo, dni, experiencia, descripcion, servicios);
             return "login.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
@@ -235,6 +235,7 @@ public class PortalControlador {
             return "redirect:/actualizarClienteProveedor";
         }
         return "actualizarCliente.html";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
     @PostMapping("/perfil/{id}")
@@ -260,6 +261,5 @@ public class PortalControlador {
         }
     }
 }
-    }
-}
+
 
