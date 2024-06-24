@@ -215,3 +215,45 @@ footer {
     justify-content: center;
     text-align: center;    
 }
+
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+  }
+  
+  /* Estilos para la barra de desplazamiento */
+  body::-webkit-scrollbar {
+      width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  body::-webkit-scrollbar-track {
+      background: var(--color-quinary); /* Color de fondo del track */
+
+  }
+  
+  body::-webkit-scrollbar-thumb {
+      background: var(--color-primary); /* Color del thumb */
+      border-radius: 10px; /* Bordes redondeados */
+      border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  body {
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  /* Animación de fondo */
+  @keyframes oscillateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }
