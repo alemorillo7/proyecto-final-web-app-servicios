@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.servicios.entidades.Imagen;
@@ -15,6 +16,7 @@ public class ImagenServicios {
     @Autowired
     private ImagenRepositorio imagenRepositorio;
 
+    @Transactional
     public Imagen guardarImagen(MultipartFile archivo) throws MiExcepcion {
         if (archivo != null) {
             try {
@@ -35,6 +37,8 @@ public class ImagenServicios {
         }
         return null;
     }
+
+    @Transactional
     public Imagen actualizarImagen (MultipartFile archivo, String idImagen) throws MiExcepcion {
         
         if (archivo != null) {
@@ -67,4 +71,6 @@ public class ImagenServicios {
         return null;
 
     }
+
+
 }

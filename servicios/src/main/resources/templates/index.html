@@ -85,13 +85,13 @@
     </header>
 
 
-    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" id="error-message">
+    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeErrorIndex" id="error-message-">
       <div class="card-body">
           <h5 class="card-title">Error</h5>
           <p class="card-text" th:text="${error}"></p>
       </div>
   </div>
-  <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+  <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExitoIndex" id="exito-message">
       <div class="card-body">
           <h5 class="card-title">Exito!</h5>
           <p class="card-text" th:text="${exito}"></p>
