@@ -18,13 +18,26 @@
 
 <body class="form-body">
         
+    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+            <h5 class="card-title">Error</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+
+    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">Exito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
     <header>
         <div class="form-wrapper d-flex align-items-center justify-content-center">
             <div class="form card p-6">
                 <div class="header">
                     <h1>Formulario Cliente</h1>
                 </div>
-                <form th:action="@{/registroCliente}" method="POST">
+                <form th:action="@{/registroCliente}" method="POST" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -81,6 +94,7 @@
                             </div>
                         </div>
                     </div>
+                  
                     <button type="submit" class="btn btn-primary btn-block mt-4">Crear usuario</button>
                 </form>
             </div>

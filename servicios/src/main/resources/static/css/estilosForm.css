@@ -91,7 +91,6 @@
   
 }
 
-
 textarea,
 input[type="text"],
 input[type="number"],
@@ -219,14 +218,22 @@ button.btn.btn-primary.btn-block.mt-4:hover {
     overflow-y: auto; /* Habilitar el desplazamiento vertical */
   }
 
-   /* Estilos para el checkbox */
-   .custom-checkbox {
+  .custom-checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 110px; /* Ajusta este valor según tus necesidades */
+    overflow-y: auto;
+}
+
+.custom-checkbox {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .custom-checkbox input[type="checkbox"] {
+    width: 50%; /* Dos columnas */
+    padding: 5px; /* Espacio alrededor de cada checkbox */
+    box-sizing: border-box;
+}
+
+.custom-checkbox input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -238,30 +245,66 @@ button.btn.btn-primary.btn-block.mt-4:hover {
     position: relative;
     margin-right: 10px;
     cursor: pointer;
-  }
-  
-  .custom-checkbox input[type="checkbox"]:checked {
+    flex-shrink: 0; /* No se reducirá aunque el texto sea largo */
+}
+
+.custom-checkbox input[type="checkbox"]:checked {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
-  }
-  
-  .custom-checkbox input[type="checkbox"]:checked::after {
+}
+
+.custom-checkbox input[type="checkbox"]:checked::after {
     content: '✔';
     color: white;
     font-size: 14px;
     position: absolute;
     top: 0;
     left: 4px;
-  }
-  
-  .custom-checkbox label {
+}
+
+.custom-checkbox label {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
     font-size: 16px;
     color: rgb(0, 0, 0);
     font-weight: 500;
-  }
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1; /* Permite que el label crezca y ocupe espacio disponible */
+}
 
+/* Estilos para el scrollbar */
+.custom-checkbox-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-checkbox-container::-webkit-scrollbar-track {
+    background: var(--color-quinary);
+    border-radius: 10px;
+}
+
+.custom-checkbox-container::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+    border: 3px solid var(--color-quinary);
+}
+
+.custom-checkbox-container::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+}
+  
+  .mensajeExito{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
+
+.mensajeError{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
 
 /* estilos form calificacion */
 
