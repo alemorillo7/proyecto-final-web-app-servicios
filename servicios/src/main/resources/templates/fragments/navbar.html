@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top" style="background-color: #455B66">
     <div class="container-fluid navInicio">
       <div>
-        <img class="logo" src="imagenes/logo-fondo-transparente.png" alt="">
+        <img class="logo" src="/imagenes/logo-fondo-transparente.png" alt="">
         <a class="navbar-brand serviHogar" style="color: #ffffff" href="#">ServiHogar</a>
       </div>
       <button class="navbar-toggler" style="color: #ffffff" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -11,6 +11,7 @@
       <div class="offcanvas offcanvas-end desplegable" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header headerDesplegable">
           <h5 class="offcanvas-title tituloDesplegable" id="offcanvasNavbarLabel" th:text="'Hola, ' + ${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
+          <img th:src="@{/imagen/perfil/{id}(id=${session.usuariosession.id})}" class="rounded-circle imagenPerfil" width="50" height="50">
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body headerBody">
@@ -25,13 +26,13 @@
                 <a class="nav-link active text-light" aria-current="page" href="#">Ver comentarios y calificaciones</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasRole('CLIENTE')">
               <a class="nav-link active text-light" aria-current="page" href="#">Cambiar a rol proveedor</a>
             </li>
 
 
-            <li class="nav-item">
-              <a class="nav-link active text-light" aria-current="page" href="#">Editar perfil</a>
+            <li class="nav-item" sec:authorize="hasRole('CLIENTE')">
+              <a class="nav-link active text-light" aria-current="page" th:href="@{/actualizarPerfil/{id}(id=${session.usuariosession.id})}">Editar perfil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="#">Desactivar cuenta</a>

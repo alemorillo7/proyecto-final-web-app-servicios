@@ -27,7 +27,7 @@ package com.app.servicios;
      .loginProcessingUrl("/logincheck")
      .usernameParameter("email")
      .passwordParameter("password")
-     .defaultSuccessUrl("/inicio", true)
+     .defaultSuccessUrl("/redirectByRole", true)
      .permitAll()
      )
      .logout((logout) -> logout
