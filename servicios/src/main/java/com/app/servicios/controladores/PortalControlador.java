@@ -38,6 +38,8 @@ public class PortalControlador {
     @Autowired
     private ServicioRepositorio servicioRepositorio;
 
+   
+
     @GetMapping("/")
     public String index(ModelMap modelo) {
         List<Servicio> servicios = servicioServicios.listarServiciosActivos();
@@ -64,7 +66,8 @@ public class PortalControlador {
                                        @RequestParam MultipartFile archivo) throws Exception {
         try {
             usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo);
-            return "login.html";
+            modelo.put("exito", "Te has registrado correctamente");
+            return "index.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             return "redirect:/registrarCliente";
@@ -102,7 +105,8 @@ public class PortalControlador {
                 }
             }
             usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, archivo, dni, experiencia, descripcion, servicios);
-            return "login.html";
+            modelo.put("exito", "Te has registrado correctamente");
+            return "index.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             return "redirect:/registrarProveedor";
@@ -139,24 +143,38 @@ public class PortalControlador {
         }
     }
 
-    @GetMapping("/login")
-    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
-        if (error != null) {
-            modelo.put("error", "Email o contraseña incorrectos");
+    @GetMapping("/redirectByRole")
+    public String redirectByRole(HttpSession session) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado == null) {
+            return "redirect:/login"; // Manejar caso de sesión no iniciada adecuadamente
         }
-        return "login.html";
+    
+        switch (logueado.getRol().toString()) {
+            case "CLIENTE":
+                return "redirect:/inicio";
+            case "PROVEEDOR":
+                return "redirect:/panelUsuario";
+            default:
+                return "redirect:/login"; // Manejar caso de roles no esperados
+        }
     }
+
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session) {
+    public String inicio(HttpSession session, ModelMap modelo) {
+       
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin";
         }
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
             return "redirect:/superadmin";
         }
+        modelo.put("exito", "Bienvenido " + logueado.getNombre());
+       
         return "inicio.html";
     }
 
@@ -185,19 +203,13 @@ public class PortalControlador {
 
     @GetMapping("/proveedores/{nombreServicio}")
     public String mostrarCarpinteria(@PathVariable String nombreServicio, ModelMap modelo) {
-
-        System.out.println("nombreServicio: " + nombreServicio);
         
         Servicio servicio = new Servicio();
 
         servicio = servicioServicios.buscarServicioPorNombre(nombreServicio);
 
-        System.out.println("servicio: " + servicio.toString());
-
         String id = servicio.getId();
         
-        System.out.println("id: " + id);
-
         List<Usuario> proveedores = usuarioServicios.listarPorServicio(id);
         
         // Crear una lista de listas de nombres de servicios
@@ -234,11 +246,11 @@ public class PortalControlador {
         if (logueado.getRol().toString().equals("CLIENTEPROVEEDOR")) {
             return "redirect:/actualizarClienteProveedor";
         }
-        return "actualizarCliente.html";
+        return "formularioModificarCliente.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
-    @PostMapping("/perfil/{id}")
+    @PostMapping("/modificarPerfil/{id}")
     public String modificarCliente(@RequestParam String nombre, 
                                 @RequestParam String apellido, 
                                 @RequestParam String direccion, 
@@ -254,7 +266,7 @@ public class PortalControlador {
 
         try {
             usuarioServicios.modificarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo, id);
-            return "redirect:/";
+            return "inicio.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             return "error.html";
