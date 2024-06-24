@@ -84,7 +84,6 @@
           </nav>
     </header>
 
-
     <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeErrorIndex" id="error-message-">
       <div class="card-body">
           <h5 class="card-title">Error</h5>
@@ -98,7 +97,12 @@
       </div>
   </div>
 
-
+  <h1 class="tituloServicios">Te damos la bienvenida</h1>
+  <div class="bienvenida">
+  <p class="presentacion">En Servihogar, entendemos lo importante que es contar con profesionales de confianza para los servicios del hogar. Nuestra plataforma conecta a expertos en electricidad, plomería, carpintería, y más, con clientes que buscan soluciones eficientes y de calidad.
+    Cada profesional en Servihogar ha sido cuidadosamente seleccionado y calificado por nuestros usuarios, garantizando que recibas un servicio confiable y a tiempo. Con nosotros, la tranquilidad y la satisfacción están aseguradas.</p>
+  <h5 class="cierre">¡Hacé tu vida más fácil con Servihogar!</h5>
+  </div>
         <h1 class="tituloServicios">Nuestros servicios</h1>
         <div class="contenedor-servicios">
             <a href="/proveedores/Agua" name="nombreServicio"><img src="imagenes/servicios/estaticas/agua-estatica.png" alt="Sanitarios" id="agua" data-gif="imagenes/servicios/agua.gif" class="gif-hover"></a>
@@ -125,32 +129,28 @@
         </div>
 
         <footer class="footer">
-          <div class="footer1">
-            <div class="usuarioFooter">
-              <h6>USUARIO</h6>
-              <p>
+          <div class="footerSuperior">   
+              <p class="textoFooter">
                 <a href="#inicioSesion" data-bs-toggle="modal" data-bs-target="#inicioSesion" class="text-white ingresar">Ingresar</a>
               </p>
-              <p>
+              <p class="textoFooter">
                 <a class="text-white preguntas">Preguntas frecuentes</a>
               </p>
-              <p>
+              <p class="textoFooter">
                 <a href="" class="text-white ayuda">Ayuda</a>
-              </p>
-              <p>
+            </p>
+              <p class="textoFooter">
                 <a class="text-white politicas">Politicas de privacidad y servicio</a>
               </p>
-              <p>
-                <a class="text-white politicas">Términos y condiciones</a>
+              <p class="textoFooter">
+                <a class="text-white terminos">Términos y condiciones</a>
               </p>
-            </div>
-            <div class="btnSubir d-md-flex">
-              <a href="#top"><img src="imagenes/iconos/arriba.png" alt="Subir" data-gif="imagenes/iconos/arriba.gif" class= "gif-hover item justify-content-md-end" ></a>
-            </div>
-            </div>
-          <section class="sectionWhat"> 
+              <a class="btnFArriba" href="#top"><img src="imagenes/iconos/arriba.png" alt="Subir" data-gif="imagenes/iconos/arriba.gif" class= "gif-hover item justify-content-md-end" ></a>
+          </div> 
+              <section class="sectionWhat"> 
             <a href="https:/web.whatsapp.com"><img class= "itemW" src="imagenes/iconos/whatsapp.png" alt="whatsapp"></a>
         </section>
+        <hr>
           <section class="sectionIcon">
             <li class="item1"><a href="https://www.facebook.com"><img class="icono" src="imagenes/iconos/facebook-2.png" alt="face"></a></li>
             <li class="item1"><a href="https://www.instagram.com"><img class="icono" src="imagenes/iconos/instagram.png" alt="insta"></a></li>
@@ -161,7 +161,7 @@
           <img class="logoFooter" src="imagenes/logo-fondo-transparente.png" alt="">
           </section>
           <h6 class="copyright"> © 2024 Copyright</h6>
-        </footer>
+      </footer>
        
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
