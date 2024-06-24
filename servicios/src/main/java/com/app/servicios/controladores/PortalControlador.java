@@ -266,7 +266,7 @@ public class PortalControlador {
 
         try {
             usuarioServicios.modificarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo, id);
-            return "redirect:/";
+            return "inicio.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             return "error.html";
