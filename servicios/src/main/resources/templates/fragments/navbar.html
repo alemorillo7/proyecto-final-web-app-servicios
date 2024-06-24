@@ -10,13 +10,13 @@
       
       <div class="offcanvas offcanvas-end desplegable" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header headerDesplegable">
-          <h5 class="offcanvas-title tituloDesplegable" id="offcanvasNavbarLabel">Bienvenidx Nombre</h5>
+          <h5 class="offcanvas-title tituloDesplegable" id="offcanvasNavbarLabel" th:text="'Hola, ' + ${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body headerBody">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 listaBodyNV">
             <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#">Órdenes nevas</a>
+            <a class="nav-link active text-light" aria-current="page" href="#">Órdenes nuevas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active text-light" aria-current="page" href="#">Órdenes abiertas</a>
@@ -37,7 +37,7 @@
             <a class="nav-link active text-light" aria-current="page" href="#">Desactivar cuenta</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#">Cerrar sesión</a>
+            <a class="nav-link active text-light" aria-current="page" href="/logout">Cerrar sesión</a>
           </li>
           </ul>
           <form class="d-flex mt-3" role="search">

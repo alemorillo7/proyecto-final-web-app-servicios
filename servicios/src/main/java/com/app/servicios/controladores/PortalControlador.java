@@ -38,6 +38,8 @@ public class PortalControlador {
     @Autowired
     private ServicioRepositorio servicioRepositorio;
 
+   
+
     @GetMapping("/")
     public String index(ModelMap modelo) {
         List<Servicio> servicios = servicioServicios.listarServiciosActivos();
@@ -144,19 +146,23 @@ public class PortalControlador {
         if (error != null) {
             modelo.put("error", "Email o contraseña incorrectos");
         }
-        return "login.html";
+        return "index.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session) {
+    public String inicio(HttpSession session, ModelMap modelo) {
+       
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin";
         }
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
             return "redirect:/superadmin";
         }
+        modelo.put("exito", "Bienvenido " + logueado.getNombre());
+       
         return "inicio.html";
     }
 
