@@ -66,7 +66,8 @@ public class PortalControlador {
                                        @RequestParam MultipartFile archivo) throws Exception {
         try {
             usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo);
-            return "login.html";
+            modelo.put("exito", "Te has registrado correctamente");
+            return "index.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             return "redirect:/registrarCliente";
@@ -104,7 +105,8 @@ public class PortalControlador {
                 }
             }
             usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, archivo, dni, experiencia, descripcion, servicios);
-            return "login.html";
+            modelo.put("exito", "Te has registrado correctamente");
+            return "index.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             return "redirect:/registrarProveedor";
@@ -191,19 +193,13 @@ public class PortalControlador {
 
     @GetMapping("/proveedores/{nombreServicio}")
     public String mostrarCarpinteria(@PathVariable String nombreServicio, ModelMap modelo) {
-
-        System.out.println("nombreServicio: " + nombreServicio);
         
         Servicio servicio = new Servicio();
 
         servicio = servicioServicios.buscarServicioPorNombre(nombreServicio);
 
-        System.out.println("servicio: " + servicio.toString());
-
         String id = servicio.getId();
         
-        System.out.println("id: " + id);
-
         List<Usuario> proveedores = usuarioServicios.listarPorServicio(id);
         
         // Crear una lista de listas de nombres de servicios

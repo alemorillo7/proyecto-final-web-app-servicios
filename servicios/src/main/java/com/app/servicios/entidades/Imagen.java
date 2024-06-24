@@ -3,6 +3,7 @@ package com.app.servicios.entidades;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-
 public class Imagen {
 
     @Id
@@ -33,6 +33,7 @@ public class Imagen {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "LONGBLOB")
     byte[] contenido;
 
 }
