@@ -144,15 +144,116 @@ footer {
     color: white;
     font-family:"Montserrat", sans-serif;
     padding: 20px;
+    box-sizing: border-box;
 }
-.footer1 {
-    display: flex;
+
+
+.usuarioFooter{
+    margin: 0px;
+    margin-bottom: 0px;
+    
 }
-.presentacionFooter{
-    margin-right: 20px;
+
+.ingresar {
+    text-decoration: none;
+}
+
+.sectionWhat {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.btnSubir {
+    text-align: right;
+}
+
+.item{
+    height: 60px;
+    background-color:  #455B66;
+    border-radius: 40%;
+    margin-right: 1.5rem;
+    padding: 0.5rem;
+}
+
+.itemW{
+    height: 90px;
+    padding: 1.5rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 1rem;
+    opacity: 80%;
+}
+
+
+.sectionIcon {
+    list-style: none;
+    margin: 20px auto;
+    text-align: center;
+}
+.item1 {
+    list-style: none;
+    display: inline-block;
+    padding: 1rem;
+}
+.icono{
+    height: 30px;
+    justify-content: center;
+}
+.sectionLogo {
+    list-style: none;
+    text-align: center;
+}
+.logoFooter {
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    text-align: center;
 }
 .copyright {
     font-size: small;
     justify-content: center;
     text-align: center;    
 }
+
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+  }
+  
+  /* Estilos para la barra de desplazamiento */
+  body::-webkit-scrollbar {
+      width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  body::-webkit-scrollbar-track {
+      background: var(--color-quinary); /* Color de fondo del track */
+
+  }
+  
+  body::-webkit-scrollbar-thumb {
+      background: var(--color-primary); /* Color del thumb */
+      border-radius: 10px; /* Bordes redondeados */
+      border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  body {
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  /* Animación de fondo */
+  @keyframes oscillateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }
