@@ -7,12 +7,12 @@
     <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
     <title>Servicios</title>
     <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
-    <link rel="stylesheet" href="css/estilosForm.css">
-    <link rel="stylesheet" href="css/icon-font.css">
-    <link rel="stylesheet" href="css/fancybox.min.css">
-    <link rel="stylesheet" href="css/swiper.min.css">
-    <link rel="stylesheet" href="css/odometer.min.css">
-    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="/css/estilosForm.css">
+    <link rel="stylesheet" href="/css/icon-font.css">
+    <link rel="stylesheet" href="/css/fancybox.min.css">
+    <link rel="stylesheet" href="/css/swiper.min.css">
+    <link rel="stylesheet" href="/css/odometer.min.css">
+    <link rel="stylesheet" href="/css/flaticon.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
@@ -20,16 +20,16 @@
 <body class="form-body">
     <header>
         <div class="form-wrapper d-flex align-items-center justify-content-center">
-            <div class="form card p-10">
+            <div class="form card">
                 <div class="header">
-                    <h1>Formulario Servicio</h1>
+                    <h1>Formulario Crear Servicio</h1>
                 </div>
                 <form th:action="@{/servicios/guardar}" method="POST" >
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre">
+                            <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="nombre del servicio">
                             </div>
                         </div>
                         </div>
@@ -46,6 +46,7 @@
             </p>
         </div>
     </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
