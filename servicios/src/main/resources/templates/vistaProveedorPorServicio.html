@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,9 +24,9 @@
                       <li th:each="servicioNombre : ${listaDeNombresDeServicios[iterStat.index]}" th:text="${servicioNombre}"></li>
                     </ul>
                   </p>
-                  <p class="card-text" th:text="${'Teléfono:' + ' ' + proveedor.getTelefono()}"></p>
-                  <p class="card-text" th:text="${'Email:' + ' ' + proveedor.getEmail()}"></p>
-                  <a href="#" class="btn btn-primary">Solicitar Servicio</a>
+                  <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Teléfono:' + ' ' + proveedor.getTelefono()}"></p>
+                  <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Email:' + ' ' + proveedor.getEmail()}"></p>
+                  <a th:if="${session.usuariosession != null}" href="#" class="btn btn-primary">Solicitar Servicio</a>
                 </div>
             </div>
         </div>

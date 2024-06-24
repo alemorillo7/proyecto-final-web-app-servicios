@@ -10,6 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/estilos-index.css">
+    <link rel="stylesheet" href="css/estilosForm.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <!-- Favicon-->
@@ -19,7 +20,7 @@
 
 <body>
     <header id="top">
-
+     
         <nav class="navbar" style="background-color: #455B66">
             <div class="navIndex">
               <img class="logo" src="imagenes/logo-fondo-transparente.png" alt="">
@@ -46,18 +47,7 @@
                 </div>
                 <button type="button" class="btnIndex btn btn-info" data-bs-toggle="modal" data-bs-target="#inicioSesion">Iniciar Sesión</button>
                 
-                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-                  <div class="card-body">
-                      <h5 class="card-title">Error</h5>
-                      <p class="card-text" th:text="${error}"></p>
-                  </div>
-              </div>
-              <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
-                  <div class="card-body">
-                      <h5 class="card-title">Exito!</h5>
-                      <p class="card-text" th:text="${exito}"></p>
-                  </div>
-              </div>
+                
                 
                 <!-- Modal login -->
                 <div class="modal fade" id="inicioSesion" tabindex="-1" aria-labelledby="inicioSesionLabel" aria-hidden="true">
@@ -93,6 +83,22 @@
             </div>
           </nav>
     </header>
+
+
+    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" id="error-message">
+      <div class="card-body">
+          <h5 class="card-title">Error</h5>
+          <p class="card-text" th:text="${error}"></p>
+      </div>
+  </div>
+  <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+      <div class="card-body">
+          <h5 class="card-title">Exito!</h5>
+          <p class="card-text" th:text="${exito}"></p>
+      </div>
+  </div>
+
+
         <h1 class="tituloServicios">Nuestros servicios</h1>
         <div class="contenedor-servicios">
             <a href="/proveedores/Agua" name="nombreServicio"><img src="imagenes/servicios/estaticas/agua-estatica.png" alt="Sanitarios" id="agua" data-gif="imagenes/servicios/agua.gif" class="gif-hover"></a>
@@ -165,6 +171,7 @@
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
         <script src="javascript/inicio.js"></script>
+        <script src="javascript/mensajes.js"></script>
 </body>
 
 

@@ -391,6 +391,8 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
+   
+
 
 
     // Metodos para manejar la logica de filtrado y ordenamiento:
@@ -439,5 +441,9 @@ public class UsuarioServicios implements UserDetailsService {
         }
 
     } */
+
+    public Usuario buscarPorEmail(String email) {
+        return usuarioRepositorio.buscarPorEmail(email);
+    }
 
 }
