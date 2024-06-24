@@ -1,7 +1,7 @@
 .titulo {
     text-align: center;
-    margin-top: 20px; /* Espacio entre el navbar y el título */
-    margin-bottom: 50px; /* Espacio bajo el título */
+    margin-top: 150px; /* Espacio entre el navbar y el título */
+    margin-bottom: 10px; /* Espacio bajo el título */
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
     font-size: 36px;
@@ -11,13 +11,44 @@
 }
 
 .contenedor-tarjetas {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    width: 90%;
     margin-top: 100px;
     margin-bottom: 50px;
+    overflow-x: scroll;
+    border: 1px solid #ccc;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-content: center;
+    max-height: 700px;
+    margin-left: 30px;
+    margin-right: 30px ;
+
 }
 
+@media (max-width: 1000px){
+    .contenedor-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+
+    }
+}
+
+@media (max-width: 700px){
+    .contenedor-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+
+    }
+}
+
+.card {
+    margin-left: 30px;
+    margin: 10px;
+    
+}
 .cuerpo-tarjeta {
     
     margin-bottom: 50px;
