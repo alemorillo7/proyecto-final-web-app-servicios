@@ -30,6 +30,9 @@
               <a class="nav-link active text-light" aria-current="page" href="#">Cambiar a rol proveedor</a>
             </li>
 
+            <li>
+              <a th:href="@{/imagen/modificar/{id}(id=${session.usuariosession.id})}" class="nav-link active text-light" aria-current="page" ></a>
+            </li>
 
             <li class="nav-item" sec:authorize="hasRole('CLIENTE')">
               <a class="nav-link active text-light" aria-current="page" th:href="@{/actualizarPerfil/{id}(id=${session.usuariosession.id})}">Editar perfil</a>
