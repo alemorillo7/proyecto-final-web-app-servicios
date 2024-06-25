@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Imagen</title>
+    <link rel="stylesheet" href="/css/estilosForm.css">
+</head>
+<body>
+    <div class="form-wrapper d-flex align-items-center justify-content-center">
+        <div class="form card">
+            <div class="header">
+                <h1>Subir Imagen</h1>
+            </div>
+            <form th:action="@{/imagen/modificado/{id}(id=${session.usuariosession.id})}" method="POST" enctype="multipart/form-data" >
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="imagen">Cargar Imagen:</label>
+                            <input type="file" class="form-control" id="imagen" name="archivo" required>
+                        </div>
+                    </div>
+                    </div>
+              
+                <button type="submit" class="btn btn-primary btn-block mt-4">Guardar Imagen</button>
+        </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
