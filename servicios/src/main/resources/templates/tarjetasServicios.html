@@ -37,7 +37,8 @@
            <img src="..." class="card-img-top imagenproveedor" alt="...">
            <div class="card-body">
              <h5 th:text="${servicio.nombre}" class="card-title nombreServicio">Nombre</h5>
-             
+             <button type="button" class="btn btn-primary btn-opcion">Editar</button>
+            <button type="button" class="btn btn-danger btn-opcion">Eliminar</button>
              <span th:if="${servicio.activo}" th:text="'Activo'">Activo</span>
                   <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
            </div>
@@ -46,18 +47,20 @@
           <img src="..." class="card-img-top imagenproveedor" alt="...">
           <div class="card-body">
             <h5 th:text="${servicio.nombre}" class="card-title nombreServicio">Nombre</h5>
-            
+            <button type="button" class="btn btn-primary btn-opcion">Editar</button>
+            <button type="button" class="btn btn-danger btn-opcion">Eliminar</button>
             <span th:if="${servicio.activo}" th:text="'Activo'">Activo</span>
-                 <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
+            <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
           </div>
         </div>
         <div class="card" th:each="servicio : ${servicios}">
           <img src="..." class="card-img-top imagenproveedor" alt="...">
           <div class="card-body">
             <h5 th:text="${servicio.nombre}" class="card-title nombreServicio">Nombre</h5>
-            
+            <button type="button" class="btn btn-primary btn-opcion">Editar</button>
+            <button type="button" class="btn btn-danger btn-opcion">Eliminar</button>
             <span th:if="${servicio.activo}" th:text="'Activo'">Activo</span>
-                 <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
+            <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
           </div>
         </div>
       </div>
