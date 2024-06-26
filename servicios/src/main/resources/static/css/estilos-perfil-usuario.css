@@ -1,3 +1,7 @@
+
+
+
+
 .contenedor-servicios {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -363,3 +367,7 @@ footer {
   #my-text1, #my-text2, #my-text3, #my-text4, #my-text5, #my-text6, #my-text7, #my-text8 {
     display: inline; /* Asegura que el subrayado se ajuste al contenido del texto */
   }
+
+  .perfil {
+    margin-top: 100px;
+}
