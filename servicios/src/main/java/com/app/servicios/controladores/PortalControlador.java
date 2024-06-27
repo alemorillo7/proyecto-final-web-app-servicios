@@ -54,7 +54,8 @@ public class PortalControlador {
 
     @PostMapping("/registroCliente")
     public String registrarClientePost(@RequestParam String nombre, 
-                                       @RequestParam String apellido, 
+                                       @RequestParam String apellido,
+                                       @RequestParam Integer dni, 
                                        @RequestParam String localidad, 
                                        @RequestParam String direccion, 
                                        @RequestParam String barrio, 
@@ -62,10 +63,9 @@ public class PortalControlador {
                                        @RequestParam String email, 
                                        @RequestParam String password, 
                                        @RequestParam String password2, 
-                                       ModelMap modelo, 
-                                       @RequestParam MultipartFile archivo) throws Exception {
+                                       ModelMap modelo) throws Exception {
         try {
-            usuarioServicios.crearCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo);
+            usuarioServicios.crearCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2);
             modelo.put("exito", "Te has registrado correctamente");
             return "index.html";
         } catch (Exception ex) {
@@ -82,19 +82,18 @@ public class PortalControlador {
     }
 
     @PostMapping("/registroProveedor")
-    public String registrarProveedorPost(@RequestParam String email,
-                                         @RequestParam String nombre,
+    public String registrarProveedorPost(@RequestParam String nombre,
                                          @RequestParam String apellido,
                                          @RequestParam Integer dni,
-                                         @RequestParam String direccion,
                                          @RequestParam String localidad,
-                                         @RequestParam List<String> serviciosIds,
-                                         @RequestParam String descripcion,
+                                         @RequestParam String direccion,
                                          @RequestParam String telefono,
-                                         @RequestParam MultipartFile archivo,
-                                         @RequestParam Integer experiencia,
+                                         @RequestParam String email,
                                          @RequestParam String password,
                                          @RequestParam String password2,
+                                         @RequestParam Integer experiencia,
+                                         @RequestParam String descripcion,
+                                         @RequestParam List<String> serviciosIds,
                                          ModelMap modelo) {
         try {
             Set<Servicio> servicios = new HashSet<>();
@@ -104,7 +103,7 @@ public class PortalControlador {
                     servicios.add(servicio);
                 }
             }
-            usuarioServicios.crearProveedor(nombre, apellido, direccion, localidad, telefono, email, password, password2, archivo, dni, experiencia, descripcion, servicios);
+            usuarioServicios.crearProveedor(nombre, apellido, dni, localidad, direccion, telefono, email, password, password2, experiencia, descripcion, servicios);
             modelo.put("exito", "Te has registrado correctamente");
             return "index.html";
         } catch (Exception ex) {
@@ -121,8 +120,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/registroClienteProveedor/{id}")
-    public String registrarClienteProveedorPost(@PathVariable String id,
-                                                @RequestParam Integer dni, 
+    public String registrarClienteProveedorPost(@PathVariable String id, 
                                                 @RequestParam Integer experiencia, 
                                                 @RequestParam String descripcion, 
                                                 @RequestParam List<String> serviciosIds, 
@@ -135,7 +133,7 @@ public class PortalControlador {
                     servicios.add(servicio);
                 }
             }
-            usuarioServicios.crearClienteProveedor(experiencia, descripcion, dni, servicios, id);
+            usuarioServicios.crearClienteProveedor(experiencia, descripcion, servicios, id);
             return "inicio.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
@@ -253,19 +251,88 @@ public class PortalControlador {
     @PostMapping("/modificarPerfil/{id}")
     public String modificarCliente(@RequestParam String nombre, 
                                 @RequestParam String apellido, 
-                                @RequestParam String direccion, 
+                                @RequestParam Integer dni,
                                 @RequestParam String localidad, 
+                                @RequestParam String direccion, 
                                 @RequestParam String barrio, 
                                 @RequestParam String telefono, 
                                 @RequestParam String email, 
                                 @RequestParam String password, 
                                 @RequestParam String password2,
-                                MultipartFile archivo,
-                                @RequestParam String id,
+                                @PathVariable String id,
                                 ModelMap modelo) {
 
         try {
-            usuarioServicios.modificarCliente(nombre, apellido, direccion, localidad, barrio, telefono, email, password, password2, archivo, id);
+            usuarioServicios.modificarCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, id);
+            return "inicio.html";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
+    @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR')")
+    @PostMapping("/modificarPerfil/{id}")
+    public String modificarProveedor(@RequestParam String nombre, 
+                                @RequestParam String apellido, 
+                                @RequestParam Integer dni,
+                                @RequestParam String localidad, 
+                                @RequestParam String direccion, 
+                                @RequestParam String telefono, 
+                                @RequestParam String email, 
+                                @RequestParam String password, 
+                                @RequestParam String password2,
+                                @RequestParam Integer experiencia,
+                                @RequestParam String descripcion,
+                                @RequestParam String[] serviciosIds,
+                                @PathVariable String id,
+                                ModelMap modelo) {
+
+     
+
+        try {
+            Set<Servicio> servicios = new HashSet<>();
+            for (String servicioId : serviciosIds) {
+                Servicio servicio = servicioRepositorio.findById(servicioId).orElse(null);
+                if (servicio != null) {
+                    servicios.add(servicio);
+                }
+            }
+            usuarioServicios.modificarProveedor(nombre, apellido, dni, localidad, direccion, telefono, email, password, password2, experiencia, descripcion, servicios, id);
+            return "inicio.html";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTEPROVEEDOR')")
+    @PostMapping("/modificarPerfil/{id}")
+    public String modificarClienteProveedor(@RequestParam String nombre, 
+                                @RequestParam String apellido, 
+                                @RequestParam Integer dni,
+                                @RequestParam String localidad, 
+                                @RequestParam String direccion, 
+                                @RequestParam String barrio,
+                                @RequestParam String telefono, 
+                                @RequestParam String email, 
+                                @RequestParam String password, 
+                                @RequestParam String password2,
+                                @RequestParam Integer experiencia,
+                                @RequestParam String descripcion,
+                                @RequestParam String[] serviciosIds,
+                                @PathVariable String id,
+                                ModelMap modelo) {
+
+     
+
+        try {
+            Set<Servicio> servicios = new HashSet<>();
+            for (String servicioId : serviciosIds) {
+                Servicio servicio = servicioRepositorio.findById(servicioId).orElse(null);
+                if (servicio != null) {
+                    servicios.add(servicio);
+                }
+            }
+            usuarioServicios.modificarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios, id);
             return "inicio.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
