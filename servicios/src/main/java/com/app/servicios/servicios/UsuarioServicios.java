@@ -217,6 +217,20 @@ public class UsuarioServicios implements UserDetailsService {
 
         usuarioRepositorio.save(clienteProveedor);
     }
+    @Transactional
+    public void modificarClienteProveedor(String nombre, String apellido,
+                                            Integer dni, String localidad, 
+                                            String direccion, String barrio,
+                                            String telefono, String email,
+                                            String password, String password2,
+                                            Integer experiencia,
+                                            String descripcion,
+                                            Set<Servicio> servicios)
+                                            throws MiExcepcion {
+
+        validarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios);
+                                                
+                                            }
 
     // Listar Usuarios//
     @Transactional(readOnly = true)
@@ -364,7 +378,54 @@ public class UsuarioServicios implements UserDetailsService {
             throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
         }
     }
+//Este se usa para validar la modificacion
+    public void validarClienteProveedor(String nombre, String apellido,
+    Integer dni, String localidad, String direccion, String barrio,
+    String telefono, String email, String password, String password2,
+    Integer experiencia, String descripcion, Set<Servicio> servicios) 
+    throws MiExcepcion {
 
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiExcepcion("El nombre no puede estar vacio");
+        }
+        if (apellido.isEmpty() || apellido == null) {
+            throw new MiExcepcion("El apellido no puede estar vacio");
+        }
+        if (dni == null) {
+            throw new MiExcepcion("El dni no puede estar vacio");
+        }
+        if (localidad.isEmpty() || localidad == null) {
+            throw new MiExcepcion("La localidad no puede estar vacia");
+        }
+        if (direccion.isEmpty() || direccion == null) {
+            throw new MiExcepcion("La direccion no puede estar vacia");
+        }
+        if (barrio.isEmpty() || barrio == null) {
+            throw new MiExcepcion("El barrio no puede estar vacio");
+        }
+        if (telefono.isEmpty() || telefono == null) {
+            throw new MiExcepcion("El telefono no puede estar vacio");
+        }
+        if (email.isEmpty() || email == null) {
+            throw new MiExcepcion("El email no puede estar vacio");
+        }
+        if (password.isEmpty() || password == null) {
+            throw new MiExcepcion("La contraseña no puede estar vacia");
+        }
+        if (!password.equals(password2)) {
+            throw new MiExcepcion("Las contraseñas no coinciden");
+        }
+        if (experiencia == null) {
+            throw new MiExcepcion("La experiencia no puede estar vacia");
+        }
+        if (descripcion.isEmpty() || descripcion == null) {
+            throw new MiExcepcion("La descripción no puede estar vacia");
+        }
+        if (servicios.isEmpty()) {
+            throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
+        }
+    }
+//Valida pase de cliente a proveedor, los datos nuevos exigidos
     public void validarClienteProveedor(Integer experiencia, String descripcion, Set<Servicio> servicios)
             throws MiExcepcion {
 
