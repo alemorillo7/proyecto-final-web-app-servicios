@@ -229,8 +229,11 @@ public class PortalControlador {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
     @GetMapping("/perfil")
     public String perfil(HttpSession session, ModelMap modelo) {
+        List<Servicio> servicios = servicioServicios.listarServiciosActivos();
+        modelo.addAttribute("servicios", servicios);
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         modelo.put("usuario", usuario);
+        modelo.put("servicios", servicios);
         return "perfilUsuario.html";
     }
 
@@ -260,11 +263,15 @@ public class PortalControlador {
                                 @RequestParam String password, 
                                 @RequestParam String password2,
                                 @PathVariable String id,
-                                ModelMap modelo) {
+                                ModelMap modelo,
+                                HttpSession session) {
 
         try {
             usuarioServicios.modificarCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, id);
-            return "inicio.html";
+
+            session.setAttribute("usuariosession", usuarioServicios.buscarPorEmail(email));
+
+            return "redirect:/perfil";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             return "error.html";
@@ -285,7 +292,8 @@ public class PortalControlador {
                                 @RequestParam String descripcion,
                                 @RequestParam String[] serviciosIds,
                                 @PathVariable String id,
-                                ModelMap modelo) {
+                                ModelMap modelo,
+                                HttpSession session) {
 
      
 
@@ -298,7 +306,10 @@ public class PortalControlador {
                 }
             }
             usuarioServicios.modificarProveedor(nombre, apellido, dni, localidad, direccion, telefono, email, password, password2, experiencia, descripcion, servicios, id);
-            return "inicio.html";
+
+            session.setAttribute("usuariosession", usuarioServicios.buscarPorEmail(email));
+
+            return "redirect:/perfil";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             return "error.html";
