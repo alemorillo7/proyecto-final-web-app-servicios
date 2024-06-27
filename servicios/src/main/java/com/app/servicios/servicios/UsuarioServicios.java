@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.app.servicios.entidades.Imagen;
+
+
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
@@ -34,8 +34,7 @@ public class UsuarioServicios implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-    @Autowired
-    private ImagenServicios imagenServicios;
+   
 
     // Crear Clientes y Proveedores//
     @Transactional

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
@@ -248,7 +248,7 @@ public class PortalControlador {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
-    @PostMapping("/modificarPerfil/{id}")
+    @PostMapping("/modificarPerfil/cliente/{id}")
     public String modificarCliente(@RequestParam String nombre, 
                                 @RequestParam String apellido, 
                                 @RequestParam Integer dni,
@@ -271,7 +271,7 @@ public class PortalControlador {
         }
     }
     @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR')")
-    @PostMapping("/modificarPerfil/{id}")
+    @PostMapping("/modificarPerfil/proveedor/{id}")
     public String modificarProveedor(@RequestParam String nombre, 
                                 @RequestParam String apellido, 
                                 @RequestParam Integer dni,
