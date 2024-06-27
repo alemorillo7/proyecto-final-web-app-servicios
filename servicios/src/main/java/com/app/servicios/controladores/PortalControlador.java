@@ -259,11 +259,80 @@ public class PortalControlador {
                                 @RequestParam String email, 
                                 @RequestParam String password, 
                                 @RequestParam String password2,
-                                @RequestParam String id,
+                                @PathVariable String id,
                                 ModelMap modelo) {
 
         try {
             usuarioServicios.modificarCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, id);
+            return "inicio.html";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
+    @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR')")
+    @PostMapping("/modificarPerfil/{id}")
+    public String modificarProveedor(@RequestParam String nombre, 
+                                @RequestParam String apellido, 
+                                @RequestParam Integer dni,
+                                @RequestParam String localidad, 
+                                @RequestParam String direccion, 
+                                @RequestParam String telefono, 
+                                @RequestParam String email, 
+                                @RequestParam String password, 
+                                @RequestParam String password2,
+                                @RequestParam Integer experiencia,
+                                @RequestParam String descripcion,
+                                @RequestParam String[] serviciosIds,
+                                @PathVariable String id,
+                                ModelMap modelo) {
+
+     
+
+        try {
+            Set<Servicio> servicios = new HashSet<>();
+            for (String servicioId : serviciosIds) {
+                Servicio servicio = servicioRepositorio.findById(servicioId).orElse(null);
+                if (servicio != null) {
+                    servicios.add(servicio);
+                }
+            }
+            usuarioServicios.modificarProveedor(nombre, apellido, dni, localidad, direccion, telefono, email, password, password2, experiencia, descripcion, servicios, id);
+            return "inicio.html";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTEPROVEEDOR')")
+    @PostMapping("/modificarPerfil/{id}")
+    public String modificarClienteProveedor(@RequestParam String nombre, 
+                                @RequestParam String apellido, 
+                                @RequestParam Integer dni,
+                                @RequestParam String localidad, 
+                                @RequestParam String direccion, 
+                                @RequestParam String barrio,
+                                @RequestParam String telefono, 
+                                @RequestParam String email, 
+                                @RequestParam String password, 
+                                @RequestParam String password2,
+                                @RequestParam Integer experiencia,
+                                @RequestParam String descripcion,
+                                @RequestParam String[] serviciosIds,
+                                @PathVariable String id,
+                                ModelMap modelo) {
+
+     
+
+        try {
+            Set<Servicio> servicios = new HashSet<>();
+            for (String servicioId : serviciosIds) {
+                Servicio servicio = servicioRepositorio.findById(servicioId).orElse(null);
+                if (servicio != null) {
+                    servicios.add(servicio);
+                }
+            }
+            usuarioServicios.modificarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios, id);
             return "inicio.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());

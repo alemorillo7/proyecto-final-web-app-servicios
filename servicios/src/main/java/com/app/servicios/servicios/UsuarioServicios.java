@@ -225,11 +225,26 @@ public class UsuarioServicios implements UserDetailsService {
                                             String password, String password2,
                                             Integer experiencia,
                                             String descripcion,
-                                            Set<Servicio> servicios)
+                                            Set<Servicio> servicios, String id)
                                             throws MiExcepcion {
 
         validarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios);
-                                                
+        
+        Usuario clienteProveedor = usuarioRepositorio.findById(id).orElse(null);
+        clienteProveedor.setNombre(nombre);
+        clienteProveedor.setApellido(apellido);
+        clienteProveedor.setDni(dni);
+        clienteProveedor.setLocalidad(localidad);
+        clienteProveedor.setDireccion(direccion);
+        clienteProveedor.setTelefono(telefono);
+        clienteProveedor.setEmail(email);
+        clienteProveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+        clienteProveedor.setRol(Rol.PROVEEDOR);
+        clienteProveedor.setExperiencia(experiencia);
+        clienteProveedor.setDescripcion(descripcion);
+        clienteProveedor.setServicios(servicios);
+
+        usuarioRepositorio.save(clienteProveedor);
                                             }
 
     // Listar Usuarios//
