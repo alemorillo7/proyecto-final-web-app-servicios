@@ -1,0 +1,85 @@
+<form th:action="@{/modificarPerfil/proveedor/{id}(id=${session.usuariosession.id})}" method="POST" class="row g-3">
+    <div class="col-12">
+      <div class="row g-2">
+        <div class="col-12">
+          <a href="#!" class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
+            <i class="bi bi-upload"></i> 
+          </a>
+          <a href="#!" class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
+            <i class="bi bi-trash"></i> 
+          </a>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="id" th:value="${session.usuariosession.id}">
+  
+    <div class="col-12 col-md-6">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" th:value="${session.usuariosession.nombre}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="apellido" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="apellido" name="apellido" th:value="${session.usuariosession.apellido}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="dni" class="form-label">DNI</label>
+      <input type="text" class="form-control" id="dni" name="dni" th:value="${session.usuariosession.dni}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" class="form-control" id="email" name="email" th:value="${session.usuariosession.email}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="telefono" class="form-label">Telefono</label>
+      <input type="text" class="form-control" id="telefono" name="telefono" th:value="${session.usuariosession.telefono}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="localidad" class="form-label">Localidad</label>
+      <input type="text" class="form-control" id="localidad" name="localidad" th:value="${session.usuariosession.localidad}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="direccion" class="form-label">Direccion</label>
+      <input type="text" class="form-control" id="direccion" name="direccion" th:value="${session.usuariosession.direccion}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="experiencia" class="form-label">Experiencia</label>
+      <input type="text" class="form-control" id="experiencia" name="experiencia" th:value="${session.usuariosession.experiencia}">
+    </div>
+
+    <div class="col-12">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" th:text="${session.usuariosession.getDescripcion()}"></textarea>
+    </div>
+
+
+
+    <div class="col-12">
+        <label for="servicios" class="form-label">Servicios</label>
+        <div class="row">
+            <div th:each="servicio : ${servicios}" class="col-md-4 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" 
+                           th:id="${'servicio-' + servicio.id}" 
+                           name="serviciosIds" 
+                           th:value="${servicio.id}"
+                           th:checked="${#lists.contains(serviciosUsuario, servicio)}">
+                    <label th:for="${'servicio-' + servicio.id}" 
+                           th:text="${servicio.nombre}" 
+                           class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required placeholder="Ingrese su password">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="password2" class="form-label">Repetir password</label>
+      <input type="password" class="form-control" id="password2" name="password2" required placeholder="Confirme su password">
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </div>
+  </form>
+  

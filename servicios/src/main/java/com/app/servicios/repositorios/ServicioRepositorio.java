@@ -20,4 +20,7 @@ public interface ServicioRepositorio extends JpaRepository<Servicio, String> {
 
     @Query("SELECT s FROM Servicio s WHERE s.activo = false")
     public List<Servicio> buscarServiciosInactivos();
+
+    @Query("SELECT s FROM Servicio s JOIN s.proveedores u WHERE u.id = :usuarioId")
+    List<Servicio> buscarServiciosPorIdUsuario(@Param("usuarioId") String usuarioId);
 }

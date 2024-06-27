@@ -227,15 +227,19 @@ public class PortalControlador {
         return "vistaProveedorPorServicio.html";
     }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
-    @GetMapping("/perfil")
-    public String perfil(HttpSession session, ModelMap modelo) {
-        List<Servicio> servicios = servicioServicios.listarServiciosActivos();
-        modelo.addAttribute("servicios", servicios);
-        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-        modelo.put("usuario", usuario);
-        modelo.put("servicios", servicios);
-        return "perfilUsuario.html";
-    }
+@GetMapping("/perfil")
+public String perfil(HttpSession session, ModelMap modelo) {
+    List<Servicio> servicios = servicioServicios.listarServiciosActivos();
+    Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+    
+    List<Servicio> serviciosUsuario = servicioServicios.listarServiciosPorUsuario(usuario.getId());
+    
+    modelo.addAttribute("servicios", servicios);
+    modelo.addAttribute("serviciosUsuario", serviciosUsuario);
+    modelo.addAttribute("usuario", usuario);
+    
+    return "perfilUsuario.html";
+}
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROVEEDOR', 'ROLE_CLIENTEPROVEEDOR', 'ROLE_CLIENTE', 'ROLE_SUPERADMIN')")
     @GetMapping("/actualizarPerfil/{id}")

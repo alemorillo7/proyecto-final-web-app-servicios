@@ -1,0 +1,65 @@
+<form th:action="@{/modificarPerfil/cliente/{id}(id=${session.usuariosession.id})}" method="POST" class="row gy-3 gy-xxl-4">
+    <div class="col-12">
+      <div class="row gy-2">
+        
+        <div class="col-12">
+          <a href="#!" class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
+            <i class="bi bi-upload"></i>
+          </a>
+          <a href="#!" class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
+            <i class="bi bi-trash"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="id" th:value="${session.usuariosession.id}">
+
+    <div class="col-12 col-md-6">
+      <label for="inputFirstName" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="inputFirstName" name="nombre" th:value="${session.usuariosession.nombre}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputLastName" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="inputLastName" name="apellido" th:value="${session.usuariosession.apellido}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputEducation" class="form-label">DNI</label>
+      <input type="text" class="form-control" id="inputEducation" name="dni" th:value="${session.usuariosession.dni}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputSkills" class="form-label">Localidad</label>
+      <input type="text" class="form-control" id="inputSkills" name="localidad" th:value="${session.usuariosession.localidad}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputCountry" class="form-label">Barrio</label>
+      <select class="form-select" id="inputCountry" name="barrio">
+        <option value="Barrio 1" th:selected="${session.usuariosession.getBarrio() == 'Barrio 1'}">Barrio 1</option>
+        <option value="Barrio 2" th:selected="${session.usuariosession.getBarrio() == 'Barrio 2'}">Barrio 2</option>
+        <option value="Barrio 3" th:selected="${session.usuariosession.getBarrio() == 'Barrio 3'}">Barrio 3</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputYouTube" class="form-label">Direccion</label>
+      <input type="text" class="form-control" id="inputYouTube" name="direccion" th:value="${session.usuariosession.direccion}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputX" class="form-label">Email</label>
+      <input type="text" class="form-control" id="inputX" name="email" th:value="${session.usuariosession.email}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputFacebook" class="form-label">Telefono</label>
+      <input type="text" class="form-control" id="inputFacebook" name="telefono" th:value="${session.usuariosession.telefono}">
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label for="inputFacebook" class="form-label">Password</label>
+      <input type="password" class="form-control" id="inputFacebook" name="password" required placeholder="Ingrese su password">
+    </div><div class="col-12 col-md-6">
+      <label for="inputFacebook" class="form-label">Repetir password</label>
+      <input type="password" class="form-control" id="inputFacebook" name="password2" required placeholder="Confirme su password">
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </div>
+  </form>

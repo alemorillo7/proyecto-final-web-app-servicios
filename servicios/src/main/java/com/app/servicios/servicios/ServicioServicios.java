@@ -79,6 +79,11 @@ public class ServicioServicios {
         List<Servicio> serviciosInactivos = servicioRepositorio.buscarServiciosInactivos();
         return serviciosInactivos;
     }
+
+    @Transactional (readOnly = true)
+    public List<Servicio> listarServiciosPorUsuario(String usuarioId) {
+        return servicioRepositorio.buscarServiciosPorIdUsuario(usuarioId);
+    }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
