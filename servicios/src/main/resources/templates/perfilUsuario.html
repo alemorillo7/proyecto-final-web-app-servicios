@@ -133,74 +133,137 @@
                   <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Vista General</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Perfil</button>
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Modificar perfil</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Password</button>
-                </li>
+                
               </ul>
-              <div class="tab-content pt-4" id="profileTabContent">
+
+              <!-- Vista de Perfil Cliente -->
+              <div class="tab-content pt-4" id="profileTabContent" sec:authorize="hasRole('CLIENTE')">
                 <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
                   <h5 class="mb-3">About</h5>
                   <p class="lead mb-3">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</p>
-                  <h5 class="mb-3">Profile</h5>
+                  <h5 class="mb-3">Mi perfil</h5>
                   <div class="row g-0">
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">First Name</div>
+                      <div class="p-2">Nombre</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">Ethan</div>
+                      <div class="p-2" th:text="${session.usuariosession.nombre}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Last Name</div>
+                      <div class="p-2">Apellido</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">Leo</div>
+                      <div class="p-2" th:text="${session.usuariosession.apellido}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Education</div>
+                      <div class="p-2">D.N.I</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">M.S Computer Science</div>
+                      <div class="p-2" th:text="${session.usuariosession.dni}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Address</div>
+                      <div class="p-2">Direccion</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">Mountain View, California</div>
+                      <div class="p-2" th:text="${session.usuariosession.direccion}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Country</div>
+                      <div class="p-2">Barrio</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">United States</div>
+                      <div class="p-2" th:text="${session.usuariosession.barrio}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Job</div>
+                      <div class="p-2">Localidad</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">Project Manager</div>
+                      <div class="p-2" th:text="${session.usuariosession.localidad}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Company</div>
+                      <div class="p-2">Telefono</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">GitHub Inc</div>
-                    </div>
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Phone</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">+1 (248) 679-8745</div>
+                      <div class="p-2" th:text="${session.usuariosession.telefono}"></div>
                     </div>
                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
                       <div class="p-2">Email</div>
                     </div>
                     <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2">leo@example.com</div>
+                      <div class="p-2" th:text="${session.usuariosession.email}"></div>
                     </div>
+                    
+                    
                   </div>
                 </div>
+                </div>
+
+                <!-- Vista perfil proveedor -->
+                <div class="tab-content pt-4" id="profileTabContent" sec:authorize="hasRole('CLIENTE')">
+                  <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
+                    <h5 class="mb-3">About</h5>
+                    <p class="lead mb-3">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</p>
+                    <h5 class="mb-3">Mi perfil</h5>
+                    <div class="row g-0">
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Nombre</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.nombre}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Apellido</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.apellido}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">D.N.I</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.dni}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Direccion</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.direccion}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Localidad</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.localidad}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Telefono</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.telefono}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Email</div>
+                      </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:text="${session.usuariosession.email}"></div>
+                      </div>
+                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                        <div class="p-2">Servicios</div>
+                        </div>
+                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                        <div class="p-2" th:each="servicio : ${session.usuariosession.servicios}" th:text="${servicio.nombre}"></div>
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                  </div>
+
+
+
+
+
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 
                   <!-- Formulario con seguridad para que solo lo vean los clientes -->
