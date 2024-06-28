@@ -526,7 +526,7 @@ public class UsuarioServicios implements UserDetailsService {
                 
         
             default:
-                return proveedores;
+                return proveedores; 
         }
 
     } */

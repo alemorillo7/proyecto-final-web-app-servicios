@@ -11,7 +11,7 @@
       <div class="offcanvas offcanvas-end desplegable" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header headerDesplegable">
           <h5 class="offcanvas-title tituloDesplegable" id="offcanvasNavbarLabel" th:text="'Hola, ' + ${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
-          <img th:src="@{/imagen/perfil/{id}(id=${session.usuariosession.id})}" class="rounded-circle imagenPerfil" width="50" height="50">
+          <img th:src="${session.usuariosession.imagen != null} ? @{/imagen/perfil/{id}(id=${session.usuariosession.id})} : @{/imagenes/default-profile.jpg}" class="rounded-circle imagenPerfil" width="50" height="50">
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body headerBody">
