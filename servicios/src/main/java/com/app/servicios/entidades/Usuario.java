@@ -11,6 +11,7 @@ import com.app.servicios.enumeraciones.Rol;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -57,7 +58,8 @@ public class Usuario {
 
     private String password;
 
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (name = "proveedor_servicio", joinColumns = @JoinColumn(name = "proveedor_id"), inverseJoinColumns = @JoinColumn(name = "servicio_id"))
     private Set<Servicio> servicios = new HashSet<>();
 
