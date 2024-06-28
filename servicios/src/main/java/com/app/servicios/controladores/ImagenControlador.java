@@ -1,6 +1,10 @@
 package com.app.servicios.controladores;
 
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,12 +43,22 @@ public class ImagenControlador {
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id){
         Usuario usuario =usuarioRepositorio.findById(id).orElse(null);
         if (usuario != null && usuario.getImagen() != null) {
-        byte[] imagen = usuario.getImagen().getContenido();
-        HttpHeaders headers = new HttpHeaders(); 
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<> (imagen, headers, HttpStatus.OK);
+            byte[] imagen = usuario.getImagen().getContenido();
+            HttpHeaders headers = new HttpHeaders(); 
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<> (imagen, headers, HttpStatus.OK);
+        } else {
+            try {
+                ClassPathResource imgFile = new ClassPathResource("static/imagenes/default-profile.jpg");
+                byte[] imageBytes = Files.readAllBytes(imgFile.getFile().toPath());
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.IMAGE_JPEG);
+                return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+            } catch (IOException e) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
     }
 
     @GetMapping("/modificar/{id}")
