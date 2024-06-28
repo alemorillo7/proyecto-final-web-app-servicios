@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.app.servicios.servicios.ImagenServicios;
 import com.app.servicios.servicios.UsuarioServicios;
+import com.app.servicios.entidades.Imagen;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.repositorios.UsuarioRepositorio;
 
@@ -36,27 +37,33 @@ public class ImagenControlador {
 
     @RequestMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id){
-         @SuppressWarnings("deprecation")
-        Usuario usuario = usuarioRepositorio.getById(id);
+        Usuario usuario =usuarioRepositorio.findById(id).orElse(null);
+        if (usuario != null && usuario.getImagen() != null) {
         byte[] imagen = usuario.getImagen().getContenido();
         HttpHeaders headers = new HttpHeaders(); 
         headers.setContentType(MediaType.IMAGE_JPEG);
-
-
         return new ResponseEntity<> (imagen, headers, HttpStatus.OK);
-
-
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/modificar/{id}")
     public String mostrarFormularioImagen(@PathVariable String id, ModelMap modelo) {
+        modelo.put("id", id);
         return "formularioImagen.html";
     }
 
     @PostMapping("/modificado/{id}")
-    public String modificarImagen(@PathVariable String id, @RequestParam MultipartFile archivo, ModelMap modelo) {
+    public String modificarImagen(@PathVariable String id,
+                                    @RequestParam MultipartFile archivo,
+                                    ModelMap modelo) {
         try {
-            imagenServicios.actualizarImagen(archivo, id);
+            Imagen imagen = imagenServicios.actualizarImagen(archivo, id);
+            Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+            if (usuario != null) {
+                usuario.setImagen(imagen);
+                usuarioRepositorio.save(usuario);
+            }
             return "redirect:/inicio";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());

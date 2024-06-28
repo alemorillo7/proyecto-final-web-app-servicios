@@ -34,6 +34,6 @@ public class Imagen {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(columnDefinition = "LONGBLOB")
-    byte[] contenido;
+    private byte[] contenido;
 
 }
