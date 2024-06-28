@@ -356,4 +356,3 @@ public String perfil(HttpSession session, ModelMap modelo) {
     }
 }
 
-

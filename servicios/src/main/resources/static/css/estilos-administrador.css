@@ -1,0 +1,35 @@
+body {
+    background-image: url("/proyecto-final-web-app-servicios/servicios/src/main/resources/static/imagenes/fondo.png");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    margin: 0; 
+    padding: 0
+}
+.contenedor-botones {
+    display: flex;
+    flex-direction: grid;
+    justify-content: center;
+    align-items: center;
+     opacity: 100%;  
+   
+  
+}
+.contenedor-titulo {
+    display: flex;
+    flex-direction: grid;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    background-color: transparent 100%;
+   
+    
+}
+
+
+.btn-opcion {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    background-color: #0683C2;
+    font-family:"Montserrat", sans-serif;
+}
