@@ -18,30 +18,29 @@ public class ImagenServicios {
 
     @Transactional
     public Imagen guardarImagen(MultipartFile archivo) throws MiExcepcion {
-        if (archivo != null) {
+        if (archivo != null && !archivo.isEmpty()) {
             try {
                 Imagen imagen = new Imagen();
                 imagen.setMime(archivo.getContentType());
 
-                imagen.setNombre(archivo.getName());
+                imagen.setNombre(archivo.getOriginalFilename());
 
                 imagen.setContenido(archivo.getBytes());
 
                 return imagenRepositorio.save(imagen);
 
-}
+}  catch (Exception e) {
 
-            catch (Exception e) {
-                System.err.println(e.getMessage());
+    throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
 }
         }
-        return null;
+        throw new MiExcepcion("El archivo no puede estar nulo o vacío");
     }
 
     @Transactional
     public Imagen actualizarImagen (MultipartFile archivo, String idImagen) throws MiExcepcion {
         
-        if (archivo != null) {
+        if (archivo != null && !archivo.isEmpty()) {
             try {
 
                 Imagen imagen = new Imagen();
@@ -56,7 +55,7 @@ public class ImagenServicios {
                 }
                 imagen.setMime(archivo.getContentType());
 
-                imagen.setNombre(archivo.getName());
+                imagen.setNombre(archivo.getOriginalFilename());
 
                 imagen.setContenido(archivo.getBytes());
 
@@ -65,10 +64,10 @@ public class ImagenServicios {
 }
 
             catch (Exception e) {
-                System.err.println(e.getMessage());
+                throw new MiExcepcion("Error al actualizar la imagen: " + e.getMessage());
 }
         }
-        return null;
+        throw new MiExcepcion("El archivo no puede ser nulo o vacío");
 
     }
 
