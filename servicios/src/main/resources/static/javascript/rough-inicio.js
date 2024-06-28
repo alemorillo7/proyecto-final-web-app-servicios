@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const annotation = RoughNotation.annotate(element, {
         type: 'underline',
         color: 'blue',
-        padding: -7,
+        padding: -3,
     });
 
     element.addEventListener("mouseenter", function () {

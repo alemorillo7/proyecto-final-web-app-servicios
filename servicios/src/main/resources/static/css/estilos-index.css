@@ -5,24 +5,27 @@
 }
 
 .bienvenida {
-    height: 600px;
+    height: 300px;
     justify-items:center;
     align-items: center;
     text-align: justify;
     margin-top: 20px;
     margin-bottom: 70px;
-    border-bottom: solid 1px #0683C2;
-    border-top: solid 1px #0683C2;
     background-image: url(/imagenes/reparaciones-del-hogar.jpg);
     box-sizing: border-box;
     background-repeat: no-repeat;
-    background-color: white;
-    position:relative;
-    opacity: 80%;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 60%;
     
 }
 .presentacion{
     margin: 30px;
+    font-size: large; 
+    font-weight: bolder;
+    color:  black;
+    background-color: white;
+    opacity: 50%;
     
 }
 .cierre {
@@ -41,19 +44,17 @@
     margin-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-    border: 1px solid black;
-    background-color: white;
 }
 
 body {
-    background-image: url(/imagenes/fondo.png);
+    background-color:#717679;
     
 }
 
 .contenedor-servicios img {
     width: 100px;
     height: 100px;
-    background-color: white;
+    border-radius: 70%;
 }
 
 @media (max-width: 767px) {
@@ -90,7 +91,6 @@ body {
     height: 500px;
     background-size: cover;
     border-bottom: solid 0.5rem #0683C2;
- 
 
 }
 .navbar {
@@ -104,12 +104,12 @@ body {
 
 }
 #my-text1 {
-    display:inline
-    
+    display:inline;
+
  }
 #my-text2 {
-    display:inline
-    
+    display:inline;
+
  }
 .navIndex {
     width: 100%;
