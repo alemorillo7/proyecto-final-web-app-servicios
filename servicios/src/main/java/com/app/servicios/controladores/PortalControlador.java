@@ -153,6 +153,12 @@ public class PortalControlador {
                 return "redirect:/inicio";
             case "PROVEEDOR":
                 return "redirect:/panelUsuario";
+            case "CLIENTEPROVEEDOR":
+                return "redirect:/panelUsuario";
+            case "ADMIN":
+                return "redirect:/inicio";
+            case "SUPERADMIN":
+                return "redirect:/superadmin";
             default:
                 return "redirect:/login"; // Manejar caso de roles no esperados
         }
@@ -165,9 +171,7 @@ public class PortalControlador {
        
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
         
-        if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/admin";
-        }
+        
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
             return "redirect:/superadmin";
         }
@@ -320,7 +324,7 @@ public String perfil(HttpSession session, ModelMap modelo) {
         }
     }
     @PreAuthorize("hasAnyRole('ROLE_CLIENTEPROVEEDOR')")
-    @PostMapping("/modificarPerfil/{id}")
+    @PostMapping("/modificarPerfil/clienteproveedor/{id}")
     public String modificarClienteProveedor(@RequestParam String nombre, 
                                 @RequestParam String apellido, 
                                 @RequestParam Integer dni,
@@ -348,7 +352,7 @@ public String perfil(HttpSession session, ModelMap modelo) {
                 }
             }
             usuarioServicios.modificarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios, id);
-            return "inicio.html";
+            return "redirect:/perfil";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             return "error.html";
