@@ -1,0 +1,42 @@
+<div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel"
+                  aria-labelledby="overview-tab" tabindex="0" sec:authorize="hasRole('CLIENTE')">
+                  <h5 class="mb-3">Mi perfil</h5>
+                  <div class="row g-0">
+                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                      <div class="p-2">Nombre</div>
+                    </div>
+                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                      <div class="p-2" th:text="${session.usuariosession.nombre}"></div>
+                    </div>
+                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                      <div class="p-2">Apellido</div>
+                    </div>
+                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                      <div class="p-2" th:text="${session.usuariosession.apellido}"></div>
+                    </div>
+                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                      <div class="p-2">D.N.I</div>
+                    </div>
+                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                      <div class="p-2" th:text="${session.usuariosession.dni}"></div>
+                    </div>
+                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                      <div class="p-2">Direccion</div>
+                    </div>
+                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                      <div class="p-2" th:text="${session.usuariosession.direccion}"></div>
+                    </div>
+                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                      <div class="p-2">Email</div>
+                    </div>
+                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                      <div class="p-2" th:text="${session.usuariosession.email}"></div>
+                    </div>
+                    <div class="col-5 col-md-3 bg-light">
+                      <div class="p-2">Telefono</div>
+                    </div>
+                    <div class="col-7 col-md-9 bg-light border-start border-white border-3">
+                      <div class="p-2" th:text="${session.usuariosession.telefono}"></div>
+                    </div>
+                  </div>
+                </div>
