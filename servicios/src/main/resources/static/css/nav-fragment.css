@@ -1,6 +1,7 @@
 nav{
     padding: 0px;
     margin: 0px;
+
 }
 .logo {
     width: 80px;
@@ -15,9 +16,10 @@ nav{
     font-family:"Montserrat", sans-serif;
     font-size: medium;
 }
-.narbar{
+.navbar{
     background-color: #0683C2;
     opacity: 90%;
+    margin: 0px;
 }
 .navInicio {
     width: 100%;
