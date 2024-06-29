@@ -13,13 +13,15 @@
 }
 
 .bienvenida {
-    height: 300px;
-    justify-items:center;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
     align-items: center;
-    text-align: justify;
+    text-align: center;
     margin-top: 20px;
     margin-bottom: 70px;
-    background-image: url(/imagenes/reparaciones-del-hogar.jpg);
+    background-image: url(/imagenes/clara.png);
     box-sizing: border-box;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -29,16 +31,25 @@
 }
 .presentacion{
     margin: 30px;
-    font-size: large; 
-    font-weight: bolder;
-    color:  black;
-    background-color: white;
-    opacity: 50%;
-    
+    font-size: 25px; 
+    color: black;
+    opacity: 100%;
+    padding-top: 30px;
+    justify-self: center;  
+    width: 70%;  
+}
+
+.eslogan {
+    width: 100%;
 }
 .cierre {
     text-align: center;
     margin: 30px;
+    color: black;
+    font-size: 300%; 
+    font-family: 'Amsterdam';
+    margin-bottom: 50px;
+
 }
 .contenedorContiene {
     width: 100%;
@@ -57,6 +68,7 @@
     padding-right: 20px;
     padding-top: 10px;
     padding-bottom: 30px;
+    justify-content: center;
 }
 
 body {
@@ -68,8 +80,8 @@ body {
 }
 
 .contenedor-servicios img {
-    width: 50px;
-    height: 50px;
+    width: 80%;
+    height: 90%;
 }
 
 
@@ -79,21 +91,13 @@ body {
     .contenedor-servicios {
         grid-template-columns: repeat(3, 0.5fr);
     }
-    .contenedor-servicios img {
-        width: 60px;
-        height: 60px;
-    
-}
+
+
 }
 
 @media (max-width: 480px) {
     .contenedor-servicios {
         grid-template-columns: repeat(2, 0.1fr);
-    }
-    .contenedor-servicios img {
-            width: 700px;
-            height: 700px;
-        
     }
     
 }
@@ -117,7 +121,6 @@ body {
     background-image: url(/imagenes/portada.png) ;
     height: 500px;
     background-size: cover;
-    border-bottom: solid 0.5rem #0683C2;
 
 }
 .navbar {
@@ -210,10 +213,10 @@ body {
 .tituloServicios {
     text-align: center;
     margin-top: 150px;
-    margin-bottom: 50px;
+    margin-bottom: 170px;
     font-family: 'Amsterdam';
     color: #455B66;
-    font-size: 350%;
+    font-size: 450%;
 }
 
 
