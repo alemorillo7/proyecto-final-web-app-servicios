@@ -33,8 +33,11 @@ public class ImagenServicios {
 
     throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
 }
-        }
+        } else{
         throw new MiExcepcion("El archivo no puede estar nulo o vacío");
+        }
+
+
     }
 
     @Transactional
@@ -42,16 +45,17 @@ public class ImagenServicios {
         
         if (archivo != null && !archivo.isEmpty()) {
             try {
-
                 Imagen imagen = new Imagen();
 
                 if (idImagen != null) {
-                    Optional<Imagen> imagenAnterior = imagenRepositorio.findById(idImagen);
-
-                    if (imagenAnterior.isPresent()) {
-                        imagen = imagenAnterior.get();
-                        
-                    }
+                    Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
+                    if (respuesta.isPresent()) {
+                        imagen = respuesta.get();
+                } else{
+                    throw new MiExcepcion("La imagen no existe");
+                }
+                } else{
+                    throw new MiExcepcion("La imagen no puede estar vacía");
                 }
                 imagen.setMime(archivo.getContentType());
 
@@ -61,15 +65,14 @@ public class ImagenServicios {
 
                 return imagenRepositorio.save(imagen);
 
-}
+}  catch (Exception e) {
 
-            catch (Exception e) {
-                throw new MiExcepcion("Error al actualizar la imagen: " + e.getMessage());
+    throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
 }
+}else{
+        throw new MiExcepcion("El archivo no puede estar nulo o vacío");
         }
-        throw new MiExcepcion("El archivo no puede ser nulo o vacío");
-
-    }
 
 
 }
+    }
