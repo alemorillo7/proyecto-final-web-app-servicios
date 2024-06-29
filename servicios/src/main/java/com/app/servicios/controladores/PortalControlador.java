@@ -339,7 +339,8 @@ public String perfil(HttpSession session, ModelMap modelo) {
                                 @RequestParam String descripcion,
                                 @RequestParam String[] serviciosIds,
                                 @PathVariable String id,
-                                ModelMap modelo) {
+                                ModelMap modelo,
+                                HttpSession session) {
 
      
 
@@ -352,6 +353,9 @@ public String perfil(HttpSession session, ModelMap modelo) {
                 }
             }
             usuarioServicios.modificarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios, id);
+
+            session.setAttribute("usuariosession", usuarioServicios.buscarPorEmail(email));
+
             return "redirect:/perfil";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
