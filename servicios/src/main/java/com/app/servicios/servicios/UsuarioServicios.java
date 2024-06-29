@@ -138,7 +138,7 @@ public class UsuarioServicios implements UserDetailsService {
         cliente.setTelefono(telefono);
         cliente.setEmail(email);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
-        cliente.setRol(Rol.CLIENTE);
+        
 
         // String idImagen = null;
 
@@ -179,7 +179,7 @@ public class UsuarioServicios implements UserDetailsService {
         proveedor.setTelefono(telefono);
         proveedor.setEmail(email);
         proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
-        proveedor.setRol(Rol.PROVEEDOR);
+        
 
 
         // String idImagen = null;
@@ -238,7 +238,6 @@ public class UsuarioServicios implements UserDetailsService {
         clienteProveedor.setTelefono(telefono);
         clienteProveedor.setEmail(email);
         clienteProveedor.setPassword(new BCryptPasswordEncoder().encode(password));
-        clienteProveedor.setRol(Rol.PROVEEDOR);
         clienteProveedor.setExperiencia(experiencia);
         clienteProveedor.setDescripcion(descripcion);
         clienteProveedor.setServicios(servicios);
