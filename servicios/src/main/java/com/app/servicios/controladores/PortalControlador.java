@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
@@ -62,10 +62,11 @@ public class PortalControlador {
                                        @RequestParam String telefono, 
                                        @RequestParam String email, 
                                        @RequestParam String password, 
-                                       @RequestParam String password2, 
+                                       @RequestParam String password2,
+                                       MultipartFile archivo, 
                                        ModelMap modelo) throws Exception {
         try {
-            usuarioServicios.crearCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2);
+            usuarioServicios.crearCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, archivo);
             modelo.put("exito", "Te has registrado correctamente");
             return "index.html";
         } catch (Exception ex) {

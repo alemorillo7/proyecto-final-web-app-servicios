@@ -56,7 +56,8 @@
                   Actualizar foto
                 </button>
                 <!-- Modal -->
-                <form th:action="@{/cambiarImagen}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/imagen/cambiarImagen}" method="POST" enctype="multipart/form-data">
+                  <input  type="text" hidden name="id" th:value="${session.usuariosession.id}">
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -67,7 +68,7 @@
                         </div>
                         <div class="modal-body">
                           <div class="input-group mb-3">
-                            <input type="file" class="form-control" id="inputGroupFile01">
+                            <input type="file" class="form-control" id="inputGroupFile01" name ="archivo">
                           </div>
                                                   </div>
                         <div class="modal-footer">

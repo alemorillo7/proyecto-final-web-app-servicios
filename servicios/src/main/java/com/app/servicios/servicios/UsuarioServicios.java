@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
-
-
+import com.app.servicios.entidades.Imagen;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
@@ -34,6 +34,8 @@ public class UsuarioServicios implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private ImagenServicios imagenServicios;
    
 
     // Crear Clientes y Proveedores//
@@ -42,8 +44,8 @@ public class UsuarioServicios implements UserDetailsService {
             String localidad, String direccion,
             String barrio,
             String telefono, String email, String password,
-            String password2 
-            // MultipartFile archivo
+            String password2, 
+            MultipartFile archivo
             ) throws MiExcepcion {
 
         validarCliente(nombre, apellido, dni, localidad, direccion,  barrio, telefono, email, password, password2);
@@ -69,10 +71,19 @@ public class UsuarioServicios implements UserDetailsService {
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         
         cliente.setRol(Rol.CLIENTE);
+        
+        if (archivo != null && !archivo.isEmpty()) {
+            try {
+                Imagen imagen = imagenServicios.guardarImagen(archivo);
+                cliente.setImagen(imagen);
+            } catch (MiExcepcion e) {
+                throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
+            }
+        } else {
+            throw new MiExcepcion("El archivo no puede estar nulo o vacío");
+        }
+        
 
-        // Imagen imagen = imagenServicios.guardarImagen(archivo);
-
-        // cliente.setImagen(imagen);
        
         cliente.setEstado(true);
 
@@ -244,6 +255,30 @@ public class UsuarioServicios implements UserDetailsService {
 
         usuarioRepositorio.save(clienteProveedor);
                                             }
+
+    @Transactional
+    public void actualizarImagenUsuario(String usuarioId, MultipartFile archivo) throws MiExcepcion {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(usuarioId);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            String idImagen = null;
+
+            if (usuario.getImagen() != null) {
+                idImagen = usuario.getImagen().getId();
+        }
+        Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen);
+          usuario.setImagen(imagen);
+
+        usuarioRepositorio.save(usuario);
+        }
+        
+        
+
+        
+
+      
+    }
 
     // Listar Usuarios//
     @Transactional(readOnly = true)
