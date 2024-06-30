@@ -20,11 +20,9 @@
               <a th:href="@{/perfil}" class="nav-link active text-light" aria-current="page" id="my-text1">Mi perfil</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#" id="my-text2">Órdenes nuevas</a>
+            <a class="nav-link active text-light" aria-current="page" th:href="@{/bandeja/{id}(id=${session.usuariosession.nombre})}" id="my-text2">Bandeja de ordenes</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="#"  id="my-text3">Órdenes abiertas</a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link active text-light" aria-current="page" href="#" id="my-text4">Ver comentarios y calificaciones</a>
             </li>
