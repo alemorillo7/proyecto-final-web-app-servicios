@@ -1,5 +1,6 @@
 package com.app.servicios.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -272,4 +273,32 @@ public class OrdenTrabajoServicios {
         ordenTrabajo.get().setEstado(true);
         ordenTrabajoRepositorio.save(ordenTrabajo.get());
     }
+
+
+
+
+/* 
+     @Service
+    public List<OrdenTrabajo> buscarOrdenesAbiertoPresupuestar(String idUsuario, String estadoOrden, String estadoTrabajo) {
+
+        //@Query("SELECT o FROM OrdenTrabajo o WHERE (o.cliente = :idUsuario OR o.proveedor = :idUsuario) AND o.estadoOrden = :estadoOrden AND o.estadoTrabajo = :estadoTrabajo")//
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarAbiertoPresupuestar(idUsuario);
+
+
+        for(int i = 0; i < ordenesTrabajo.size(); i++) {
+            
+            String ordenTrabajoId = ordenesTrabajo.get(i).getId();
+
+            List<Servicio> servicios = new ArrayList<>();
+
+            @Query("SELECT s.nombre FROM OrdenTrabajo ot JOIN ot.servicios s WHERE ot.id = ordenTrabajoId")
+
+
+
+        }
+        
+
+
+
+    } */
 }
