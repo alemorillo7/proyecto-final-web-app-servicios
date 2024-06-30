@@ -8,9 +8,12 @@ import org.hibernate.annotations.GenericGenerator;
 import com.app.servicios.enumeraciones.EstadoOrden;
 import com.app.servicios.enumeraciones.EstadoTrabajo;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -56,10 +59,14 @@ public class OrdenTrabajo {
 
    
     @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] imagen;
 
     
     @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] video;
 
     private Integer presupuesto;
