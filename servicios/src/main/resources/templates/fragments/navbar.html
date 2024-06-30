@@ -2,7 +2,7 @@
     <div class="container-fluid navInicio">
       <div>
         <img class="logo" src="/imagenes/logo-fondo-transparente.png" alt="">
-        <a class="navbar-brand serviHogar" style="color: #ffffff" href="#">ServiHogar</a>
+        <a class="navbar-brand serviHogar" style="color: #ffffff" th:href="@{/inicio}">ServiHogar</a>
       </div>
       <button class="navbar-toggler" style="color: #ffffff" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,10 +17,13 @@
         <div class="offcanvas-body headerBody">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 listaBodyNV">
             <li>
-              <a th:href="@{/perfil}" class="nav-link active text-light" aria-current="page" id="my-text1">Mi perfil</a>
+              <a th:href="@{/inicio}" class="nav-link active text-light" aria-current="page" id="my-text1">Inicio</a>
+            </li>
+            <li>
+              <a th:href="@{/perfil}" class="nav-link active text-light" aria-current="page" id="my-text2">Mi perfil</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" th:href="@{/bandeja/{id}(id=${session.usuariosession.nombre})}" id="my-text2">Bandeja de ordenes</a>
+            <a class="nav-link active text-light" aria-current="page" th:href="@{/bandeja/{id}(id=${session.usuariosession.nombre})}" id="my-text3">Bandeja de ordenes</a>
             </li>
             
             <li class="nav-item">
