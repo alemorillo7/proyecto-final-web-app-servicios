@@ -109,7 +109,7 @@ public class ImagenControlador {
             return "redirect:/perfil";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
-            return "redirect:/imagen/modificar/" + id;
+            return "redirect:/perfil";
         }
     }
 }

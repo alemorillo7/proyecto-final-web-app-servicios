@@ -266,9 +266,14 @@ public class UsuarioServicios implements UserDetailsService {
 
             if (usuario.getImagen() != null) {
                 idImagen = usuario.getImagen().getId();
-        }
-        Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen);
-          usuario.setImagen(imagen);
+                Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen);
+                usuario.setImagen(imagen);
+        } else {
+                Imagen imagen = imagenServicios.guardarImagen(archivo);
+                usuario.setImagen(imagen);
+            }
+        
+          
 
         usuarioRepositorio.save(usuario);
         }
