@@ -180,13 +180,81 @@
 
                     <!-- Segunda pestaña -->
                     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                      
+                      <div id="contenedor-ordenes-calificar-cliente" sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
+                        <h5 class="mb-3">Trabajos para calificar</h5>
+                        <table>
+                          <thead>
+                            <tr>
+                              <th scope="col">Titulo</th>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">Proveedor</th>
+                              <th scope="col">Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              
+                          </tbody>
+                        </table>
+                        </div>
+  
+                        <div id="contenedor-ordenes-calificar-proveedor" sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                          <h5 class="mb-3">Trabajos esperando calificacion</h5>
+                        <table sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                          <thead>
+                            <tr>
+                              <th scope="col">Titulo</th>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">Cliente</th>
+                              <th scope="col">Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                           
+                          </tbody>
+                        </table>
+                      </div>
+  
                     </div>
 
 
                     <!-- Tercera pestaña -->
                     <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab" tabindex="0">
-                      
+                      <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div id="contenedor-ordenes-presupuestar-cliente" sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
+                          <h5 class="mb-3">Presupuestos rechazados por mi</h5>
+                          <table>
+                            <thead>
+                              <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Proveedor</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                          </table>
+                          </div>
+    
+                          <div id="contenedor-ordenes-presupuestar-proveedor" sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                            <h5 class="mb-3">Presupuestos rechazados por clientes</h5>
+                          <table sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                            <thead>
+                              <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                             
+                            </tbody>
+                          </table>
+                        </div>
+    
+                      </div>
                     </div>
 
 
