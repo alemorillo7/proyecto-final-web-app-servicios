@@ -30,7 +30,10 @@
                   <p class="card-text">Servicios:
                     <div class="servicios">
                       <ul class="servicios-columnas">
-                        <li th:each="servicioNombre : ${listaDeNombresDeServicios[iterStat.index]}" th:text="${servicioNombre}"></li>
+                        <li th:each="servicio, iterStat : ${listaDeNombresDeServicios}">
+                            <input type="checkbox" th:id="'servicio_' + ${iterStat.index}" th:name="'servicio_' + ${iterStat.index}" th:value="${servicio}"/>
+                            <label th:for="'servicio_' + ${iterStat.index}" th:text="${servicio}"></label>
+                        </li>
                       </ul>
                     </div>
                     
@@ -55,11 +58,11 @@
                   <form th:action="@{/solicitarServicio}" method="post" enctype="multipart/form-data">
                       <div class="mb-3">
                           <label for="titulo" class="form-label">Título</label>
-                          <input type="text" class="form-control" id="titulo" name="titulo" required>
+                          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo del pedido" required>
                       </div>
                       <div class="mb-3">
                           <label for="descripcion" class="form-label">Descripción</label>
-                          <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                      <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Escriba la descripción detallada" required></textarea>
                       </div>
                       <div class="mb-3">
                           <label for="imagen" class="form-label">Imagen (opcional)</label>
