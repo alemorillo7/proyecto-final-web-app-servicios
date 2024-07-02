@@ -27,8 +27,8 @@
     background-attachment: fixed;
     background-size: 100%;
     opacity: 60%;
-    
 }
+
 .presentacion{
     margin: 30px;
     font-size: 25px; 
@@ -38,6 +38,7 @@
     justify-self: center;  
     width: 70%;  
 }
+
 
 .eslogan {
     width: 100%;
@@ -51,6 +52,52 @@
     margin-bottom: 50px;
 
 }
+
+@media (max-width: 990px) {
+    .bienvenida {
+        background-size: 300%;
+        height: 600px;
+
+    }
+    .presentacion {
+        font-size: 20px; 
+    }
+
+    .cierre {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 880px) {
+    .bienvenida {
+        background-size: 200%;
+        height: 800px;
+    }
+    .presentacion {
+        font-size: 20px; 
+    }
+
+    .cierre {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    .bienvenida {
+        background-size: 350%;
+        height: 700px;
+    }
+    .presentacion {
+        font-size: 15px; 
+    }
+
+    .cierre {
+        font-size: 15px;
+    }
+}
+
+
+
 .contenedorContiene {
     width: 100%;
     display: flex;
@@ -235,7 +282,6 @@ body {
 
 
 
-
 .boton {
     background-color: #0683C2;
 }
@@ -285,6 +331,7 @@ body {
     margin-bottom: 20px;
     margin-left: 100px;
     background-color: #0683C2;
+    font-weight: bolder;
 }
 
 footer {
