@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/css/estilos-inicio.css">
         <link rel="stylesheet" href="/css/vistaProveedores.css">
         <link rel="stylesheet" href="css/nav-fragment.css">
+        <link rel="stylesheet" href="css/footer.css">
     <title>Resultados de Búsqueda</title>
 </head>
 <body>
@@ -41,6 +42,9 @@
     <div th:if="${#lists.isEmpty(proveedores)}">
         <p>No se encontraron proveedores para este servicio.</p>
     </div>
+    <footer th:replace="~{fragments/footer :: footer}" class="footer">
+        
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
         <script src="javascript/rough-inicio.js"></script>
 </body>

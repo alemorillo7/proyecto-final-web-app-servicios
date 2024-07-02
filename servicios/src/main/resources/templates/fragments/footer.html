@@ -1,101 +1,66 @@
 
-    <footer class="footer text-center footer-style text-lg-start text-white"
-                style="background-color: #455B66"
-                >
-        <div class="container p-4 pb-0">
-            <section class="">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">
-                    ServiHogar
-                  </h6>
-                  <p>
-                    Somos un equipo de profesionales dedicados a facilitar la búsqueda de los servicios que tu hogar necesita. 
-                  </p>
-                </div>
-               <hr class="w-100 clearfix d-md-none" />
-      
-               <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Servicios</h6>
-                  <p>
-                    <a class="text-white">Electricista</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Albañil</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Plomero</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Otros</a>
-                  </p>
-                </div>
-               
-      
-                <hr class="w-100 clearfix d-md-none" />
-        
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">
-                    Usuario
-                  </h6>
-                  
-                  <p>
-                    <a class="text-white">Ingresar</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Preguntas frecuentes</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Ayuda</a>
-                  </p>
-                </div>
-        
-                <hr class="w-100 clearfix d-md-none" />
-         
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
-                  <p><i class="fas fa-home mr-3"></i>  Mendoza</p>              
-                  <p><i class="fas fa-envelope mr-3"></i>  servihogar@gmail.com</p>
-                  <p><i class="fas fa-phone mr-3"></i>  + 59 8 29160001</p>
-                </div>
-                
+<footer class="footer">
+  <div class="footerSuperior">   
+      <p class="textoFooter">
+        <a id="my-text2" href="#inicioSesion" data-bs-toggle="modal" data-bs-target="#inicioSesion" class="text-white ingresar">Ingresar</a>
+      </p>
+      <p class="textoFooter">
+        <a class="text-white preguntas">Preguntas frecuentes</a>
+      </p>
+      <p class="textoFooter">
+        <a href="" class="text-white ayuda">Ayuda</a>
+    </p>
+      <p class="textoFooter">
+        <a class="text-white politicas">Politicas de privacidad y servicio</a>
+      </p>
+      <p class="textoFooter">
+        <a class="text-white terminos">Términos y condiciones</a>
+      </p>
+      <a class="btnFArriba" href="#top"><img src="imagenes/iconos/arriba.png" alt="Subir" data-gif="imagenes/iconos/arriba.gif" class= "gif-hover item justify-content-md-end" ></a>
+     
+    
+    </div> 
+      <section class="sectionWhat"> 
+    <a href="https:/web.whatsapp.com"><img class= "itemW" src="imagenes/iconos/whatsapp.png" alt="whatsapp"></a>
+</section>
+<hr>
+  <section class="sectionIcon">
+    <li class="item1"><a href="https://www.facebook.com"><img class="icono" src="imagenes/iconos/facebook-2.png" alt="face"></a></li>
+    <li class="item1"><a href="https://www.instagram.com"><img class="icono" src="imagenes/iconos/instagram.png" alt="insta"></a></li>
+    <li class="item1"><a href="https://www.youtube.com"><img class="icono" src="imagenes/iconos/youtube.png" alt="youtube"></a></li>
+    <li class="item1"><a href="https://www.gmail.com"><img class="icono" src="imagenes/iconos/gmail.png" alt="mail"></a></li>
+  </section>
+  <section class="sectionLogo">
+  <img class="logoFooter" src="imagenes/logo-fondo-transparente.png" alt="">
+  </section>
+  <h6 class="copyright"> © 2024 Copyright</h6>
+     <!-- Modal Iniciar Sesión -->
+     <div class="modal fade" id="inicioSesion" tabindex="-1" aria-labelledby="inicioSesionLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Iniciar sesión</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="formulario" th:action="@{/logincheck}" method="post">
+              <div class="form-group">
+                  <label for="email">Correo Electrónico</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo electrónico" required>
               </div>
-             </section>
-           <hr class="my-3">
-           
-          <section class="p-3 pt-0">
-              <div class="row d-flex align-items-center">
-               <div class="col-md-7 col-lg-8 text-center text-md-start">
-                <div class="p-3">
-                    © 2024 Copyright:
-                    <a class="text-white" 
-                       >Equipo4.com</a
-                      >
-                  </div>
-                </div>
-               
-                <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-                    <a
-                     class="btn btn-outline-light btn-floating m-1"
-                     class="text-white"
-                     role="button"
-                     ><i class="fab fa-facebook-f"></i
-                    ></a>
-                    
-                  <a
-                     class="btn btn-outline-light btn-floating m-1"
-                     class="text-white"
-                     role="button"
-                     ><i class="fab fa-google"></i
-                    ></a>
-                    <a
-                    class="btn btn-outline-light btn-floating m-1"
-                    class="text-white"
-                    role="button"
-                    ><i class="fab fa-instagram"></i
-                    ></a>
-                </div>
+              <div class="form-group">
+                  <label for="password">Contraseña</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
               </div>
-            </section>
-            </div>
-          </footer>
+              <button type="submit" class="btn btn-info btn-block btnIngresar">Ingresar</button>
+              <div class="text-center mt-8">
+                  <a href="#">¿Olvidaste tu contraseña?</a>
+              </div>
+              <div class="text-center mt-">
+                  <span>¿No tienes una cuenta? <a href="/index">Regístrate</a></span>
+              </div>
+          </form>                   
+        </div>
+      </div>
+    </div>
+</footer>
