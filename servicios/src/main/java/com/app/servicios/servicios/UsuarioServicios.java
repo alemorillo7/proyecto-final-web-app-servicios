@@ -80,6 +80,7 @@ public class UsuarioServicios implements UserDetailsService {
             throw new MiExcepcion("El archivo no puede estar nulo o vacío");
         }
 
+
         cliente.setEstado(true);
 
         usuarioRepositorio.save(cliente);
@@ -569,6 +570,7 @@ public class UsuarioServicios implements UserDetailsService {
         return usuarioRepositorio.buscarPorEmail(email);
     }
 
+
     @Transactional
     public void convertirClienteAAdmin(String id) throws MiExcepcion {
         Optional<Usuario> usuarioOptional = usuarioRepositorio.findById(id);
@@ -585,4 +587,21 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
+  //Buscar cliente en base de datos para validar por mail que no exista y crear usuario
+    public boolean existeClientePorEmail(String email) {
+        return usuarioRepositorio.existsByEmail(email);
+    }
+    //Buscar cliente en base de datos para validar por dni que no exista y crear usuario
+    public boolean existeClientePorDni(Integer dni) {
+        return usuarioRepositorio.existsByDni(dni);
+    }
+
+    //Buscar proveedor en base de datos para validar por mail que no exista y crear usuario
+    public boolean existeProveedorPorEmail(String email) {
+        return usuarioRepositorio.existsByEmail(email);
+    }
+    //Buscar cliente en base de datos para validar por dni que no exista y crear usuario
+    public boolean existeProveedorPorDni(Integer dni) {
+        return usuarioRepositorio.existsByDni(dni);
+    }
 }
