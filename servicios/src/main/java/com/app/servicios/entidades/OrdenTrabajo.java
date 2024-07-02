@@ -40,7 +40,6 @@ public class OrdenTrabajo {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
-    
     private Integer numeroDeOrden;
 
     private String titulo;

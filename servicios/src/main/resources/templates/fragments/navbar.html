@@ -26,12 +26,9 @@
             <a class="nav-link active text-light" aria-current="page" th:href="@{/bandeja/{id}(id=${session.usuariosession.nombre})}" id="my-text3">Bandeja de ordenes</a>
             </li>
             
-            <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="#" id="my-text4">Ver comentarios y calificaciones</a>
-            </li>
 
             <li class="nav-item" sec:authorize="hasRole('CLIENTE')">
-              <a class="nav-link active text-light" aria-current="page" href="#" id="my-text5">Cambiar a rol proveedor</a>
+              <a class="nav-link active text-light" aria-current="page" href="#" id="my-text5">Quiero ser proveedor de servicios</a>
             </li>
 
             

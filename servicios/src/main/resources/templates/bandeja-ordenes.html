@@ -83,7 +83,7 @@
                       <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Ordenes abiertas</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Trabajos para calificar</button>
+                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Trabajos esperando calificacion</button>
                     </li>
                     <li class="nav-item" role="presentation">
                       <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email-tab-pane" type="button" role="tab" aria-controls="email-tab-pane" aria-selected="false">Ordenes cerradas</button>
@@ -112,7 +112,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                            
+                            <tr th:each="ordenAbiertoPresupuestar : ${ordenesAbiertoPresupuestar}">
+                              <td th:text="${ordenAbiertoPresupuestar.titulo}"></td>
+                              <td></td>
+                              <td th:text="${ordenAbiertoPresupuestar.proveedor.nombre}"></td>
+                              <td>
+                                <button>VER</button>
+                              </td>
+                            </tr>
                         </tbody>
                       </table>
                       </div>

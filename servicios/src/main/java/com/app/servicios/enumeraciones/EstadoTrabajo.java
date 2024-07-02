@@ -8,7 +8,8 @@ public enum EstadoTrabajo {
     PRESUPUESTO_RECHAZADO,
     TRABAJO_RECHAZADO,
     FINALIZADO,
-    CANCELADO
+    CANCELADO_CLIENTE,
+    CANCELADO_PROVEEDOR
     
     
 }
