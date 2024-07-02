@@ -31,5 +31,10 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT p FROM Usuario p JOIN p.servicios s WHERE s.id = :servicioId")
     List<Usuario> buscarProveedoresPorIdServicio(@Param("servicioId") String servicioId);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByDni(Integer dni);
+
 }
 
