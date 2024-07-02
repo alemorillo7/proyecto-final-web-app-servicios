@@ -1,3 +1,10 @@
+@font-face {
+    font-family:'Amsterdam';
+    src: url('/fuentes/Amsterdam.ttf') format('truetype');
+    /* Agrega más formatos de fuente según sea necesario */
+    font-weight: normal;
+    font-style: normal;
+  }
 nav{
     padding: 0px;
     margin: 0px;
@@ -12,13 +19,16 @@ nav{
 .serviHogar {
     margin: 0px;
     padding: 0px;
+    padding-top: 20px;
     text-decoration: none;
-    font-family:"Montserrat", sans-serif;
-    font-size: medium;
+    font-family: 'Amsterdam';
+    font-size: 25px;
+    color: #ffff;
+
 }
 .navbar{
     background-color: #0683C2;
-    opacity: 90%;
+    opacity: 95%;
     margin: 0px;
 }
 .navInicio {
@@ -29,7 +39,7 @@ nav{
     background-color: #0683C2;
 }
 .headerDesplegable {
-    background-color: #0683C2;
+    background-color: #455B66;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,10 +48,16 @@ nav{
 }
 
 .headerBody{
-    background-color: #96B8CD ;
-
+    background-color: #0683C2 ;
+    
 }
 
 .desplegable{
-    opacity: 90%;
+    opacity: 97%;
+    font-size: 20px;
+}
+.btnBuscar {
+    background-color: #0683C2;
+    color: black;
+    
 }
