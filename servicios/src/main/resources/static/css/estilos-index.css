@@ -149,26 +149,12 @@ body {
     
 }
 
-.logo {
-    width: 80px;
-    height: 80px;
-    padding: 0px;
-    margin: 0px;
-}
-
-.serviHogar {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    font-family:"Montserrat", sans-serif;
-}
 
 #top {
     width: 100%;
-    background-image: url(/imagenes/portada.png) ;
-    height: 500px;
+    background-image: url(/imagenes/portada.png);
+    height: 600px;
     background-size: cover;
-
 }
 .navbar {
     margin: 0;
@@ -207,7 +193,22 @@ body {
     width: 100%;
     display: flex;    
     align-items: center;
+      position: relative;
 
+}
+
+
+.logo {
+    width: 80px;
+    height: 80px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.serviHogar {
+    padding-top: 100px;
+    text-decoration: none;
+    font-family:'Amsterdam';
 }
 
 .btnIndex {
