@@ -1,6 +1,6 @@
 package com.app.servicios.servicios;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -168,7 +168,7 @@ public class OrdenTrabajoServicios {
     }
     @Transactional(readOnly = true)
     public List<OrdenTrabajo> listarOrdenesCancelado() {
-        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarPorEstadoTrabajo(EstadoTrabajo.CANCELADO);
+        List<OrdenTrabajo> ordenesTrabajo = ordenTrabajoRepositorio.buscarPorEstadoTrabajo(EstadoTrabajo.CANCELADO_CLIENTE);
         return ordenesTrabajo;
     }
     @Transactional(readOnly = true)
@@ -221,7 +221,7 @@ public class OrdenTrabajoServicios {
     @Transactional
     public void cancelaTrabajoOrdenTrabajo(String id) throws MiExcepcion {
         OrdenTrabajo ordenTrabajo = ordenTrabajoRepositorio.findById(id).orElse(null);
-        ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.CANCELADO);
+        ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.CANCELADO_CLIENTE);
         ordenTrabajo.setEstadoOrden(EstadoOrden.CALIFICAR);
         ordenTrabajoRepositorio.save(ordenTrabajo);
     }
@@ -277,28 +277,107 @@ public class OrdenTrabajoServicios {
 
 
 
-/* 
-     @Service
-    public List<OrdenTrabajo> buscarOrdenesAbiertoPresupuestar(String idUsuario, String estadoOrden, String estadoTrabajo) {
 
-        //@Query("SELECT o FROM OrdenTrabajo o WHERE (o.cliente = :idUsuario OR o.proveedor = :idUsuario) AND o.estadoOrden = :estadoOrden AND o.estadoTrabajo = :estadoTrabajo")//
-        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarAbiertoPresupuestar(idUsuario);
+//Queries de busqueda para tablas en bandeja//
+    public List<OrdenTrabajo> buscarOrdenesAbiertoPresupuestar(Usuario idUsuario) {
 
+        EstadoOrden estadoOrden = EstadoOrden.ABIERTO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.PRESUPUESTAR;
 
-        for(int i = 0; i < ordenesTrabajo.size(); i++) {
-            
-            String ordenTrabajoId = ordenesTrabajo.get(i).getId();
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
 
-            List<Servicio> servicios = new ArrayList<>();
-
-            @Query("SELECT s.nombre FROM OrdenTrabajo ot JOIN ot.servicios s WHERE ot.id = ordenTrabajoId")
-
-
-
-        }
+        return ordenesTrabajoAbiertoPresupuestar;
         
+    } 
+
+    public List<OrdenTrabajo> buscarOrdenesAbiertoPresupuestado(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.ABIERTO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.PRESUPUESTADO;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
 
 
+    public List<OrdenTrabajo> buscarOrdenesAbiertoAceptado(Usuario idUsuario) {
 
-    } */
+        EstadoOrden estadoOrden = EstadoOrden.ABIERTO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.ACEPTADO;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
+
+    public List<OrdenTrabajo> buscarOrdenesFinalizadoCalificar(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.CALIFICAR;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.FINALIZADO;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
+
+    public List<OrdenTrabajo> buscarOrdenesFinalizadoCalificado(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.CALIFICADO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.FINALIZADO;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
+
+
+    public List<OrdenTrabajo> buscarOrdenesCerradoTrabajoRechazado(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.CERRADO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.TRABAJO_RECHAZADO;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
+
+    public List<OrdenTrabajo> buscarOrdenesCerradoPresupuestoRechazado(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.CERRADO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.PRESUPUESTO_RECHAZADO;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
+
+    public List<OrdenTrabajo> buscarOrdenesCerradoCanceladoCliente(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.CERRADO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.CANCELADO_CLIENTE;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
+
+
+    public List<OrdenTrabajo> buscarOrdenesCerradoCanceladoProveedor(Usuario idUsuario) {
+
+        EstadoOrden estadoOrden = EstadoOrden.CERRADO;
+        EstadoTrabajo estadoTrabajo = EstadoTrabajo.CANCELADO_PROVEEDOR;
+
+        List<OrdenTrabajo> ordenesTrabajoAbiertoPresupuestar = ordenTrabajoRepositorio.buscarOrdenes(idUsuario, estadoOrden, estadoTrabajo);
+
+        return ordenesTrabajoAbiertoPresupuestar;
+        
+    } 
 }

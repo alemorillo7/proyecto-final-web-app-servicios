@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,19 +35,17 @@ public class UsuarioServicios implements UserDetailsService {
     private UsuarioRepositorio usuarioRepositorio;
     @Autowired
     private ImagenServicios imagenServicios;
-   
 
     // Crear Clientes y Proveedores//
     @Transactional
-    public void crearCliente(String nombre, String apellido, Integer dni, 
+    public void crearCliente(String nombre, String apellido, Integer dni,
             String localidad, String direccion,
             String barrio,
             String telefono, String email, String password,
-            String password2, 
-            MultipartFile archivo
-            ) throws MiExcepcion {
+            String password2,
+            MultipartFile archivo) throws MiExcepcion {
 
-        validarCliente(nombre, apellido, dni, localidad, direccion,  barrio, telefono, email, password, password2);
+        validarCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2);
 
         Usuario cliente = new Usuario();
 
@@ -61,17 +58,17 @@ public class UsuarioServicios implements UserDetailsService {
         cliente.setLocalidad(localidad);
 
         cliente.setDireccion(direccion);
-        
+
         cliente.setBarrio(barrio);
-        
+
         cliente.setTelefono(telefono);
-        
+
         cliente.setEmail(email);
-        
+
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
-        
+
         cliente.setRol(Rol.CLIENTE);
-        
+
         if (archivo != null && !archivo.isEmpty()) {
             try {
                 Imagen imagen = imagenServicios.guardarImagen(archivo);
@@ -82,25 +79,24 @@ public class UsuarioServicios implements UserDetailsService {
         } else {
             throw new MiExcepcion("El archivo no puede estar nulo o vacío");
         }
-        
 
-       
+
         cliente.setEstado(true);
 
         usuarioRepositorio.save(cliente);
     }
 
     public void crearProveedor(String nombre, String apellido, Integer dni,
-                                String localidad, String direccion,
-                                String telefono, String email, String password,
-                                String password2,
-                                // MultipartFile archivo,
-                                Integer experiencia, String descripcion,
-                                Set<Servicio> servicios) throws MiExcepcion {
+            String localidad, String direccion,
+            String telefono, String email, String password,
+            String password2,
+            // MultipartFile archivo,
+            Integer experiencia, String descripcion,
+            Set<Servicio> servicios) throws MiExcepcion {
 
         validarProveedor(nombre, apellido, dni, localidad, direccion,
-        telefono, email, password, password2,
-        experiencia, descripcion, servicios);
+                telefono, email, password, password2,
+                experiencia, descripcion, servicios);
 
         Usuario proveedor = new Usuario();
 
@@ -126,12 +122,12 @@ public class UsuarioServicios implements UserDetailsService {
     // Modificar Cliente y Proveedor//
 
     @Transactional
-    public void modificarCliente(String nombre, String apellido, Integer dni, 
-                                    String localidad, String direccion, 
-                                    String barrio, String telefono, String email,
-                                    String password, String password2,
-                                    // MultipartFile archivo,
-                                    String id) throws MiExcepcion {
+    public void modificarCliente(String nombre, String apellido, Integer dni,
+            String localidad, String direccion,
+            String barrio, String telefono, String email,
+            String password, String password2,
+            // MultipartFile archivo,
+            String id) throws MiExcepcion {
 
         validarCliente(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2);
 
@@ -139,47 +135,45 @@ public class UsuarioServicios implements UserDetailsService {
 
         if (respuesta.isPresent()) {
 
-        Usuario cliente = respuesta.get();
-        cliente.setNombre(nombre);
-        cliente.setApellido(apellido);
-        cliente.setDni(dni);
-        cliente.setLocalidad(localidad);
-        cliente.setDireccion(direccion);
-        cliente.setBarrio(barrio);
-        cliente.setTelefono(telefono);
-        cliente.setEmail(email);
-        cliente.setPassword(new BCryptPasswordEncoder().encode(password));
-        
+            Usuario cliente = respuesta.get();
+            cliente.setNombre(nombre);
+            cliente.setApellido(apellido);
+            cliente.setDni(dni);
+            cliente.setLocalidad(localidad);
+            cliente.setDireccion(direccion);
+            cliente.setBarrio(barrio);
+            cliente.setTelefono(telefono);
+            cliente.setEmail(email);
+            cliente.setPassword(new BCryptPasswordEncoder().encode(password));
 
-        // String idImagen = null;
+            // String idImagen = null;
 
-        // if(cliente.getImagen() != null){
-        //     idImagen = cliente.getImagen().getId();
-            
-        // }
-        
-        // Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen); 
+            // if(cliente.getImagen() != null){
+            // idImagen = cliente.getImagen().getId();
 
-        // cliente.setImagen(imagen);
-        
+            // }
 
-        usuarioRepositorio.save(cliente);
-    }
+            // Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen);
+
+            // cliente.setImagen(imagen);
+
+            usuarioRepositorio.save(cliente);
+        }
     }
 
     @Transactional
     public void modificarProveedor(String nombre, String apellido, Integer dni,
-                                    String localidad, String direccion, 
-                                    String telefono, String email,
-                                    String password, String password2, 
-                                    // MultipartFile archivo, 
-                                    Integer experiencia, String descripcion,
-                                    Set<Servicio> servicios, String id)
-                                    throws MiExcepcion {
+            String localidad, String direccion,
+            String telefono, String email,
+            String password, String password2,
+            // MultipartFile archivo,
+            Integer experiencia, String descripcion,
+            Set<Servicio> servicios, String id)
+            throws MiExcepcion {
 
         validarProveedor(nombre, apellido, dni, localidad,
-        direccion, telefono, email, password, password2,
-        experiencia, descripcion, servicios);
+                direccion, telefono, email, password, password2,
+                experiencia, descripcion, servicios);
 
         Usuario proveedor = usuarioRepositorio.findById(id).orElse(null);
         proveedor.setNombre(nombre);
@@ -190,20 +184,17 @@ public class UsuarioServicios implements UserDetailsService {
         proveedor.setTelefono(telefono);
         proveedor.setEmail(email);
         proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
-        
-
 
         // String idImagen = null;
 
         // if(proveedor.getImagen() != null){
-        //     idImagen = proveedor.getImagen().getId();
-            
+        // idImagen = proveedor.getImagen().getId();
+
         // }
-        
-        // Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen); 
+
+        // Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen);
 
         // proveedor.setImagen(imagen);
-
 
         proveedor.setExperiencia(experiencia);
         proveedor.setDescripcion(descripcion);
@@ -214,8 +205,8 @@ public class UsuarioServicios implements UserDetailsService {
 
     @Transactional
     public void crearClienteProveedor(Integer experiencia, String descripcion,
-                                        Set<Servicio> servicios,
-                                        String id) throws MiExcepcion {
+            Set<Servicio> servicios,
+            String id) throws MiExcepcion {
 
         validarClienteProveedor(experiencia, descripcion, servicios);
 
@@ -227,19 +218,21 @@ public class UsuarioServicios implements UserDetailsService {
 
         usuarioRepositorio.save(clienteProveedor);
     }
+
     @Transactional
     public void modificarClienteProveedor(String nombre, String apellido,
-                                            Integer dni, String localidad, 
-                                            String direccion, String barrio,
-                                            String telefono, String email,
-                                            String password, String password2,
-                                            Integer experiencia,
-                                            String descripcion,
-                                            Set<Servicio> servicios, String id)
-                                            throws MiExcepcion {
+            Integer dni, String localidad,
+            String direccion, String barrio,
+            String telefono, String email,
+            String password, String password2,
+            Integer experiencia,
+            String descripcion,
+            Set<Servicio> servicios, String id)
+            throws MiExcepcion {
 
-        validarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password, password2, experiencia, descripcion, servicios);
-        
+        validarClienteProveedor(nombre, apellido, dni, localidad, direccion, barrio, telefono, email, password,
+                password2, experiencia, descripcion, servicios);
+
         Usuario clienteProveedor = usuarioRepositorio.findById(id).orElse(null);
         clienteProveedor.setNombre(nombre);
         clienteProveedor.setApellido(apellido);
@@ -254,7 +247,7 @@ public class UsuarioServicios implements UserDetailsService {
         clienteProveedor.setServicios(servicios);
 
         usuarioRepositorio.save(clienteProveedor);
-                                            }
+    }
 
     @Transactional
     public void actualizarImagenUsuario(String usuarioId, MultipartFile archivo) throws MiExcepcion {
@@ -268,21 +261,14 @@ public class UsuarioServicios implements UserDetailsService {
                 idImagen = usuario.getImagen().getId();
                 Imagen imagen = imagenServicios.actualizarImagen(archivo, idImagen);
                 usuario.setImagen(imagen);
-        } else {
+            } else {
                 Imagen imagen = imagenServicios.guardarImagen(archivo);
                 usuario.setImagen(imagen);
             }
-        
-          
 
-        usuarioRepositorio.save(usuario);
+            usuarioRepositorio.save(usuario);
         }
-        
-        
 
-        
-
-      
     }
 
     // Listar Usuarios//
@@ -316,8 +302,7 @@ public class UsuarioServicios implements UserDetailsService {
         List<Usuario> proveedores = usuarioRepositorio.buscarProveedoresPorIdServicio(servicio);
 
         return proveedores;
-        
-        
+
     }
 
     // Buscar usuario//
@@ -353,9 +338,9 @@ public class UsuarioServicios implements UserDetailsService {
     }
 
     public void validarCliente(String nombre, String apellido, Integer dni,
-    String localidad, String direccion, String barrio,
-    String telefono, String email, String password, String password2)
-    throws MiExcepcion {
+            String localidad, String direccion, String barrio,
+            String telefono, String email, String password, String password2)
+            throws MiExcepcion {
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("El nombre no puede estar vacio");
@@ -389,10 +374,10 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
-    public void validarProveedor(String nombre, String apellido, Integer dni, 
-    String localidad, String direccion, String telefono, String email,
-    String password, String password2, Integer experiencia, String descripcion,
-    Set<Servicio> servicios) throws MiExcepcion {
+    public void validarProveedor(String nombre, String apellido, Integer dni,
+            String localidad, String direccion, String telefono, String email,
+            String password, String password2, Integer experiencia, String descripcion,
+            Set<Servicio> servicios) throws MiExcepcion {
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("El nombre no puede estar vacio");
@@ -431,12 +416,13 @@ public class UsuarioServicios implements UserDetailsService {
             throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
         }
     }
-//Este se usa para validar la modificacion
+
+    // Este se usa para validar la modificacion
     public void validarClienteProveedor(String nombre, String apellido,
-    Integer dni, String localidad, String direccion, String barrio,
-    String telefono, String email, String password, String password2,
-    Integer experiencia, String descripcion, Set<Servicio> servicios) 
-    throws MiExcepcion {
+            Integer dni, String localidad, String direccion, String barrio,
+            String telefono, String email, String password, String password2,
+            Integer experiencia, String descripcion, Set<Servicio> servicios)
+            throws MiExcepcion {
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("El nombre no puede estar vacio");
@@ -478,7 +464,8 @@ public class UsuarioServicios implements UserDetailsService {
             throw new MiExcepcion("Los proveedores deben tener al menos un servicio seleccionado");
         }
     }
-//Valida pase de cliente a proveedor, los datos nuevos exigidos
+
+    // Valida pase de cliente a proveedor, los datos nuevos exigidos
     public void validarClienteProveedor(Integer experiencia, String descripcion, Set<Servicio> servicios)
             throws MiExcepcion {
 
@@ -519,59 +506,102 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
-   
-
-
-
     // Metodos para manejar la logica de filtrado y ordenamiento:
 
-    /* Corregir todo esto porque no funciona
-    public List<Usuario> obtenerListaProveedoresPorIdServicios(String id) {
-        return usuarioRepositorio.buscarProveedorPorIdServicio(id);//
-    }
-        @Autowired
-        private CalificacionRepositorio calificacionRepositorio;
-
-        //Metodo para obtener el promedio de las calificaciones
-        public Double obtenerPromedioCalificacion(Usuario proveedor) {
-        List<Calificacion> calificaciones = calificacionRepositorio.buscarCalificacionesPorProveedoredor(proveedor);
-        if (calificaciones.isEmpty()) {
-            return 0.0;
-        }
-        int sumaPuntaje = 0;
-        for (Calificacion calificacion : calificaciones) {
-            sumaPuntaje += calificacion.getPuntaje();
-        }
-        return (double) sumaPuntaje / calificaciones.size();}
-
-    // ordenamiento:
-    public List<Usuario> obtenerProveedorPorFiltro(String id, String orden ){
-        List<Usuario> proveedores = usuarioRepositorio.buscarProveedorPorIdServicio(id);
-        switch (orden.toLowerCase()) {
-
-            case "nombre": //caso 1 filtrar por nombre de forma descendente y entregar una lista
-            return proveedores.stream().sorted(Comparator.comparing(Usuario::getNombre).reversed()).collect(Collectors.toList());
-            
-                 
-                case "calificacion"://caso 2 filtrar por el promedio obtenido de un metodo que dispara el resultado
-                // entre la suma de todas las calificaciones de cada provedor entre la cantidad de calidicaciones, 
-                //entrega una lista  
-                return proveedores.stream().sorted(Comparator.comparingDouble(this::obtenerPromedioCalificacion).reversed()).collect(Collectors.toList());
-                
-                
-                
-                case "Expeciencia": //caso 3 filtrar por los años de experiencia y devuelve una lista de forma descendente
-                return proveedores.stream().sorted(Comparator.comparing(Usuario :: getExperiencia).reversed()).collect(Collectors.toList());
-                
-        
-            default:
-                return proveedores; 
-        }
-
-    } */
+    /*
+     * Corregir todo esto porque no funciona
+     * public List<Usuario> obtenerListaProveedoresPorIdServicios(String id) {
+     * return usuarioRepositorio.buscarProveedorPorIdServicio(id);//
+     * }
+     * 
+     * @Autowired
+     * private CalificacionRepositorio calificacionRepositorio;
+     * 
+     * //Metodo para obtener el promedio de las calificaciones
+     * public Double obtenerPromedioCalificacion(Usuario proveedor) {
+     * List<Calificacion> calificaciones =
+     * calificacionRepositorio.buscarCalificacionesPorProveedoredor(proveedor);
+     * if (calificaciones.isEmpty()) {
+     * return 0.0;
+     * }
+     * int sumaPuntaje = 0;
+     * for (Calificacion calificacion : calificaciones) {
+     * sumaPuntaje += calificacion.getPuntaje();
+     * }
+     * return (double) sumaPuntaje / calificaciones.size();}
+     * 
+     * // ordenamiento:
+     * public List<Usuario> obtenerProveedorPorFiltro(String id, String orden ){
+     * List<Usuario> proveedores =
+     * usuarioRepositorio.buscarProveedorPorIdServicio(id);
+     * switch (orden.toLowerCase()) {
+     * 
+     * case "nombre": //caso 1 filtrar por nombre de forma descendente y entregar
+     * una lista
+     * return
+     * proveedores.stream().sorted(Comparator.comparing(Usuario::getNombre).reversed
+     * ()).collect(Collectors.toList());
+     * 
+     * 
+     * case "calificacion"://caso 2 filtrar por el promedio obtenido de un metodo
+     * que dispara el resultado
+     * // entre la suma de todas las calificaciones de cada provedor entre la
+     * cantidad de calidicaciones,
+     * //entrega una lista
+     * return proveedores.stream().sorted(Comparator.comparingDouble(this::
+     * obtenerPromedioCalificacion).reversed()).collect(Collectors.toList());
+     * 
+     * 
+     * 
+     * case "Expeciencia": //caso 3 filtrar por los años de experiencia y devuelve
+     * una lista de forma descendente
+     * return proveedores.stream().sorted(Comparator.comparing(Usuario ::
+     * getExperiencia).reversed()).collect(Collectors.toList());
+     * 
+     * 
+     * default:
+     * return proveedores;
+     * }
+     * 
+     * }
+     */
 
     public Usuario buscarPorEmail(String email) {
         return usuarioRepositorio.buscarPorEmail(email);
     }
 
+
+    @Transactional
+    public void convertirClienteAAdmin(String id) throws MiExcepcion {
+        Optional<Usuario> usuarioOptional = usuarioRepositorio.findById(id);
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            if (usuario.getRol() == Rol.CLIENTE) {
+                usuario.setRol(Rol.ADMIN);
+                usuarioRepositorio.save(usuario);
+            } else {
+                throw new MiExcepcion("El usuario no es un cliente.");
+            }
+        } else {
+            throw new MiExcepcion("No existe el usuario");
+        }
+    }
+
+  //Buscar cliente en base de datos para validar por mail que no exista y crear usuario
+    public boolean existeClientePorEmail(String email) {
+        return usuarioRepositorio.existsByEmail(email);
+    }
+    //Buscar cliente en base de datos para validar por dni que no exista y crear usuario
+    public boolean existeClientePorDni(Integer dni) {
+        return usuarioRepositorio.existsByDni(dni);
+    }
+
+    //Buscar proveedor en base de datos para validar por mail que no exista y crear usuario
+    public boolean existeProveedorPorEmail(String email) {
+        return usuarioRepositorio.existsByEmail(email);
+    }
+    //Buscar cliente en base de datos para validar por dni que no exista y crear usuario
+    public boolean existeProveedorPorDni(Integer dni) {
+        return usuarioRepositorio.existsByDni(dni);
+    }
 }
