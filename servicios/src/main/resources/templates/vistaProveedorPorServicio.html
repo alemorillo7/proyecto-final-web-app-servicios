@@ -13,7 +13,7 @@
     </head>
 
     <header>
-      <nav th:replace="~{fragments/navbar :: nav}"></nav>
+      <nav th:replace="~{fragments/navbar :: nav}" sec:authorize="isAuthenticated()"></nav>
   </header>
 <body>
     <h1 class="titulo">Proveedores disponibles</h1>

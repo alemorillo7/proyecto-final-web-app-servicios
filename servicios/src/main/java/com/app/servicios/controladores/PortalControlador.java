@@ -1,6 +1,6 @@
 package com.app.servicios.controladores;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -259,7 +259,7 @@ public class PortalControlador {
     }
 
     @GetMapping("/proveedores/{nombreServicio}")
-    public String mostrarCarpinteria(@PathVariable String nombreServicio, ModelMap modelo) {
+    public String mostrarProveedoresPorServicio(@PathVariable String nombreServicio, ModelMap modelo) {
 
         Servicio servicio = new Servicio();
 

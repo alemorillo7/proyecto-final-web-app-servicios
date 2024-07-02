@@ -18,6 +18,7 @@ package com.app.servicios;
      http
      .authorizeHttpRequests((authorize) -> authorize
      .requestMatchers("/admin/").hasRole("ADMIN")
+     .requestMatchers("/proveedores/**").permitAll()
      .requestMatchers("/css/", "/js/", "/img/", "/**")
      .permitAll()
      )
