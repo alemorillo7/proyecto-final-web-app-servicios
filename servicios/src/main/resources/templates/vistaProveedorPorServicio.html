@@ -65,7 +65,7 @@
                       </div>
                       <div th:each="servicio, iterStat : ${listaDeNombresDeServicios}">
                         <input type="checkbox" th:id="'servicio_' + ${iterStat.index}" th:name="'servicio_' + ${iterStat.index}" th:value="${servicio}"/>
-                        <label th:for="'servicio_' + ${iterStat.index}" th:text="${servicio}"></label>
+                        <label th:for="'servicio_' + ${iterStat.index}" th:text="${servicioNombre}"></label>
                     </div>
                     
                       <div class="mb-3">
