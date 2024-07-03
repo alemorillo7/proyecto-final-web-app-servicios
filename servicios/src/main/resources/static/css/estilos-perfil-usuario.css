@@ -371,4 +371,47 @@ footer {
   .perfil {
     margin-top: 100px;
 }
+.card.widget-card {
+    background-color: var(--color-background);
+border-color: var(--color-secondary);
+}
 
+.card-header text-bg-primary {
+    background-color: var(--color-secondary) !important; /* Importante para sobrescribir otras clases */
+    color: white;
+}
+
+
+button.btn.btn-primary.btn-block.mt-4 {
+    display: block;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--color-background);
+    border: 5px solid var(--color-primary);
+    box-shadow: 0px 4px 30px var(--color-tertiary);
+    border-radius: 15px;
+    margin: 10px;
+    transition: transform 0.2s;
+    border-color: #0683C2;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-body {
+    padding: 20px;
+    border-color: #0683C2;
+  }
+  
+  .card-title {
+    color: var(--color-primary);
+  }
+  
+  .card-text {
+    color: var(--color-senary);
+  }
+
+  
