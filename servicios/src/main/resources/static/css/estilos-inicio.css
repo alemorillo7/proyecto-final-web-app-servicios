@@ -96,13 +96,13 @@ body {
     .tituloServicios {
         font-size: 35px;
    
-    }
-
-.boton {
+}
+}
+    .boton {
     background-color: #0683C2;
     font:bolder;
 }
-.btnModal {
+    .btnModal {
     text-decoration: none;
     color: black;
     font-family:"Montserrat", sans-serif;
@@ -143,9 +143,34 @@ body {
     font-family:"Montserrat", sans-serif; 
 }
 
-.textoUsuarios {
-    font-family:"Amsterdam"; 
+.tituloUsuario {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 40px;
+    font-family: 'Amsterdam';
+    color: #455B66;
+    font-size: 450%;
 }
+@media (max-width: 767px) {
+    .tituloServicios {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloServicios {
+        font-size: 35px;
+   
+}
+}
+
+.textoUsuarios {
+    margin: 0px;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+
+
 
 :root {
     --color-primary: #0683C2;
@@ -190,4 +215,3 @@ body {
   }
 
  
- }
