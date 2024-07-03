@@ -59,6 +59,7 @@ public class OrdenTrabajoControlador {
                                 @RequestParam String ordenTrabajoId,
                                 @RequestParam Integer presupuesto,
                                 @RequestParam String comentarioPresupuesto) throws MiExcepcion {
+                                    System.out.println("Entre al contolador");
         ordenTrabajoServicios.trabajoPresupuestadoOrdenTrabajo(ordenTrabajoId, presupuesto, comentarioPresupuesto);
         return "redirect:/bandeja/session.usuariosession.nombre";
     }
@@ -117,6 +118,7 @@ public class OrdenTrabajoControlador {
         ordenTrabajoServicios.proveedorCancelaTrabajoOrdenTrabajo(ordenTrabajoId);
         return "redirect:/bandeja/session.usuariosession.nombre";
     }
+
 //**************************************************************************
 //ACA VA CALIFICAR, necesitamos calificacion
 //**************************************************************************

@@ -279,7 +279,7 @@ public class OrdenTrabajoServicios {
     public void clienteCancelaTrabajoOrdenTrabajo(String id) throws MiExcepcion {
         OrdenTrabajo ordenTrabajo = ordenTrabajoRepositorio.findById(id).orElse(null);
         ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.CANCELADO_CLIENTE);
-        ordenTrabajo.setEstadoOrden(EstadoOrden.CALIFICAR);
+        ordenTrabajo.setEstadoOrden(EstadoOrden.CERRADO);
         ordenTrabajoRepositorio.save(ordenTrabajo);
     }
 
@@ -288,7 +288,7 @@ public class OrdenTrabajoServicios {
     public void proveedorCancelaTrabajoOrdenTrabajo(String id) throws MiExcepcion {
         OrdenTrabajo ordenTrabajo = ordenTrabajoRepositorio.findById(id).orElse(null);
         ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.CANCELADO_PROVEEDOR);
-        ordenTrabajo.setEstadoOrden(EstadoOrden.CALIFICAR);
+        ordenTrabajo.setEstadoOrden(EstadoOrden.CERRADO);
         ordenTrabajoRepositorio.save(ordenTrabajo);
     }
 
@@ -321,7 +321,17 @@ public class OrdenTrabajoServicios {
         ordenTrabajo.get().setEstado(true);
         ordenTrabajoRepositorio.save(ordenTrabajo.get());
     }
-
+    //Buscar por ID
+    @Transactional(readOnly = true)
+    public OrdenTrabajo buscarOrdenTrabajo(String id) throws MiExcepcion {
+        OrdenTrabajo ordenTrabajo = ordenTrabajoRepositorio.findById(id).orElse(null);
+        if (ordenTrabajo!=null) {
+            return ordenTrabajo;
+        } else {
+            throw new MiExcepcion("No existe la orden de trabajo");
+        }
+        
+    }
     // Queries de busqueda para tablas en bandeja//
     public List<OrdenTrabajo> buscarOrdenesAbiertoPresupuestar(Usuario idUsuario) {
 

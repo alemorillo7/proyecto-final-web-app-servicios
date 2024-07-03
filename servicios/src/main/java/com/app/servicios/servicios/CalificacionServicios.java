@@ -1,28 +1,35 @@
 package com.app.servicios.servicios;
 
-import java.util.ArrayList;
 import java.util.List;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.servicios.entidades.Calificacion;
+import com.app.servicios.entidades.OrdenTrabajo;
 import com.app.servicios.entidades.Usuario;
+import com.app.servicios.enumeraciones.EstadoCalificacion;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.CalificacionRepositorio;
-
+import com.app.servicios.repositorios.UsuarioRepositorio;
 
 @Service
 public class CalificacionServicios {
 
     @Autowired
     private CalificacionRepositorio calificacionRepositorio;
+    @Autowired
+    private UsuarioServicios usuarioServicios;
+    @Autowired
+    private OrdenTrabajoServicios ordenTrabajoServicios;
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
+    
 
     // Validacion de calificación//
-    public void validarCalificacion(Integer puntaje, String comentario, Usuario cliente, Usuario proveedor)
+    public void validarCalificacion(Integer puntaje, String comentario, String clienteId, String proveedorId,
+            String ordenTrabajoId)
             throws MiExcepcion {
         if (puntaje == null || puntaje < 1 || puntaje > 5) {
             throw new MiExcepcion("El puntaje debe ser mayor o igual a 1 y menor o igual a 5");
@@ -30,27 +37,40 @@ public class CalificacionServicios {
         if (comentario == null || comentario.isEmpty()) {
             throw new MiExcepcion("El comentario no puede estar vacío");
         }
-        if (cliente == null) {
+        if (clienteId == null) {
             throw new MiExcepcion("El cliente no puede estar vacío");
         }
-        if (proveedor == null) {
+        if (proveedorId == null) {
             throw new MiExcepcion("El proveedor no puede estar vacío");
+        }
+        if (ordenTrabajoId == null) {
+            throw new MiExcepcion("La orden de trabajo no puede estar vacía");
         }
     }
 
     // Crear una calificación//
     @Transactional
-    public void crearCalificacion(Integer puntaje, String comentario, Usuario cliente, Usuario proveedor)
+    public void crearCalificacion(Integer puntaje, String comentario, String clienteId, String proveedorId,
+            String ordenTrabajoId)
             throws MiExcepcion {
 
+                
+
+
         try {
-            validarCalificacion(puntaje, comentario, cliente, proveedor);
+            ordenTrabajoServicios.calificarOrdenTrabajo(ordenTrabajoId);
+            validarCalificacion(puntaje, comentario, clienteId, proveedorId, ordenTrabajoId);
             Calificacion calificacion = new Calificacion();
             calificacion.setPuntaje(puntaje);
             calificacion.setComentario(comentario);
+            Usuario cliente = usuarioServicios.buscarUsuario(clienteId);
             calificacion.setCliente(cliente);
+            Usuario proveedor = usuarioServicios.buscarUsuario(proveedorId);
             calificacion.setProveedor(proveedor);
+            OrdenTrabajo ordenTrabajo = ordenTrabajoServicios.buscarOrdenTrabajo(ordenTrabajoId);
+            calificacion.setOrdenTrabajo(ordenTrabajo);
             calificacion.setActivo(true);
+            calificacion.setEstadoCalificacion(EstadoCalificacion.CALIFICADA);
             calificacionRepositorio.save(calificacion);
 
         } catch (MiExcepcion ex) {
@@ -61,21 +81,29 @@ public class CalificacionServicios {
 
     // Modificar una calificación//
     @Transactional
-    public void modificarCalificacion(String id, Integer puntaje, String comentario, boolean activo)
+    public void modificarCalificacion(String id, String comentario)
             throws MiExcepcion {
-        Calificacion calificacion = new Calificacion();
-        calificacion = calificacionRepositorio.findById(id).orElse(null);
-        calificacion.setPuntaje(puntaje);
-        calificacion.setComentario(comentario);
-        calificacion.setActivo(activo);
-        calificacionRepositorio.save(calificacion);
+        try {
+            Calificacion calificacion = calificacionRepositorio.findById(id)
+                    .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
+
+            calificacion.setComentario(comentario);
+            calificacionRepositorio.save(calificacion);
+
+        } catch (MiExcepcion e) {
+            throw e; // Re-lanzar la excepción específica de negocio
+        } catch (Exception e) {
+            throw new MiExcepcion("Error al modificar la calificación", e); // Encapsular cualquier otro error
+                                                                            // inesperado
+        }
+
     }
 
     // Desactivar una calificación//
     @Transactional
     public void desactivarCalificacion(String id) throws MiExcepcion {
-        Calificacion calificacion = new Calificacion();
-        calificacion = calificacionRepositorio.findById(id).orElse(null);
+        Calificacion calificacion = calificacionRepositorio.findById(id)
+        .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
         calificacion.setActivo(false);
         calificacionRepositorio.save(calificacion);
     }
@@ -83,8 +111,8 @@ public class CalificacionServicios {
     // Activar una calificación//
     @Transactional
     public void activarCalificacion(String id) throws MiExcepcion {
-        Calificacion calificacion = new Calificacion();
-        calificacion = calificacionRepositorio.findById(id).orElse(null);
+        Calificacion calificacion = calificacionRepositorio.findById(id)
+        .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
         calificacion.setActivo(true);
         calificacionRepositorio.save(calificacion);
     }
@@ -109,32 +137,55 @@ public class CalificacionServicios {
     }
 
     @Transactional(readOnly = true)
-    public List<Calificacion> buscarCalificacionesPorCliente(Usuario cliente) {
-        List<Calificacion> calificaciones = new ArrayList<Calificacion>();
-        calificaciones = calificacionRepositorio.buscarCalificacionesPorCliente(cliente);
+    public List<Calificacion> buscarCalificacionesPorCliente(String clienteId) {
+        Usuario cliente = usuarioRepositorio.findById(clienteId).orElse(null);
+        List<Calificacion> calificaciones = calificacionRepositorio.buscarCalificacionesPorProveedor(cliente);
         return calificaciones;
     }
 
     @Transactional(readOnly = true)
-    public List<Calificacion> buscarCalificacionesPorProveedoredor(Usuario proveedor) {
-        List<Calificacion> calificaciones = new ArrayList<Calificacion>();
-        calificaciones = calificacionRepositorio.buscarCalificacionesPorProveedoredor(proveedor);
+    public List<Calificacion> buscarCalificacionesPorProveedor(String proveedorId) {
+        Usuario proveedor = usuarioRepositorio.findById(proveedorId).orElse(null);
+        List<Calificacion> calificaciones = calificacionRepositorio.buscarCalificacionesPorProveedor(proveedor);
         return calificaciones;
     }
-     
-    public Double obtenerPromedioCalificacion (Usuario proveedor){
-        Double numero = 0.0;
-        return numero;
-    }
-
-    
-    
-
-
 
     @Transactional(readOnly = true)
     public Calificacion buscarCalificacionPorId(String id) {
         return calificacionRepositorio.findById(id).orElse(null);
+    }
+
+    public Double obtenerPromedioCalificacion(Usuario proveedor) {
+        Double numero = 0.0;
+        return numero;
+    }
+
+    // Metodo denunciar calificacion
+    @Transactional
+    public void denunciarCalificacion(String id) throws MiExcepcion {
+        Calificacion calificacion = calificacionRepositorio.findById(id)
+                .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
+        calificacion.setEstadoCalificacion(EstadoCalificacion.DENUNCIADA);
+        calificacionRepositorio.save(calificacion);
+    }
+
+    // Metodo censurar calificacion
+    @Transactional
+    public void censurarCalificacion(String id, String comentario) throws MiExcepcion {
+        Calificacion calificacion = calificacionRepositorio.findById(id)
+                .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
+        calificacion.setEstadoCalificacion(EstadoCalificacion.CENSURADA);
+        calificacion.setComentario(comentario);
+        calificacionRepositorio.save(calificacion);
+    }
+    // Eliminar comentario calificacion
+    @Transactional
+    public void eliminarComentarioCalificacion(String id) throws MiExcepcion {
+        Calificacion calificacion = calificacionRepositorio.findById(id)
+                .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
+        String comentario = " ";
+        calificacion.setComentario(comentario);
+        calificacionRepositorio.save(calificacion);
     }
 
 }
