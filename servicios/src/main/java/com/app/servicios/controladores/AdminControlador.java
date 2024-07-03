@@ -180,10 +180,10 @@ public class AdminControlador {
 
     // Modificar calificación
     @PostMapping("/calificaciones/modificar/{id}")
-    public String modificarCalificacion(@PathVariable String id, @RequestParam Integer puntaje,
-            @RequestParam String comentario, @RequestParam boolean activo, ModelMap modelo) {
+    public String modificarCalificacion(@PathVariable String id,
+            @RequestParam String comentario, ModelMap modelo) {
         try {
-            calificacionServicios.modificarCalificacion(id, puntaje, comentario, activo);
+            calificacionServicios.modificarCalificacion(id, comentario);
             return "redirect:/admin/calificaciones";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
