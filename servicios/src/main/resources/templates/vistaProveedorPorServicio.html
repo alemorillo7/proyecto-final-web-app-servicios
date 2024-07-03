@@ -12,11 +12,13 @@
     <link rel="stylesheet" href="css/estilosForm.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/estilos-inicio.css">
+    <link rel="stylesheet" href="/css/estilos-index.css">
     <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
     </head>
 
     <header>
-      <nav th:replace="~{fragments/navbar :: nav}"></nav>
+      <nav th:replace="~{fragments/navbar :: nav}" sec:authorize="isAuthenticated()"></nav>
+      <div th:replace="~{fragments/nav-vista-proveedor-por-servicio :: div}" sec:authorize="!isAuthenticated()"></div>
   </header>
 <body>
     <h1 class="titulo">Proveedores disponibles</h1>

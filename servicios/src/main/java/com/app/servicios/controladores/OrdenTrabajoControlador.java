@@ -8,11 +8,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.app.servicios.entidades.OrdenTrabajo;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
+import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.ServicioRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
 import com.app.servicios.servicios.OrdenTrabajoServicios;
@@ -31,6 +35,92 @@ public class OrdenTrabajoControlador {
 
     @Autowired
     private ServicioRepositorio servicioRepositorio;
+//Crear Orden Trabajo
+    @PostMapping("/crearOrdenTrabajo")
+    @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR' , 'ADMIN')")
+    public String crearOrdenTrabajo(ModelMap modelo,
+                                    HttpSession session,
+                                    @RequestParam String titulo,
+                                    @RequestParam String proveedorId,
+                                    @RequestParam String clienteId,
+                                    @RequestParam List<String> serviciosIds,
+                                    @RequestParam String descripcion,
+                                    MultipartFile archivo) throws MiExcepcion {
+
+        ordenTrabajoServicios.crearOrdenTrabajo(proveedorId, clienteId, titulo, serviciosIds, descripcion, archivo);
+        
+        return "redirect:/bandeja/session.usuariosession.nombre";//ver si funciona//
+    }
+//Trabajo Presupuestado
+    @PostMapping("/ordenTrabajo/trabajoPresupuestado")
+    @PreAuthorize("hasRole('PROVEEDOR' , 'CLIENTEPROVEEDOR')")
+    public String presupuestado(ModelMap modelo, 
+                                HttpSession session,
+                                @RequestParam String ordenTrabajoId,
+                                @RequestParam Integer presupuesto,
+                                @RequestParam String comentarioPresupuesto) throws MiExcepcion {
+        ordenTrabajoServicios.trabajoPresupuestadoOrdenTrabajo(ordenTrabajoId, presupuesto, comentarioPresupuesto);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+//Trabajo Rechazado
+    @PostMapping("/ordenTrabajo/trabajoRechazado")
+    @PreAuthorize("hasRole('PROVEEDOR' , 'CLIENTEPROVEEDOR')")
+    public String rechazado(ModelMap modelo, 
+                            HttpSession session,
+                            @RequestParam String ordenTrabajoId,
+                            @RequestParam String comentarioPresupuesto) throws MiExcepcion {
+        ordenTrabajoServicios.trabajoRechazadoOrdenTrabajo(ordenTrabajoId, comentarioPresupuesto);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+//Presupuesto Aceptado
+    @PostMapping("/ordenTrabajo/presupuestoAceptado")
+    @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR', 'ADMIN')")
+    public String presupuestoAceptado(ModelMap modelo, 
+                                      HttpSession session,
+                                      @RequestParam String ordenTrabajoId) throws MiExcepcion {
+        ordenTrabajoServicios.presupuestoAceptadoOrdenTrabajo(ordenTrabajoId);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+// Presupuesto Rechazado
+    @PostMapping("/ordenTrabajo/presupuestoRechazado")
+    @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR', 'ADMIN')")
+    public String presupuestoRechazado(ModelMap modelo, 
+                                       HttpSession session,
+                                       @RequestParam String ordenTrabajoId) throws MiExcepcion {
+        ordenTrabajoServicios.presupuestoRechazadoOrdenTrabajo(ordenTrabajoId);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+// Trabajo Terminado
+    @PostMapping("/ordenTrabajo/trabajoTerminado")
+    @PreAuthorize("hasRole('PROVEEDOR' , 'CLIENTEPROVEEDOR')")
+    public String trabajoTerminado(ModelMap modelo, 
+                                   HttpSession session,
+                                   @RequestParam String ordenTrabajoId) throws MiExcepcion {
+        ordenTrabajoServicios.trabajoTerminadoOrdenTrabajo(ordenTrabajoId);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+// Cliente Cancela trabajo
+    @PostMapping("/ordenTrabajo/clienteCancelaTrabajo")
+    @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR', 'ADMIN')")
+    public String clienteCancelaTrabajo(ModelMap modelo, 
+                                        HttpSession session,
+                                        @RequestParam String ordenTrabajoId) throws MiExcepcion {
+        ordenTrabajoServicios.clienteCancelaTrabajoOrdenTrabajo(ordenTrabajoId);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+// Proveedor Cancela trabajo
+    @PostMapping("/ordenTrabajo/proveedorCancelaTrabajo")
+    @PreAuthorize("hasRole('PROVEEDOR' , 'CLIENTEPROVEEDOR')")
+    public String proveedorCancelaTrabajo(ModelMap modelo, 
+                                          HttpSession session,
+                                          @RequestParam String ordenTrabajoId) throws MiExcepcion {
+        ordenTrabajoServicios.proveedorCancelaTrabajoOrdenTrabajo(ordenTrabajoId);
+        return "redirect:/bandeja/session.usuariosession.nombre";
+    }
+//**************************************************************************
+//ACA VA CALIFICAR, necesitamos calificacion
+//**************************************************************************
+
     
     @GetMapping("/{nombre}")
     @PreAuthorize("hasRole('CLIENTE' , 'PROVEEDOR' , 'CLIENTEPROVEEDOR' , 'ADMIN')")
