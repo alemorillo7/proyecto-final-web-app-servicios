@@ -27,19 +27,28 @@ nav{
 
 }
 .navbar{
-    background-color: #0683C2;
-    opacity: 95%;
+    padding: 0;
     margin: 0px;
 }
+
+
+
 .navInicio {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0683C2;
+    background-color: transparent;
 }
+
+.navbar :hover{
+    background-color: #0683C2; 
+    opacity: 95%; 
+
+}
+
 .headerDesplegable {
-    background-color: #455B66;
+    background-color: #ffff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -65,9 +74,9 @@ nav{
 .btnBuscar {
     background-color: #0683C2;
     color: black;
-    
-    
 }
+
+
 
 
  /* Estilo del subrayado */

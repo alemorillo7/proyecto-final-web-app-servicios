@@ -139,6 +139,13 @@ body {
     cursor: pointer;
 }
 
+.container {
+    font-family:"Montserrat", sans-serif; 
+}
+
+.textoUsuarios {
+    font-family:"Amsterdam"; 
+}
 
 :root {
     --color-primary: #0683C2;
