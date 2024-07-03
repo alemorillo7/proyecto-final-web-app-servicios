@@ -279,7 +279,7 @@ public class OrdenTrabajoServicios {
     public void clienteCancelaTrabajoOrdenTrabajo(String id) throws MiExcepcion {
         OrdenTrabajo ordenTrabajo = ordenTrabajoRepositorio.findById(id).orElse(null);
         ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.CANCELADO_CLIENTE);
-        ordenTrabajo.setEstadoOrden(EstadoOrden.CALIFICAR);
+        ordenTrabajo.setEstadoOrden(EstadoOrden.CERRADO);
         ordenTrabajoRepositorio.save(ordenTrabajo);
     }
 
@@ -288,7 +288,7 @@ public class OrdenTrabajoServicios {
     public void proveedorCancelaTrabajoOrdenTrabajo(String id) throws MiExcepcion {
         OrdenTrabajo ordenTrabajo = ordenTrabajoRepositorio.findById(id).orElse(null);
         ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.CANCELADO_PROVEEDOR);
-        ordenTrabajo.setEstadoOrden(EstadoOrden.CALIFICAR);
+        ordenTrabajo.setEstadoOrden(EstadoOrden.CERRADO);
         ordenTrabajoRepositorio.save(ordenTrabajo);
     }
 
