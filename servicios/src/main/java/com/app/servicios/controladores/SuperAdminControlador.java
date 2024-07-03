@@ -191,7 +191,7 @@ public class SuperAdminControlador {
     public String modificarCalificacion(@PathVariable String id, @RequestParam Integer puntaje,
             @RequestParam String comentario, @RequestParam boolean activo, ModelMap modelo) {
         try {
-            calificacionServicios.modificarCalificacion(id, puntaje, comentario, activo);
+            calificacionServicios.modificarCalificacion(id, comentario);
             return "redirect:/superadmin/calificaciones";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
