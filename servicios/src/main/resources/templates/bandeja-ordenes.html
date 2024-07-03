@@ -120,7 +120,7 @@
                   <div id="contenedor-ordenes-presupuestar-cliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Ordenes enviadas esperando presupuesto</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -135,22 +135,20 @@
                           <td></td>
                           <td th:text="${ordenAbiertoPresupuestar.proveedor.nombre}"></td>
                           <td>
+                            <!-- Este modal no tiene botones porque es solo para ver, el cliente no puede hacer nada -->
                             <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
                               aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel" th:text="${ordenAbiertoPresupuestar.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
+                                    <!-- Aca de tiene que ver la informacion de la orden -->
                                   </div>
-                                  <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                      data-bs-toggle="modal">Open second modal</button>
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
@@ -181,6 +179,9 @@
                     </table>
                   </div>
 
+
+
+
                   <div id="contenedor-ordenes-presupuestar-proveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Ordenes recibidas esperando presupuesto</h5>
@@ -204,12 +205,12 @@
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel" th:text="${ordenAbiertoPresupuestar.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
+                                    <!-- Aca de tiene que ver la informacion de la orden -->
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
