@@ -117,6 +117,7 @@ public class OrdenTrabajoControlador {
         ordenTrabajoServicios.proveedorCancelaTrabajoOrdenTrabajo(ordenTrabajoId);
         return "redirect:/bandeja/session.usuariosession.nombre";
     }
+
 //**************************************************************************
 //ACA VA CALIFICAR, necesitamos calificacion
 //**************************************************************************
