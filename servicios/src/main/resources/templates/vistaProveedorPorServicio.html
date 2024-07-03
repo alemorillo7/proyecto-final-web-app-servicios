@@ -30,6 +30,7 @@
                 <div class="card-body cuerpo-tarjeta">
                   <h5 class="card-title" th:text="${proveedor.getNombre() + ' ' + proveedor.getApellido()}"></h5>
                   <p class="card-text" th:text="${'Años de experiencia:' + ' ' + proveedor.getExperiencia()}"></p>
+                  <p class="card-text" th:text="${'Calificacion:' + ' ' + proveedor.getPromedioCalificacion()}"></p>
                   <p class="card-text" th:text="${proveedor.descripcion}"></p>
                   <p class="card-text">Servicios:
                     <div class="servicios">
