@@ -955,7 +955,7 @@
                         <tr th:each="ordenCerradoCanceladoCliente, iterStat : ${ordenesCerradoCanceladoCliente}">
                           <td th:text="${ordenCerradoCanceladoCliente.titulo}"></td>
                           <td th:text="${ordenCerradoCanceladoCliente.fecha}"></td>
-                          <td th:text="'${ordenCerradoCanceladoCliente.proveedor.nombre}' + ' ' + '${ordenCerradoCanceladoCliente.proveedor.apellido}'"></td>
+                          <td th:text="${ordenCerradoCanceladoCliente.proveedor.nombre} + ' ' + ${ordenCerradoCanceladoCliente.proveedor.apellido}"></td>
                           <td>
                             <div class="modal fade" id="exampleModalToggleCerradoCanceladoCliente" aria-hidden="true"
                               aria-labelledby="exampleModalToggleCerradoCanceladoCliente" tabindex="-1">
