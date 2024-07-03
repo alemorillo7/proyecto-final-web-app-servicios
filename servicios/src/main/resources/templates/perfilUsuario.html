@@ -1,257 +1,193 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="css/estilos-perfil-usuario.css" />
-    <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
-    <title>Perfil</title>
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/estilos-perfil-usuario.css"/>
+  <link rel="stylesheet" href="css/nav-fragment.css" />
+  <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
+  <title>Perfil</title>
+</head>
 
   <body>
     <header>
       <nav th:replace="~{fragments/navbar :: nav}"></nav>
     </header>
 
-    <section class="bg-light py-3 py-md-5 py-xl-8">
-      <div class="container perfil">
-        <div class="row justify-content-md-center">
-          <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-            <h2 class="mb-4 display-5 text-center">Mi perfil</h2>
-            <p class="text-secondary text-center lead fs-4 mb-5">Desde aquí puedes ver o cambiar tu información personal</p>
-            <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-          </div>
+  <section class="bg-light py-3 py-md-5 py-xl-8">
+    <div class="container perfil">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+          <h2 class="mb-4 display-5 text-center">Mi perfil</h2>
+          <p class="text-secondary text-center lead fs-4 mb-5">
+            Desde aquí puedes ver o cambiar tu información personal
+          </p>
+          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle" />
         </div>
       </div>
+    </div>
 
-      <div class="container">
-        <div class="row gy-4 gy-lg-0">
-          <div class="col-12 col-lg-4 col-xl-3">
-            <div class="row gy-4">
-              <div class="col-12">
-                <div class="card widget-card border-light shadow-sm">
-                  <div class="card-header text-bg-primary" th:text="${'Bienvenido' + ' ' + session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></div>
-                  <div class="card-body">
-                    <div class="text-center mb-3">
-                      <img th:src="@{/imagen/perfil/{id}(id=${session.usuariosession.id})}" class="img-fluid rounded" th:alt="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}">
+    <div class="container">
+      <div class="row gy-4 gy-lg-0">
+        <div class="col-12 col-lg-4 col-xl-3">
+          <div class="row gy-4">
+            <div class="col-12">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-header text-bg-primary"
+                  th:text="${'Bienvenido' + ' ' + session.usuariosession.nombre + ' ' + session.usuariosession.apellido}">
+                </div>
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <img th:src="@{/imagen/perfil/{id}(id=${session.usuariosession.id})}" class="img-fluid rounded"
+                      th:alt="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}" />
+                  </div>
+                  <h5 class="text-center mb-1"
+                    th:text="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
+                  <p class="text-center text-secondary mb-4" th:text="${session.usuariosession.rol}"></p>
+                </div>
+
+                <!-- *************************************************************************************************** -->
+                <!-- Modal para cambio de la imagen -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Actualizar foto
+                </button>
+                <!-- Modal -->
+                <form th:action="@{/imagen/cambiarImagen}" method="POST" enctype="multipart/form-data">
+                  <input  type="text" hidden name="id" th:value="${session.usuariosession.id}">
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title h6" id="exampleModalLabel">Seleccione una imagen</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="input-group mb-3">
+                            <input type="file" class="form-control" id="inputGroupFile01" name ="archivo">
+                          </div>
+                                                  </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Guardar imagen
+                          </button>
+
+                        </div>
+                      </div>
                     </div>
-                    <h5 class="text-center mb-1" th:text="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
-                    <p class="text-center text-secondary mb-4" th:text="${session.usuariosession.rol}"></p>
                   </div>
-                </div>
+                </form>
+                <!-- **************************************************************************************************** -->
+
+
               </div>
-              <div class="col-12">
-                <div class="card widget-card border-light shadow-sm">
-                  <div class="card-header text-bg-primary">Social Accounts</div>
-                  <div class="card-body">
-                    <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
-                      <i class="bi bi-youtube"></i>
-                    </a>
-                    <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
-                      <i class="bi bi-twitter-x"></i>
-                    </a>
-                    <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
-                      <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
-                      <i class="bi bi-linkedin"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="card widget-card border-light shadow-sm">
-                  <div class="card-header text-bg-primary">Sobre ti</div>
-                  <div class="card-body">
-                    <ul class="list-group list-group-flush mb-0">
-                      <li class="list-group-item">
-                        <h6 class="mb-1">
-                          <span class="bii bi-mortarboard-fill me-2"></span>
-                          Education
-                        </h6>
-                        <span>M.S Computer Science</span>
-                      </li>
-                      <li class="list-group-item">
-                        <h6 class="mb-1">
-                          <span class="bii bi-geo-alt-fill me-2"></span>
-                          Location
-                        </h6>
-                        <span>Mountain View, California</span>
-                      </li>
-                      <li class="list-group-item">
-                        <h6 class="mb-1">
-                          <span class="bii bi-building-fill-gear me-2"></span>
-                          Company
-                        </h6>
-                        <span>GitHub Inc</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="card widget-card border-light shadow-sm">
-                  <div class="card-header text-bg-primary">Skills</div>
-                  <div class="card-body">
-                    <span class="badge text-bg-primary">HTML</span>
-                    <span class="badge text-bg-primary">SCSS</span>
-                    <span class="badge text-bg-primary">Javascript</span>
-                    <span class="badge text-bg-primary">React</span>
-                    <span class="badge text-bg-primary">Vue</span>
-                    <span class="badge text-bg-primary">Angular</span>
-                    <span class="badge text-bg-primary">UI</span>
-                    <span class="badge text-bg-primary">UX</span>
-                  </div>
+            </div>
+            <div class="col-12">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-header text-bg-primary">Social Accounts</div>
+                <div class="card-body">
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-youtube"></i>
+                  </a>
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-facebook"></i>
+                  </a>
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-lg-8 col-xl-9">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
-                <ul class="nav nav-tabs" id="profileTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Vista General</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Modificar perfil</button>
-                  </li>
-                </ul>
 
-                <div class="tab-content pt-4" id="profileTabContent">
-                  <!-- Vista de Perfil Cliente -->
-                  <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0" sec:authorize="hasRole('CLIENTE')">
-                    <h5 class="mb-3">About</h5>
-                    <p class="lead mb-3">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</p>
-                    <h5 class="mb-3">Mi perfil</h5>
-                    <div class="row g-0">
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Nombre</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.nombre}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Apellido</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.apellido}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">D.N.I</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.dni}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Direccion</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.direccion}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Email</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.email}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light">
-                        <div class="p-2">Telefono</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.telefono}"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Vista de Perfil Proveedor -->
-                  <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0" sec:authorize="hasRole('PROVEEDOR')">
-                    <h5 class="mb-3">About</h5>
-                    <p class="lead mb-3">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</p>
-                    <h5 class="mb-3">Mi perfil</h5>
-                    <div class="row g-0">
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Nombre</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.nombre}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Apellido</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.apellido}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">D.N.I</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.dni}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Direccion</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.direccion}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Email</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.email}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Telefono</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.telefono}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Descripcion</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-bottom border-start border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.descripcion}"></div>
-                      </div>
-                      <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                        <div class="p-2">Años de experiencia</div>
-                      </div>
-                      <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2" th:text="${session.usuariosession.experiencia}"></div>
-                      </div>
-
-                      <div class="col-5 col-md-3 bg-light border-start border-bottom border-white border-3">
-                        <div class="p-2">Servicios</div>
-                      </div>
-
-                      <div class="col-7 col-md-9 bg-light border-start border-white border-3">
-                        <div class="p-2" th:each="servicio : ${session.usuariosession.servicios}" th:text="${servicio.nombre}"></div></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Formulario para Clientes -->
-                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" sec:authorize="hasRole('CLIENTE')">
-                    <form th:replace="~{fragments/formulario-cliente :: form}"></form>
-                  </div>
-
-                  <!-- Formulario para Proveedores -->
-                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" sec:authorize="hasRole('PROVEEDOR')">
-                    <form th:replace="~{fragments/formulario-proveedor :: form}"></form>
-                  </div>
+            <!-- Servicios en el panel lateral en forma de etiquetas -->
+            <div class="col-12" sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-header text-bg-primary">Servicios</div>
+                <div class="card-body d-flex flex-wrap">
+                  <span class="badge text-bg-primary mr-2 mb-2" th:each="servicio : ${session.usuariosession.servicios}"
+                    th:text="${servicio.nombre}"></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+
+
+        <div class="col-12 col-lg-8 col-xl-9">
+          <div class="card widget-card border-light shadow-sm">
+            <div class="card-body p-4">
+              <ul class="nav nav-tabs" id="profileTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                    data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane"
+                    aria-selected="true">
+                    Vista General
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                    type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+                    Modificar perfil
+                  </button>
+                </li>
+              </ul>
+
+              
+              <div class="tab-content pt-4"  id="profileTabContent">
+                <!-- Vista de Perfil Cliente -->
+                <div th:replace="~{fragments/vista-general-cliente-en-perfil :: div}"></div>
+                <!-- Vista de Perfil Proveedor -->
+                <div th:replace="~{fragments/vista-general-proveedor-en-perfil :: div}"></div>
+                <!-- Vista de Perfil ClienteProveedor -->
+                <div th:replace="~{fragments/vista-general-clienteProveedor-en-perfil :: div}"></div>
+                <!-- Vista de Perfil Admin -->
+                <div th:replace="~{fragments/vista-general-admin-en-perfil :: div}"></div>
+              </div>
+            
+
+            
+              <!-- Formulario para modificar perfil de CLIENTE -->
+              <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                tabindex="0" sec:authorize="hasRole('CLIENTE')">
+                <form th:replace="~{fragments/formulario-cliente-modificar-en-perfil :: form}"></form>
+              </div>
+
+              <!-- Formulario para modificar perfil de PROVEEDOR -->
+              <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                tabindex="0" sec:authorize="hasRole('PROVEEDOR')">
+                <form th:replace="~{fragments/formulario-proveedor-modificar-en-perfil :: form}"></form>
+              </div>
+
+              <!-- Formulario para modificar perfil de CLIENTEPROVEEDOR -->
+              <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+              tabindex="0" sec:authorize="hasRole('CLIENTEPROVEEDOR')">
+              <form th:replace="~{fragments/formulario-clienteProveedor-modificar-en-perfil :: form}"></form>
+            </div>
+
+            <!-- Formulario para modificar perfil de ADMIN -->
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+            tabindex="0" sec:authorize="hasRole('ADMIN')">
+            <form th:replace="~{fragments/formulario-admin-modificar-en-perfil :: form}"></form>
+          </div>
+        
+
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
