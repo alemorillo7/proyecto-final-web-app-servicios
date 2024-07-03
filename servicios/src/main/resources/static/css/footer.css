@@ -141,3 +141,19 @@ footer {
     background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
 }
 
+.btnEnviar {
+    background-color:#0683C2;
+    font-weight: bolder;
+    color: black;
+}
+
+.btnPreguntasF {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
+
+.btnPoliticas {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
+.btnTerminos {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
