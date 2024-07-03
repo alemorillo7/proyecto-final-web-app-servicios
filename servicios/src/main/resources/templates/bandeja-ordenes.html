@@ -116,7 +116,7 @@
                 <!-- Primera pestaña -->
                 <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel"
                   aria-labelledby="overview-tab" tabindex="0">
-                  <!-- Ordenes Abierto y Presupuestar -->
+                  <!-- Ordenes Abierto y Presupuestar  - CLIENTE -->
                   <div id="contenedor-ordenes-presupuestar-cliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Ordenes enviadas esperando presupuesto</h5>
@@ -133,65 +133,85 @@
                         <tr th:each="ordenAbiertoPresupuestar, iterStat : ${ordenesAbiertoPresupuestar}">
                           <td th:text="${ordenAbiertoPresupuestar.titulo}"></td>
                           <td th:text="${ordenAbiertoPresupuestar.fecha}"></td>
-                          <td th:text="${ordenAbiertoPresupuestar.proveedor.nombre}"></td>
+                          <td
+                            th:text="${ordenAbiertoPresupuestar.proveedor.nombre} + ' ' + ${ordenAbiertoPresupuestar.proveedor.apellido}">
+                          </td>
                           <td>
                             <!-- Modal principal -->
-                            <div class="modal fade" th:id="'exampleModalToggle' + ${iterStat.index}" aria-hidden="true"
-                              th:aria-labelledby="'exampleModalToggleLabel' + ${iterStat.index}" tabindex="-1">
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
+                              tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'exampleModalToggleLabel' + ${iterStat.index}"
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
                                       th:text="${ordenAbiertoPresupuestar.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    <p th:text="'Proveedor: '+ ${ordenAbiertoPresupuestar.proveedor.nombre}"></p>
+                                    <p
+                                      th:text="'Proveedor: '+ ${ordenAbiertoPresupuestar.proveedor.nombre} + ' ' + ${ordenAbiertoPresupuestar.proveedor.apellido}">
+                                    </p>
                                     <p th:text="'Fecha de solicitud: '+ ${ordenAbiertoPresupuestar.fecha}"></p>
                                     <p th:text="'Servicios solicitados: '"></p>
                                     <ul>
-                                      <li th:each="servicio : ${ordenAbiertoPresupuestar.servicios}"><p th:text="${servicio.getNombre()}"></p></li>
+                                      <li th:each="servicio : ${ordenAbiertoPresupuestar.servicios}">
+                                        <p th:text="${servicio.getNombre()}"></p>
+                                      </li>
                                     </ul>
-                                    <p th:text="'Descripcion del trabajo a realizar: '+ ${ordenAbiertoPresupuestar.descripcion}"></p>
+                                    <p
+                                      th:text="'Descripcion del trabajo a realizar: '+ ${ordenAbiertoPresupuestar.descripcion}">
+                                    </p>
                                   </div>
                                   <div class="modal-footer">
-                                      <button class="btn btn-primary"
-                                      th:data-bs-target="'#exampleModalToggle2' + ${iterStat.index}"
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteABiertoPresupuestar2' + ${iterStat.index}"
                                       data-bs-toggle="modal">Cancelar orden</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <!-- Modal secundario -->
-                            <div class="modal fade" th:id="'exampleModalToggle2' + ${iterStat.index}" aria-hidden="true"
-                              th:aria-labelledby="'exampleModalToggleLabel2' + ${iterStat.index}" tabindex="-1">
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleClienteABiertoPresupuestar2' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleClienteABiertoPresupuestar2' + ${iterStat.index}"
+                              tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'exampleModalToggleLabel2' + ${iterStat.index}">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleClienteABiertoPresupuestar2' + ${iterStat.index}">
                                       Modal 2</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
+                                    <h3>¿Desea cancelar la orden?</h3>
                                     <form th:action="@{/bandeja/ordenTrabajo/clienteCancelaTrabajo}" method="POST">
                                       <div class="mb-3">
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestar.id}" name="ordenTrabajoId"/>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestar.id}"
+                                          name="ordenTrabajoId" />
                                       </div>
                                       <button type="submit" class="btn btn-primary">Confirmar cancelacion</button>
                                     </form>
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary"
-                                      th:data-bs-target="'#exampleModalToggle' + ${iterStat.index}"
+                                      th:data-bs-target="'#exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
                                       data-bs-toggle="modal">Volver</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <button class="btn btn-primary"
-                              th:data-bs-target="'#exampleModalToggle' + ${iterStat.index}" data-bs-toggle="modal">Ver orden</button>
+                              th:data-bs-target="'#exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
                       </tbody>
@@ -200,7 +220,7 @@
 
 
 
-
+                  <!-- Ordenes Abierto y Presupuestar  - PROVEEDOR -->
                   <div id="contenedor-ordenes-presupuestar-proveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Ordenes recibidas esperando presupuesto</h5>
@@ -218,40 +238,62 @@
                         <tr th:each="ordenAbiertoPresupuestar, iterStat : ${ordenesAbiertoPresupuestar}">
                           <td th:text="${ordenAbiertoPresupuestar.titulo}"></td>
                           <td th:text="${ordenAbiertoPresupuestar.fecha}"></td>
-                          <td th:text="${ordenAbiertoPresupuestar.cliente.nombre}"></td>
+                          <td
+                            th:text="${ordenAbiertoPresupuestar.cliente.nombre} + ' ' + ${ordenAbiertoPresupuestar.cliente.apellido}">
+                          </td>
                           <td>
                             <!-- Modal principal -->
-                            <div class="modal fade" th:id="'exampleModalToggleProveedor' + ${iterStat.index}" aria-hidden="true"
-                              th:aria-labelledby="'exampleModalToggleLabelProveedor' + ${iterStat.index}" tabindex="-1">
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleProveedorAbiertoPresupuestar' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleProveedorAbiertoPresupuestar' + ${iterStat.index}"
+                              tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'exampleModalToggleLabelProveedor' + ${iterStat.index}"
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleProveedorAbiertoPresupuestar' + ${iterStat.index}"
                                       th:text="${ordenAbiertoPresupuestar.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
+                                    <p
+                                      th:text="'Cliente: '+ ${ordenAbiertoPresupuestar.cliente.nombre} + ' ' + ${ordenAbiertoPresupuestar.cliente.apellido}">
+                                    </p>
+                                    <p th:text="'Fecha de solicitud: '+ ${ordenAbiertoPresupuestar.fecha}"></p>
+                                    <p th:text="'Servicios solicitados: '"></p>
+                                    <ul>
+                                      <li th:each="servicio : ${ordenAbiertoPresupuestar.servicios}">
+                                        <p th:text="${servicio.getNombre()}"></p>
+                                      </li>
+                                    </ul>
+                                    <p
+                                      th:text="'Descripcion del trabajo a realizar: '+ ${ordenAbiertoPresupuestar.descripcion}">
+                                    </p>
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary"
-                                      th:data-bs-target="'#exampleModalToggle2Proveedor' + ${iterStat.index}"
+                                      th:data-bs-target="'#exampleModalToggleProveedorAbiertoPresupuestar2' + ${iterStat.index}"
                                       data-bs-toggle="modal">Presupuestar</button>
-                                      <button class="btn btn-primary"
-                                      th:data-bs-target="'#exampleModalToggle3Proveedor' + ${iterStat.index}"
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleProveedorAbiertoPresupuestar3' + ${iterStat.index}"
                                       data-bs-toggle="modal">Rechazar trabajo</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <!-- Modal secundario -->
-                            <div class="modal fade" th:id="'exampleModalToggle2Proveedor' + ${iterStat.index}" aria-hidden="true"
-                              th:aria-labelledby="'exampleModalToggleLabel2Proveedor' + ${iterStat.index}" tabindex="-1">
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleProveedorAbiertoPresupuestar2' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleProveedorAbiertoPresupuestar2' + ${iterStat.index}"
+                              tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'exampleModalToggleLabel2Proveedor' + ${iterStat.index}">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleProveedorAbiertoPresupuestar2' + ${iterStat.index}">
                                       Enviar presupuesto</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
@@ -259,14 +301,17 @@
                                   <div class="modal-body">
                                     <form th:action="@{/bandeja/ordenTrabajo/trabajoPresupuestado}" method="POST">
                                       <div class="mb-3">
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestar.id}" name="ordenTrabajoId"/>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestar.id}"
+                                          name="ordenTrabajoId" />
                                       </div>
                                       <div class="mb-3">
                                         <label for="presupuesto" class="form-label">Presupuesto</label>
                                         <input type="number" class="form-control" id="presupuesto" name="presupuesto">
                                       </div>
                                       <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Comentario" id="floatingTextarea" name="comentarioPresupuesto" style="height: 100px;"></textarea>
+                                        <textarea class="form-control" placeholder="Comentario" id="floatingTextarea"
+                                          name="comentarioPresupuesto" style="height: 100px;"></textarea>
                                         <label for="floatingTextarea">Comentario</label>
                                       </div>
                                       <br>
@@ -275,20 +320,24 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary"
-                                      th:data-bs-target="'#exampleModalToggleProveedor' + ${iterStat.index}"
-                                      data-bs-toggle="modal">Back to first</button>
+                                      th:data-bs-target="'#exampleModalToggleProveedorAbiertoPresupuestar' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Volver</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
 
                             <!-- Modal terciario -->
-                            <div class="modal fade" th:id="'exampleModalToggle3Proveedor' + ${iterStat.index}" aria-hidden="true"
-                              th:aria-labelledby="'exampleModalToggleLabel3Proveedor' + ${iterStat.index}" tabindex="-1">
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleProveedorAbiertoPresupuestar3' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleProveedorAbiertoPresupuestar3' + ${iterStat.index}"
+                              tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'exampleModalToggleLabel3Proveedor' + ${iterStat.index}">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleProveedorAbiertoPresupuestar3' + ${iterStat.index}">
                                       Rechazar trabajo</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
@@ -296,10 +345,13 @@
                                   <div class="modal-body">
                                     <form th:action="@{/bandeja/ordenTrabajo/trabajoRechazado}" method="POST">
                                       <div class="mb-3">
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestar.id}" name="ordenTrabajoId"/>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestar.id}"
+                                          name="ordenTrabajoId" />
                                       </div>
                                       <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Comentario" id="floatingTextarea" name="comentarioPresupuesto" style="height: 100px;"></textarea>
+                                        <textarea class="form-control" placeholder="Comentario" id="floatingTextarea"
+                                          name="comentarioPresupuesto" style="height: 100px;"></textarea>
                                         <label for="floatingTextarea">Comentario</label>
                                       </div>
                                       <br>
@@ -308,15 +360,16 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary"
-                                      th:data-bs-target="'#exampleModalToggleProveedor' + ${iterStat.index}"
-                                      data-bs-toggle="modal">Back to first</button>
+                                      th:data-bs-target="'#exampleModalToggleProveedorAbiertoPresupuestar' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Volver</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
 
                             <button class="btn btn-primary"
-                              th:data-bs-target="'#exampleModalToggleProveedor' + ${iterStat.index}" data-bs-toggle="modal">Ver orden</button>
+                              th:data-bs-target="'#exampleModalToggleProveedorAbiertoPresupuestar' + ${iterStat.index}"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
 
@@ -324,7 +377,9 @@
                     </table>
                   </div>
 
-                  <!-- Ordenes Abierto y Presupuestado -->
+                  <!-- *************************************************************************************************************************************************************** -->
+
+                  <!-- Ordenes Abierto y Presupuestado - CLIENTE-->
                   <div id="contenedor-ordenes-presupuestado-cliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Ordenes presupuestadas esperando aprobacion</h5>
@@ -338,12 +393,169 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="ordenAbiertoPresupuestado : ${ordenesAbiertoPresupuestado}">
+                        <tr th:each="ordenAbiertoPresupuestado, iterStat : ${ordenesAbiertoPresupuestado}">
                           <td th:text="${ordenAbiertoPresupuestado.titulo}"></td>
                           <td th:text="${ordenAbiertoPresupuestado.fecha}"></td>
-                          <td th:text="${ordenAbiertoPresupuestado.proveedor.nombre}"></td>
+                          <td
+                            th:text="${ordenAbiertoPresupuestado.proveedor.nombre} + ' ' + ${ordenAbiertoPresupuestado.proveedor.apellido}">
+                          </td>
                           <td>
+                            <!-- Modal principal -->
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                              tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                                      th:text="${ordenAbiertoPresupuestado.titulo}"></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p
+                                      th:text="'Cliente: '+ ${ordenAbiertoPresupuestado.cliente.nombre} + ' ' + ${ordenAbiertoPresupuestado.cliente.apellido}">
+                                    </p>
+                                    <p th:text="'Fecha de solicitud: '+ ${ordenAbiertoPresupuestado.fecha}"></p>
+                                    <p th:text="'Servicios solicitados: '"></p>
+                                    <ul>
+                                      <li th:each="servicio : ${ordenAbiertoPresupuestado.servicios}">
+                                        <p th:text="${servicio.getNombre()}"></p>
+                                      </li>
+                                    </ul>
+                                    <p
+                                      th:text="'Descripcion del trabajo a realizar: '+ ${ordenAbiertoPresupuestado.descripcion}">
+                                    </p>
+                                    <p th:text="'Presupuesto: $'+ ${ordenAbiertoPresupuestado.presupuesto}"></p>
+                                    <p
+                                      th:text="'Comentario del presupuesto: '+ ${ordenAbiertoPresupuestado.comentarioPresupuesto}">
+                                    </p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado2' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Aceptar presupuesto</button>
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado3' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Rechazar presupuesto</button>
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado4' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Cancelar orden</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Modal secundario -->
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleClienteAbiertoPresupuestado2' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleClienteAbiertoPresupuestado2' + ${iterStat.index}"
+                              tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleClienteAbiertoPresupuestado2' + ${iterStat.index}">
+                                      Enviar presupuesto</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h3>¿Desea aceptar el presupuesto?</h3>
+                                    <form th:action="@{/bandeja/ordenTrabajo/presupuestoAceptado}" method="POST">
+                                      <div class="mb-3">
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestado.id}"
+                                          name="ordenTrabajoId" />
+                                      </div>
 
+
+                                      <button type="submit" class="btn btn-primary">Aceptar presupuesto</button>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Volver</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- Modal terciario -->
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleClienteAbiertoPresupuestado3' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleClienteAbiertoPresupuestado3' + ${iterStat.index}"
+                              tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleClienteAbiertoPresupuestado3' + ${iterStat.index}">
+                                      Rechazar presupuesto</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h3>¿Desea rechazar el presupuesto?</h3>
+                                    <form th:action="@{/bandeja/ordenTrabajo/presupuestoRechazado}" method="POST">
+                                      <div class="mb-3">
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestado.id}"
+                                          name="ordenTrabajoId" />
+                                      </div>
+                                      <button type="submit" class="btn btn-primary">Rechazar presupuesto</button>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Volver</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Modal cuaternario -->
+                            <div class="modal fade"
+                              th:id="'exampleModalToggleClienteAbiertoPresupuestado4' + ${iterStat.index}"
+                              aria-hidden="true"
+                              th:aria-labelledby="'exampleModalToggleClienteAbiertoPresupuestado4' + ${iterStat.index}"
+                              tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5"
+                                      th:id="'exampleModalToggleClienteAbiertoPresupuestado4' + ${iterStat.index}">
+                                      Rechazar presupuesto</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h3>¿Desea cancelar la orden?</h3>
+                                    <form th:action="@{/bandeja/ordenTrabajo/clienteCancelaTrabajo}" method="POST">
+                                      <div class="mb-3">
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" hidden th:value="${ordenAbiertoPresupuestado.id}"
+                                          name="ordenTrabajoId" />
+                                      </div>
+                                      <button type="submit" class="btn btn-primary">Confirmar cancelacion</button>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-primary"
+                                      th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                                      data-bs-toggle="modal">Volver</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-primary"
+                              th:data-bs-target="'#exampleModalToggleClienteAbiertoPresupuestado' + ${iterStat.index}"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
 
@@ -351,9 +563,11 @@
                     </table>
                   </div>
 
-                  <div id="contenedor-ordenes-presupuestado-proveedor"
+                  <!-- Ordenes Abierto y ACEPTADO - PROVEEDOR-->
+
+                  <div id="contenedor-ordenes-aceptado-proveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
-                    <h5 class="mb-3">Ordenes presupuestadas aprobadas</h5>
+                    <h5 class="mb-3">Ordenes presupuestadas aprobadas - Trabajos en curso</h5>
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -364,17 +578,201 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="ordenAbiertoAceptado : ${ordenesAbiertoAceptado}">
+                        <tr th:each="ordenAbiertoAceptado, iterStat : ${ordenesAbiertoAceptado}">
                           <td th:text="${ordenAbiertoAceptado.titulo}"></td>
                           <td th:text="${ordenAbiertoAceptado.fecha}"></td>
                           <td th:text="${ordenAbiertoAceptado.cliente.nombre}"></td>
-                          <td>
-
-                          </td>
+                          
+                            <td>
+                              <!-- Modal principal -->
+                              <div class="modal fade"
+                                th:id="'exampleModalToggleProveedorAbiertoAceptado' + ${iterStat.index}"
+                                aria-hidden="true"
+                                th:aria-labelledby="'exampleModalToggleProveedorAbiertoAceptado' + ${iterStat.index}"
+                                tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5"
+                                        th:id="'exampleModalToggleProveedorAbiertoAceptado' + ${iterStat.index}"
+                                        th:text="${ordenAbiertoAceptado.titulo}"></h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p
+                                        th:text="'Cliente: '+ ${ordenAbiertoAceptado.cliente.nombre} + ' ' + ${ordenAbiertoAceptado.cliente.apellido}">
+                                      </p>
+                                      <p th:text="'Fecha de solicitud: '+ ${ordenAbiertoAceptado.fecha}"></p>
+                                      <p th:text="'Servicios solicitados: '"></p>
+                                      <ul>
+                                        <li th:each="servicio : ${ordenAbiertoAceptado.servicios}">
+                                          <p th:text="${servicio.getNombre()}"></p>
+                                        </li>
+                                      </ul>
+                                      <p
+                                        th:text="'Descripcion del trabajo a realizar: '+ ${ordenAbiertoAceptado.descripcion}">
+                                      </p>
+                                      <p th:text="'Presupuesto: $'+ ${ordenAbiertoAceptado.presupuesto}"></p>
+                                      <p th:text="'Comentario del presupuesto: '+ ${ordenAbiertoAceptado.comentarioPresupuesto}">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn btn-primary"
+                                        th:data-bs-target="'#exampleModalToggleProveedorAbiertoAceptado2' + ${iterStat.index}"
+                                        data-bs-toggle="modal">Cancelar orden</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Modal secundario -->
+                              <div class="modal fade"
+                                th:id="'exampleModalToggleProveedorAbiertoAceptado2' + ${iterStat.index}"
+                                aria-hidden="true"
+                                th:aria-labelledby="'exampleModalToggleProveedorAbiertoAceptado2' + ${iterStat.index}"
+                                tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5"
+                                        th:id="'exampleModalToggleProveedorAbiertoAceptado2' + ${iterStat.index}">
+                                        Modal 2</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <h3>¿Desea cancelar la orden?</h3>
+                                      <form th:action="@{/bandeja/ordenTrabajo/proveedorCancelaTrabajo}" method="POST">
+                                        <div class="mb-3">
+                                          <input type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" hidden th:value="${ordenAbiertoAceptado.id}"
+                                            name="ordenTrabajoId" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Confirmar cancelacion</button>
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn btn-primary"
+                                        th:data-bs-target="'#exampleModalToggleProveedorAbiertoAceptado' + ${iterStat.index}"
+                                        data-bs-toggle="modal">Volver</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <button class="btn btn-primary"
+                                th:data-bs-target="'#exampleModalToggleProveedorAbiertoAceptado' + ${iterStat.index}"
+                                data-bs-toggle="modal">Ver orden</button>
+                            </td>
+                          
                         </tr>
                       </tbody>
                     </table>
                   </div>
+
+
+                   <!-- Ordenes Abierto y ACEPTADO - CLIENTE-->
+
+                   <div id="contenedor-ordenes-aceptado-cliente"
+                   sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
+                   <h5 class="mb-3">Ordenes presupuestadas aprobadas - Trabajos en curso</h5>
+                   <table class="table table-striped">
+                     <thead>
+                       <tr>
+                         <th scope="col">Titulo</th>
+                         <th scope="col">Fecha</th>
+                         <th scope="col">Proveedor</th>
+                         <th scope="col">Acciones</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr th:each="ordenAbiertoAceptado, iterStat : ${ordenesAbiertoAceptado}">
+                         <td th:text="${ordenAbiertoAceptado.titulo}"></td>
+                         <td th:text="${ordenAbiertoAceptado.fecha}"></td>
+                         <td th:text="${ordenAbiertoAceptado.proveedor.nombre}"></td>
+                         
+                           <td>
+                             <!-- Modal principal -->
+                             <div class="modal fade"
+                               th:id="'exampleModalToggleClienteAbiertoAceptado' + ${iterStat.index}"
+                               aria-hidden="true"
+                               th:aria-labelledby="'exampleModalToggleClienteAbiertoAceptado' + ${iterStat.index}"
+                               tabindex="-1">
+                               <div class="modal-dialog modal-dialog-centered">
+                                 <div class="modal-content">
+                                   <div class="modal-header">
+                                     <h1 class="modal-title fs-5"
+                                       th:id="'exampleModalToggleClienteAbiertoAceptado' + ${iterStat.index}"
+                                       th:text="${ordenAbiertoAceptado.titulo}"></h1>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                       aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                     <p
+                                       th:text="'Proveedor: '+ ${ordenAbiertoAceptado.proveedor.nombre} + ' ' + ${ordenAbiertoAceptado.proveedor.apellido}">
+                                     </p>
+                                     <p th:text="'Fecha de solicitud: '+ ${ordenAbiertoAceptado.fecha}"></p>
+                                     <p th:text="'Servicios solicitados: '"></p>
+                                     <ul>
+                                       <li th:each="servicio : ${ordenAbiertoAceptado.servicios}">
+                                         <p th:text="${servicio.getNombre()}"></p>
+                                       </li>
+                                     </ul>
+                                     <p
+                                       th:text="'Descripcion del trabajo a realizar: '+ ${ordenAbiertoAceptado.descripcion}">
+                                     </p>
+                                     <p th:text="'Presupuesto: $'+ ${ordenAbiertoAceptado.presupuesto}"></p>
+                                     <p th:text="'Comentario del presupuesto: '+ ${ordenAbiertoAceptado.comentarioPresupuesto}">
+                                   </div>
+                                   <div class="modal-footer">
+                                     <button class="btn btn-primary"
+                                       th:data-bs-target="'#exampleModalToggleClienteAbiertoAceptado2' + ${iterStat.index}"
+                                       data-bs-toggle="modal">Cancelar orden</button>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                             <!-- Modal secundario -->
+                             <div class="modal fade"
+                               th:id="'exampleModalToggleClienteAbiertoAceptado2' + ${iterStat.index}"
+                               aria-hidden="true"
+                               th:aria-labelledby="'exampleModalToggleClienteAbiertoAceptado2' + ${iterStat.index}"
+                               tabindex="-1">
+                               <div class="modal-dialog modal-dialog-centered">
+                                 <div class="modal-content">
+                                   <div class="modal-header">
+                                     <h1 class="modal-title fs-5"
+                                       th:id="'exampleModalToggleClienteAbiertoAceptado2' + ${iterStat.index}">
+                                       Modal 2</h1>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                       aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                     <h3>¿Desea cancelar la orden?</h3>
+                                     <form th:action="@{/bandeja/ordenTrabajo/clienteCancelaTrabajo}" method="POST">
+                                       <div class="mb-3">
+                                         <input type="text" class="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" hidden th:value="${ordenAbiertoAceptado.id}"
+                                           name="ordenTrabajoId" />
+                                       </div>
+                                       <button type="submit" class="btn btn-primary">Confirmar cancelacion</button>
+                                     </form>
+                                   </div>
+                                   <div class="modal-footer">
+                                     <button class="btn btn-primary"
+                                       th:data-bs-target="'#exampleModalToggleClienteAbiertoAceptado' + ${iterStat.index}"
+                                       data-bs-toggle="modal">Volver</button>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                             <button class="btn btn-primary"
+                               th:data-bs-target="'#exampleModalToggleClienteAbiertoAceptado' + ${iterStat.index}"
+                               data-bs-toggle="modal">Ver orden</button>
+                           </td>
+                         
+                       </tr>
+                     </tbody>
+                   </table>
+                 </div>
                 </div>
 
                 <!-- ************************************************************************************************************************************************************************************************ -->
