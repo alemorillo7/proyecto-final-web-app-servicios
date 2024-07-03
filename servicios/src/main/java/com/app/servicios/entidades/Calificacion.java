@@ -2,7 +2,11 @@ package com.app.servicios.entidades;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.app.servicios.enumeraciones.EstadoCalificacion;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -17,10 +21,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Calificacion {
-    
 
-@Id
-    @GeneratedValue (generator = "uuid")
+
+    @Id
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
@@ -36,6 +40,9 @@ public class Calificacion {
 
     @OneToOne
     private OrdenTrabajo ordenTrabajo;
+
+    @Enumerated(EnumType.STRING)
+    private EstadoCalificacion estadoCalificacion;
 
     private boolean activo;
 }
