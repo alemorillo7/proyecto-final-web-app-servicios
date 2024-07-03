@@ -25,6 +25,7 @@ public class CalificacionServicios {
     private OrdenTrabajoServicios ordenTrabajoServicios;
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    
 
     // Validacion de calificación//
     public void validarCalificacion(Integer puntaje, String comentario, String clienteId, String proveedorId,
@@ -53,7 +54,11 @@ public class CalificacionServicios {
             String ordenTrabajoId)
             throws MiExcepcion {
 
+                
+
+
         try {
+            ordenTrabajoServicios.calificarOrdenTrabajo(ordenTrabajoId);
             validarCalificacion(puntaje, comentario, clienteId, proveedorId, ordenTrabajoId);
             Calificacion calificacion = new Calificacion();
             calificacion.setPuntaje(puntaje);

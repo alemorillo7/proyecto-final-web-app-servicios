@@ -784,7 +784,7 @@
                   <div id="contenedor-ordenes-calificar-cliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Trabajos para calificar</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -794,61 +794,89 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="ordenFinalizadoCalificar : ${ordenesFinalizadoCalificar}">
+                        <tr th:each="ordenFinalizadoCalificar, iterStat : ${ordenesFinalizadoCalificar}">
                           <td th:text="${ordenFinalizadoCalificar.titulo}"></td>
-                          <td></td>
+                          <td th:text="${ordenFinalizadoCalificar.fecha}"></td>
                           <td th:text="${ordenFinalizadoCalificar.proveedor.nombre}"></td>
                           <td>
-                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal fade" id="exampleModalToggleClienteCalificarFinalizado" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleClienteCalificarFinalizado" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleClienteCalificarFinalizado" th:text="${ordenFinalizadoCalificar.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
-                                  </div>
+                                    <p
+                                    th:text="'Proveedor: '+ ${ordenFinalizadoCalificar.proveedor.nombre} + ' ' + ${ordenFinalizadoCalificar.proveedor.apellido}">
+                                  </p>
+                                  <p th:text="'Fecha de solicitud: '+ ${ordenFinalizadoCalificar.fecha}"></p>
+                                  <p th:text="'Servicios solicitados: '"></p>
+                                  <ul>
+                                    <li th:each="servicio : ${ordenFinalizadoCalificar.servicios}">
+                                      <p th:text="${servicio.getNombre()}"></p>
+                                    </li>
+                                  </ul>
+                                  <p
+                                    th:text="'Descripcion del trabajo a realizar: '+ ${ordenFinalizadoCalificar.descripcion}">
+                                  </p>
+                                  <p th:text="'Presupuesto: $'+ ${ordenFinalizadoCalificar.presupuesto}"></p>
+                                  <p th:text="'Comentario del presupuesto: '+ ${ordenFinalizadoCalificar.comentarioPresupuesto}">                                  </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                      data-bs-toggle="modal">Open second modal</button>
+                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggleClienteCalificarFinalizado2"
+                                      data-bs-toggle="modal">Calificar</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                            <div class="modal fade" id="exampleModalToggleClienteCalificarFinalizado2" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleClienteCalificarFinalizado2" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleClienteCalificarFinalizado2">Calificar</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Hide this modal and show the first with the button below.
+                                    <form action="/calificaciones/nueva" method="POST">
+                                      <div class="mb-3">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" hidden th:value="${ordenFinalizadoCalificar.id}" name="ordenTrabajoId">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" hidden th:value="${ordenFinalizadoCalificar.proveedor.id}" name="proveedorId">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" hidden th:value="${ordenFinalizadoCalificar.cliente.id}" name="clienteId">
+                                      </div>
+                                      <div class="mb-3">
+                                      <input type="number" class="form-control" id="calificacion" aria-describedby="emailHelp" placeholder="Calificacion" name="puntaje" min="0" max="5">
+                                      </div>
+                                      <div class="mb-3">
+                                        <textarea name="comentario" class="form-control" placeholder="Comentario" id="floatingTextarea" style="height: 100px;"></textarea>
+                                      </div>
+                                      <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                                      data-bs-toggle="modal">Back to first</button>
+                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggleClienteCalificarFinalizado"
+                                      data-bs-toggle="modal">Volver</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                              data-bs-toggle="modal">Open first modal</button>
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggleClienteCalificarFinalizado"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
+
+
                   <div id="contenedor-ordenes-calificar-proveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Trabajos esperando calificacion</h5>
-                    <table sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                    <table sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')" class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -858,51 +886,44 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="ordenFinalizadoCalificar : ${ordenesFinalizadoCalificar}">
+                        <tr th:each="ordenFinalizadoCalificar, iterStat : ${ordenesFinalizadoCalificar}">
                           <td th:text="${ordenFinalizadoCalificar.titulo}"></td>
-                          <td></td>
-                          <td th:text="${ordenFinalizadoCalificar.cliente.nombre}"></td>
+                          <td th:text="${ordenFinalizadoCalificar.fecha}"></td>
+                          <td th:text="${ordenFinalizadoCalificar.cliente.nombre} + ' ' + ${ordenFinalizadoCalificar.cliente.apellido}"></td>
                           <td>
-                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal fade" id="exampleModalToggleProveedorCalificarFinalizado" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleProveedorCalificarFinalizado" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleProveedorCalificarFinalizado" th:text="${ordenFinalizadoCalificar.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
-                                  </div>
+                                    <p
+                                    th:text="'Cliente: '+ ${ordenFinalizadoCalificar.cliente.nombre} + ' ' + ${ordenFinalizadoCalificar.cliente.apellido}">
+                                  </p>
+                                  <p th:text="'Fecha de solicitud: '+ ${ordenFinalizadoCalificar.fecha}"></p>
+                                  <p th:text="'Servicios solicitados: '"></p>
+                                  <ul>
+                                    <li th:each="servicio : ${ordenFinalizadoCalificar.servicios}">
+                                      <p th:text="${servicio.getNombre()}"></p>
+                                    </li>
+                                  </ul>
+                                  <p
+                                    th:text="'Descripcion del trabajo a realizar: '+ ${ordenFinalizadoCalificar.descripcion}">
+                                  </p>
+                                  <p th:text="'Presupuesto: $'+ ${ordenFinalizadoCalificar.presupuesto}"></p>
+                                  <p th:text="'Comentario del presupuesto: '+ ${ordenFinalizadoCalificar.comentarioPresupuesto}">       
+                                </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                      data-bs-toggle="modal">Open second modal</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                              <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                      aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    Hide this modal and show the first with the button below.
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                                      data-bs-toggle="modal">Back to first</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                              data-bs-toggle="modal">Open first modal</button>
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggleProveedorCalificarFinalizado"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
                       </tbody>
@@ -917,10 +938,10 @@
 
                 <!-- Tercera pestaña -->
                 <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab" tabindex="0">
-                  <!-- Ordenes calificadas -->
-                  <div id="contenedor-ordenes-calificado-cliente"
+                  <!-- Ordenes canceladas por cliente -->
+                  <div id="contenedor-ordenes-cerrado-canceladoCliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
-                    <h5 class="mb-3">Trabajos calificados</h5>
+                    <h5 class="mb-3">Trabajos cancelados por mi</h5>
                     <table>
                       <thead>
                         <tr>
@@ -931,61 +952,117 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="ordenFinalizadoCalificado : ${ordenesFinalizadoCalificado}">
-                          <td th:text="${ordenFinalizadoCalificado.titulo}"></td>
-                          <td></td>
-                          <td th:text="${ordenFinalizadoCalificado.proveedor.nombre}"></td>
+                        <tr th:each="ordenCerradoCanceladoCliente, iterStat : ${ordenesCerradoCanceladoCliente}">
+                          <td th:text="${ordenCerradoCanceladoCliente.titulo}"></td>
+                          <td th:text="${ordenCerradoCanceladoCliente.fecha}"></td>
+                          <td th:text="'${ordenCerradoCanceladoCliente.proveedor.nombre}' + ' ' + '${ordenCerradoCanceladoCliente.proveedor.apellido}'"></td>
                           <td>
-                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal fade" id="exampleModalToggleCerradoCanceladoCliente" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleCerradoCanceladoCliente" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleCerradoCanceladoCliente" th:text="${ordenCerradoCanceladoCliente.titulo}"></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
+                                    <p
+                                    th:text="'Proveedor: '+ ${ordenCerradoCanceladoCliente.proveedor.nombre} + ' ' + ${ordenCerradoCanceladoCliente.proveedor.apellido}">
+                                  </p>
+                                  <p th:text="'Fecha de solicitud: '+ ${ordenCerradoCanceladoCliente.fecha}"></p>
+                                  <p th:text="'Servicios solicitados: '"></p>
+                                  <ul>
+                                    <li th:each="servicio : ${ordenCerradoCanceladoCliente.servicios}">
+                                      <p th:text="${servicio.getNombre()}"></p>
+                                    </li>
+                                  </ul>
+                                  <p
+                                    th:text="'Descripcion del trabajo a realizar: '+ ${ordenCerradoCanceladoCliente.descripcion}">
+                                  </p>
+                                  <p th:text="'Presupuesto: $'+ ${ordenCerradoCanceladoCliente.presupuesto}" th:if="${ordenCerradoCanceladoCliente.presupuesto} != null"></p>
+                                  <p th:text="'Comentario del presupuesto: '+ ${ordenCerradoCanceladoCliente.comentarioPresupuesto}" th:if="${ordenCerradoCanceladoCliente.comentarioPresupuesto} != null">    
                                   </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                      data-bs-toggle="modal">Open second modal</button>
+                                    
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                              <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                      aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    Hide this modal and show the first with the button below.
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                                      data-bs-toggle="modal">Back to first</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                              data-bs-toggle="modal">Open first modal</button>
+                            
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggleCerradoCanceladoCliente"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
-                  <div id="contenedor-ordenes-calificado-proveedor"
+                    <!-- Ordenes cliente rechaza presupuesto -->
+                  <div id="contenedor-ordenes-cerrado-presupuestoRechazado"
+                    sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
+                    <h5 class="mb-3">Presupuestos rechazados por mi</h5>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th scope="col">Titulo</th>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Proveedor</th>
+                          <th scope="col">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="ordenCerradoPresupuestoRechazado, iterStat : ${ordenesCerradoPresupuestoRechazado}">
+                          <td th:text="${ordenCerradoPresupuestoRechazado.titulo}"></td>
+                          <td th:text="${ordenCerradoPresupuestoRechazado.fecha}"></td>
+                          <td th:text="'${ordenCerradoPresupuestoRechazado.proveedor.nombre}' + ' ' + '${ordenCerradoPresupuestoRechazado.proveedor.apellido}'"></td>
+                          <td>
+                            <div class="modal fade" id="exampleModalToggleCerradoPresupuestoRechazado" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleCerradoPresupuestoRechazado" tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleCerradoPresupuestoRechazado" th:text="${ordenCerradoPresupuestoRechazado.titulo}"></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p
+                                    th:text="'Proveedor: '+ ${ordenCerradoPresupuestoRechazado.proveedor.nombre} + ' ' + ${ordenCerradoPresupuestoRechazado.proveedor.apellido}">
+                                  </p>
+                                  <p th:text="'Fecha de solicitud: '+ ${ordenCerradoPresupuestoRechazado.fecha}"></p>
+                                  <p th:text="'Servicios solicitados: '"></p>
+                                  <ul>
+                                    <li th:each="servicio : ${ordenCerradoPresupuestoRechazado.servicios}">
+                                      <p th:text="${servicio.getNombre()}"></p>
+                                    </li>
+                                  </ul>
+                                  <p
+                                    th:text="'Descripcion del trabajo a realizar: '+ ${ordenCerradoPresupuestoRechazado.descripcion}">
+                                  </p>
+                                  <p th:text="'Presupuesto: $'+ ${ordenCerradoPresupuestoRechazado.presupuesto}" th:if="${ordenCerradoPresupuestoRechazado.presupuesto} != null"></p>
+                                  <p th:text="'Comentario del presupuesto: '+ ${ordenCerradoPresupuestoRechazado.comentarioPresupuesto}" th:if="${ordenCerradoPresupuestoRechazado.comentarioPresupuesto} != null">    
+                                  </div>
+                                  <div class="modal-footer">
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggleCerradoPresupuestoRechazado"
+                              data-bs-toggle="modal">Ver orden</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- Ordenes canceladas por proveedor -->
+                  <div id="contenedor-ordenes-cerrado-canceladoProveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
-                    <h5 class="mb-3">Trabajos calificados</h5>
-                    <table sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                    <h5 class="mb-3">Trabajos cancelados por mi</h5>
+                    <table>
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -995,51 +1072,107 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="ordenFinalizadoCalificado : ${ordenesFinalizadoCalificado}">
-                          <td th:text="${ordenFinalizadoCalificado.titulo}"></td>
-                          <td></td>
-                          <td th:text="${ordenFinalizadoCalificado.cliente.nombre}"></td>
+                        <tr th:each="ordenCerradoCanceladoProveedor, iterStat : ${ordenesCerradoCanceladoProveedor}">
+                          <td th:text="${ordenCerradoCanceladoProveedor.titulo}"></td>
+                          <td th:text="${ordenCerradoCanceladoProveedor.fecha}"></td>
+                          <td th:text="'${ordenCerradoCanceladoProveedor.cliente.nombre}' + ' ' + '${ordenCerradoCanceladoProveedor.cliente.apellido}'"></td>
                           <td>
-                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal fade" id="exampleModalToggleCerradoCanceladoProveedor" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleCerradoCanceladoProveedor" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleCerradoCanceladoProveedor">Modal 1</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Show a second modal and hide this one with the button below.
+                                    <p
+                                    th:text="'Cliente: '+ ${ordenCerradoCanceladoProveedor.cliente.nombre} + ' ' + ${ordenCerradoCanceladoProveedor.cliente.apellido}">
+                                  </p>
+                                  <p th:text="'Fecha de solicitud: '+ ${ordenCerradoCanceladoProveedor.fecha}"></p>
+                                  <p th:text="'Servicios solicitados: '"></p>
+                                  <ul>
+                                    <li th:each="servicio : ${ordenCerradoCanceladoProveedor.servicios}">
+                                      <p th:text="${servicio.getNombre()}"></p>
+                                    </li>
+                                  </ul>
+                                  <p
+                                    th:text="'Descripcion del trabajo a realizar: '+ ${ordenCerradoCanceladoProveedor.descripcion}">
+                                  </p>
+                                  <p th:text="'Presupuesto: $'+ ${ordenCerradoCanceladoProveedor.presupuesto}" th:if="${ordenFinalizadoCalificar.presupuesto} != null"></p>
+                                  <p th:text="'Comentario del presupuesto: '+ ${ordenCerradoCanceladoProveedor.comentarioPresupuesto}" th:if="${ordenFinalizadoCalificar.comentarioPresupuesto} != null">    
                                   </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                      data-bs-toggle="modal">Open second modal</button>
+                                    
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
-                              aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                            
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggleCerradoCanceladoProveedor"
+                              data-bs-toggle="modal">Ver orden</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+
+                  <!-- Trabajos rechazados por proveedor -->
+                  <div id="contenedor-ordenes-cerrado-rechazadoProveedor"
+                    sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
+                    <h5 class="mb-3">Trabajos rechazados por mi</h5>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th scope="col">Titulo</th>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Cliente</th>
+                          <th scope="col">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="ordenCerradoTrabajorechazado, iterStat : ${ordenesCerradoTrabajorechazado}">
+                          <td th:text="${ordenCerradoTrabajorechazado.titulo}"></td>
+                          <td th:text="${ordenCerradoTrabajorechazado.fecha}"></td>
+                          <td th:text="'${ordenCerradoTrabajorechazado.cliente.nombre}' + ' ' + '${ordenCerradoTrabajorechazado.cliente.apellido}'"></td>
+                          <td>
+                            <div class="modal fade" id="exampleModalToggleCerradoTrabajoRechazado" aria-hidden="true"
+                              aria-labelledby="exampleModalToggleCerradoTrabajoRechazado" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleCerradoTrabajoRechazado">Modal 1</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    Hide this modal and show the first with the button below.
+                                    <p
+                                    th:text="'Cliente: '+ ${ordenCerradoTrabajorechazado.cliente.nombre} + ' ' + ${ordenCerradoTrabajorechazado.cliente.apellido}">
+                                  </p>
+                                  <p th:text="'Fecha de solicitud: '+ ${ordenCerradoTrabajorechazado.fecha}"></p>
+                                  <p th:text="'Servicios solicitados: '"></p>
+                                  <ul>
+                                    <li th:each="servicio : ${ordenCerradoTrabajorechazado.servicios}">
+                                      <p th:text="${servicio.getNombre()}"></p>
+                                    </li>
+                                  </ul>
+                                  <p
+                                    th:text="'Descripcion del trabajo a realizar: '+ ${ordenCerradoTrabajorechazado.descripcion}">
+                                  </p>
+                                  <p th:text="'Presupuesto: $'+ ${ordenCerradoTrabajorechazado.presupuesto}" th:if="${ordenCerradoTrabajorechazado.presupuesto} != null"></p>
+                                  <p th:text="'Comentario del presupuesto: '+ ${ordenCerradoTrabajorechazado.comentarioPresupuesto}" th:if="${ordenCerradoTrabajorechazado.comentarioPresupuesto} != null">    
                                   </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                                      data-bs-toggle="modal">Back to first</button>
+                                    
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
-                              data-bs-toggle="modal">Open first modal</button>
+                            
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggleCerradoTrabajoRechazado"
+                              data-bs-toggle="modal">Ver orden</button>
                           </td>
                         </tr>
                       </tbody>

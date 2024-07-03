@@ -30,10 +30,10 @@ public class CalificacionControlador {
                                     @RequestParam String ordenTrabajoId, ModelMap modelo) {
         try {
             calificacionServicios.crearCalificacion(puntaje, comentario, clienteId, proveedorId, ordenTrabajoId);
-            return "redirect:/calificaciones/listar";
+            return "redirect:/bandeja/session.usuariosession.nombre";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
-            return "formularioCalificacion";
+            return "redirect:/bandeja/session.usuariosession.nombre";
         }
     }
 
