@@ -19,6 +19,7 @@ import com.app.servicios.entidades.Usuario;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.ServicioRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
+import com.app.servicios.servicios.CalificacionServicios;
 import com.app.servicios.servicios.OrdenTrabajoServicios;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +36,8 @@ public class OrdenTrabajoControlador {
 
     @Autowired
     private ServicioRepositorio servicioRepositorio;
+    @Autowired
+    private CalificacionServicios calificacionServicios;
 //Crear Orden Trabajo
     @PostMapping("/crearOrdenTrabajo")
     @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR' , 'ADMIN')")
@@ -126,12 +129,12 @@ public class OrdenTrabajoControlador {
     
     @GetMapping("/{nombre}")
     @PreAuthorize("hasRole('CLIENTE' , 'PROVEEDOR' , 'CLIENTEPROVEEDOR' , 'ADMIN')")
-    public String mostrarBandeja(ModelMap modelo, HttpSession session) {
+    public String mostrarBandeja(ModelMap modelo, HttpSession session) throws MiExcepcion {
 
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-        
-
+        Integer promedioCalificacion = calificacionServicios.obtenerPromedioCalificaciones(logueado.getId());
+        modelo.addAttribute("promedioCalificacion", promedioCalificacion);
         List<OrdenTrabajo> ordenesAbiertoPresupuestar = ordenTrabajoServicios.buscarOrdenesAbiertoPresupuestar(logueado);
         List<OrdenTrabajo> ordenesAbiertoPresupuestado = ordenTrabajoServicios.buscarOrdenesAbiertoPresupuestado(logueado);
         List<OrdenTrabajo> ordenesAbiertoAceptado = ordenTrabajoServicios.buscarOrdenesAbiertoAceptado(logueado);

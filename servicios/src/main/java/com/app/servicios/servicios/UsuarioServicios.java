@@ -249,6 +249,21 @@ public class UsuarioServicios implements UserDetailsService {
         usuarioRepositorio.save(clienteProveedor);
     }
 
+    // Setea promedio
+    @Transactional
+    public void actualizarPromedioCalificacion(String proveedorId, Integer promedio) throws MiExcepcion {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(proveedorId);
+        if (respuesta.isPresent()) {
+            Usuario proveedor = respuesta.get();
+            proveedor.setPromedioCalificacion(promedio);
+            System.out.println("promedio seteado");
+            usuarioRepositorio.save(proveedor);
+        } else {
+            throw new MiExcepcion("No se encontro el proveedor");
+        }
+    }
+
     @Transactional
     public void actualizarImagenUsuario(String usuarioId, MultipartFile archivo) throws MiExcepcion {
 
