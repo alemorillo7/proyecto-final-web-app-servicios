@@ -619,4 +619,24 @@ public class UsuarioServicios implements UserDetailsService {
     public boolean existeProveedorPorDni(Integer dni) {
         return usuarioRepositorio.existsByDni(dni);
     }
+
+
+    @Transactional
+    public void recuperarPass(String email, String password, String password2) throws MiExcepcion {
+
+        if (!password.equals(password2)) {
+            throw new MiExcepcion("Las contraseñas no coinciden");
+        }
+        Optional<Usuario> usuarioOptional = Optional.ofNullable(usuarioRepositorio.buscarPorEmail(email));
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+            usuarioRepositorio.saveAndFlush(usuario);
+        } else {
+            throw new MiExcepcion("No existe el usuario");
+        }
+
+
+    }
+
 }
