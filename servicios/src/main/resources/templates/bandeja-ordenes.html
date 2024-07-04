@@ -1200,9 +1200,28 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
               <!-- Cuarta pestaña -->
               <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab"
-                tabindex="0">
-              
-              </div>
+                  tabindex="0">
+                  <h5 class="mb-3">Calificaciones recibidas</h5>
+                  <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Comentario</th>
+                            <th scope="col">Puntaje</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="calificacion : ${calificaciones}">
+                            <td th:text="${calificacion.cliente.nombre} + ' ' + ${calificacion.cliente.apellido}"></td>
+                            <td th:text="${calificacion.comentario}"></td>
+                            <td th:text="${calificacion.puntaje}"></td>
+                            <td><button class="btn btn-danger">Denunciar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                  </div>
+                </div>
 
 
 
