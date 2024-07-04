@@ -2,8 +2,10 @@ package com.app.servicios.controladores;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.servicios.entidades.Calificacion;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.ServicioRepositorio;
+import com.app.servicios.servicios.CalificacionServicios;
 import com.app.servicios.servicios.ServicioServicios;
 import com.app.servicios.servicios.UsuarioServicios;
 
@@ -40,6 +44,9 @@ public class PortalControlador {
 
     @Autowired
     private ServicioRepositorio servicioRepositorio;
+
+    @Autowired
+    private CalificacionServicios calificacionServicios;
 
     @GetMapping("/")
     public String index(ModelMap modelo) {
@@ -259,7 +266,7 @@ public class PortalControlador {
     }
 
     @GetMapping("/proveedores/{nombreServicio}")
-    public String mostrarProveedoresPorServicio(@PathVariable String nombreServicio, ModelMap modelo) {
+    public String mostrarProveedoresPorServicio(@PathVariable String nombreServicio, ModelMap modelo) throws MiExcepcion {
 
         Servicio servicio = new Servicio();
 
@@ -278,7 +285,22 @@ public class PortalControlador {
                     .collect(Collectors.toList());
             listaDeNombresDeServicios.add(nombresServicios);
         }
+        //probando
+        Map<String, String> promedios = new HashMap<>();
+        Map<String, Integer> cantidades = new HashMap<>();
+        Map<String, List<Calificacion>> calificacionesPorProveedor = new HashMap<>();
 
+        for (Usuario proveedor : proveedores) {
+            String promedio = usuarioServicios.obtenerPromedioCalificaciones(proveedor);
+            int cantidad = usuarioServicios.contarCalificaciones(proveedor);
+            promedios.put(proveedor.getId(), promedio);
+            cantidades.put(proveedor.getId(), cantidad);
+            List<Calificacion> calificaciones = calificacionServicios.buscarCalificacionesPorProveedor(proveedor.getId());
+            calificacionesPorProveedor.put(proveedor.getId(), calificaciones);
+        }
+        modelo.addAttribute("promedios", promedios);
+        modelo.addAttribute("cantidades", cantidades);
+        modelo.addAttribute("calificacionesPorProveedor", calificacionesPorProveedor);
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("servicio", id);
         modelo.addAttribute("listaDeNombresDeServicios", listaDeNombresDeServicios);

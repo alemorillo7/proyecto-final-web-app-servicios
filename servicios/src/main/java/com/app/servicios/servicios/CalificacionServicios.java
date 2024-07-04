@@ -188,11 +188,7 @@ public class CalificacionServicios {
         calificacion.setComentario(comentario);
         calificacionRepositorio.save(calificacion);
     }
-    public Integer obtenerPromedioCalificaciones(String proveedorId) throws MiExcepcion {
-        Double apromediar = calificacionRepositorio.promedioCalificacionProveedor(proveedorId);
-        Integer promedio = (apromediar != null) ? (int) Math.round(apromediar) : 0; // Asumimos promedio 0 si no hay calificaciones
-        usuarioServicios.actualizarPromedioCalificacion(proveedorId, promedio);
-        return promedio;
-    }
+    
 
 }
+

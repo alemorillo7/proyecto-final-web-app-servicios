@@ -30,7 +30,6 @@ public class CalificacionControlador {
                                     @RequestParam String ordenTrabajoId, ModelMap modelo) {
         try {
             calificacionServicios.crearCalificacion(puntaje, comentario, clienteId, proveedorId, ordenTrabajoId);
-            calificacionServicios.obtenerPromedioCalificaciones(proveedorId);
             return "redirect:/bandeja/session.usuariosession.nombre";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
@@ -108,4 +107,5 @@ public class CalificacionControlador {
         modelo.put("calificaciones", calificaciones);
         return "tablaCalificaciones";
     }
+    
 }
