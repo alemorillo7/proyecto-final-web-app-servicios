@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cliente Proveedor</title>
+    <link rel="stylesheet" href="/css/estilosForm.css">
 </head>
 <body>
-    <form th:action="@{/registarClienteProveedor/}" method="post">
+    <form th:action="@{/registroClienteProveedor/{id}(id=${session.usuariosession.id})}" method="post">
         <div class="col-md-6">
             <div class="form-group">
                 <label>Servicios:</label>
@@ -24,6 +25,10 @@
             <div class="form-group">
                 <label for="experiencia">Años de Experiencia:</label>
                 <input type="number" class="form-control" id="experiencia" name="experiencia" required placeholder="Años de experiencia">
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
             </div>
     </form>
 </body>

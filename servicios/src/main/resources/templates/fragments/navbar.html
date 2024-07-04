@@ -28,7 +28,7 @@
             
 
             <li class="nav-item" sec:authorize="hasRole('CLIENTE')">
-              <a class="nav-link active text-light" aria-current="page" href="#" id="my-text6">Quiero ser proveedor de servicios</a>
+              <a class="nav-link active text-light" aria-current="page" th:href="@{/registrarClienteProveedor/{id}(id=${session.usuariosession.id})}" id="my-text6">Quiero ser proveedor de servicios</a>
             </li>
 
             
