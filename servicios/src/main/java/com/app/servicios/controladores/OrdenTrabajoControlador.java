@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.servicios.entidades.Calificacion;
 import com.app.servicios.entidades.OrdenTrabajo;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.ServicioRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
+import com.app.servicios.servicios.CalificacionServicios;
 import com.app.servicios.servicios.OrdenTrabajoServicios;
 import com.app.servicios.servicios.UsuarioServicios;
 
@@ -39,6 +41,8 @@ public class OrdenTrabajoControlador {
     private ServicioRepositorio servicioRepositorio;
     @Autowired
     private UsuarioServicios usuarioServicios;
+    @Autowired
+    private CalificacionServicios calificacionServicios;
 //Crear Orden Trabajo
 
     @GetMapping("/crearOrdenTrabajo/{proveedorId}")
@@ -167,7 +171,8 @@ public class OrdenTrabajoControlador {
         List<OrdenTrabajo> ordenesCerradoPresupuestoRechazado = ordenTrabajoServicios.buscarOrdenesCerradoPresupuestoRechazado(logueado);
         List<OrdenTrabajo> ordenesCerradoCanceladoCliente = ordenTrabajoServicios.buscarOrdenesCerradoCanceladoCliente(logueado);
         List<OrdenTrabajo> ordenesCerradoCanceladoProveedor = ordenTrabajoServicios.buscarOrdenesCerradoCanceladoProveedor(logueado);
-
+        String proveedorId = logueado.getId();
+        List<Calificacion> calificaciones = calificacionServicios.buscarCalificacionesPorProveedor(proveedorId);
         modelo.addAttribute("ordenesAbiertoPresupuestar", ordenesAbiertoPresupuestar);
         modelo.addAttribute("ordenesAbiertoPresupuestado", ordenesAbiertoPresupuestado);
         modelo.addAttribute("ordenesAbiertoAceptado", ordenesAbiertoAceptado);
@@ -177,7 +182,7 @@ public class OrdenTrabajoControlador {
         modelo.addAttribute("ordenesCerradoPresupuestoRechazado", ordenesCerradoPresupuestoRechazado);
         modelo.addAttribute("ordenesCerradoCanceladoCliente", ordenesCerradoCanceladoCliente);
         modelo.addAttribute("ordenesCerradoCanceladoProveedor", ordenesCerradoCanceladoProveedor);
-
+        modelo.addAttribute("calificaciones", calificaciones);
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         modelo.addAttribute("usuarios", usuarios);
 

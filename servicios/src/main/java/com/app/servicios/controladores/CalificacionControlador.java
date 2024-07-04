@@ -99,6 +99,12 @@ public class CalificacionControlador {
         modelo.put("calificaciones", calificaciones);
         return "tablaCalificaciones";
     }
+    @GetMapping("proveedor/{proveedorId}/calificaciones")
+    public String buscarCalificacionesPorProveedor(@PathVariable String proveedorId, ModelMap modelo) {
+        List<Calificacion> calificaciones = calificacionServicios.buscarCalificacionesPorProveedor(proveedorId);
+        modelo.put("calificaciones", calificaciones);
+        return "bandeja-ordenes";
+    }
 
     // Mostrar calificaciones por cliente
     @GetMapping("/cliente/{clienteId}")
