@@ -61,6 +61,7 @@
     columns: 2; /* Divide el contenido en 2 columnas */
     -webkit-columns: 2;
     padding: 0;
+    list-style: none;
 }
 
 .servicios-columnas li {
