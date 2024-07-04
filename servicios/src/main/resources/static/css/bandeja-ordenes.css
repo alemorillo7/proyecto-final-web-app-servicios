@@ -54,12 +54,16 @@ button.btn.btn-primary.btn-block.mt-4 {
   margin: 10px;
   transition: transform 0.2s;
   border-radius: 15px;
+
+  color: black;
+  font-family:"Montserrat", sans-serif;
   }
   
-  .card:hover {
-    transform: scale(1.05);
+ 
+  .mjeBienvenida{
+    font-weight: bold;
   }
-  
+
   .card-body {
     padding: 20px;
     border-color: #0683C2;
