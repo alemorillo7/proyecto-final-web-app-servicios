@@ -19,6 +19,8 @@ import com.app.servicios.servicios.CalificacionServicios;
 import com.app.servicios.servicios.ServicioServicios;
 import com.app.servicios.servicios.UsuarioServicios;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminControlador {
@@ -31,12 +33,23 @@ public class AdminControlador {
 
     @Autowired
     private CalificacionServicios calificacionServicios;
-
+// panel control
     @GetMapping("/panel")
-    public String panelAdministrador() {
+    public String panelAdministrador(ModelMap modelo, HttpSession session) {
+
+        List<Calificacion> calificacionesDenunciadas = calificacionServicios.listarCalificacionesDenunciadas();
+        modelo.addAttribute("denuncias", calificacionesDenunciadas);
         return "administrador.html";
     }
-
+// censurar comentario
+@PostMapping("/censurarComentario")
+public String censurarComentario(@RequestParam("id") String id, @RequestParam("comentario") String comentario, ModelMap modelo) throws Exception {
+    System.out.println("entre al controlador");
+        calificacionServicios.censurarComentario(id, comentario);
+        List<Calificacion> calificacionesDenunciadas = calificacionServicios.listarCalificacionesDenunciadas();
+        modelo.addAttribute("denuncias", calificacionesDenunciadas);
+    return "administrador.html";
+}
     // Mostrar lista de servicios
     @GetMapping("/servicios")
     public String listarServicios(ModelMap modelo) {

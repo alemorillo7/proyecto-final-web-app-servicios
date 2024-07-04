@@ -1216,7 +1216,10 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                             <td th:text="${calificacion.cliente.nombre} + ' ' + ${calificacion.cliente.apellido}"></td>
                             <td th:text="${calificacion.comentario}"></td>
                             <td th:text="${calificacion.puntaje}"></td>
-                            <td><button class="btn btn-danger">Denunciar</button></td>
+                            <td>
+
+                              <button class="btn btn-danger" th:if="${calificacion.estadoCalificacion.name()} == 'CALIFICADA'">Denunciar</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

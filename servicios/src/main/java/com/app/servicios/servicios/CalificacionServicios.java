@@ -169,6 +169,11 @@ public class CalificacionServicios {
         calificacion.setEstadoCalificacion(EstadoCalificacion.DENUNCIADA);
         calificacionRepositorio.save(calificacion);
     }
+    @Transactional
+    public List<Calificacion> listarCalificacionesDenunciadas(){
+        List<Calificacion> calificacionesDenunciadas = calificacionRepositorio.listarCalificacionesDenunciadas();
+        return calificacionesDenunciadas;
+    }
 
     // Metodo censurar calificacion
     @Transactional
@@ -179,9 +184,18 @@ public class CalificacionServicios {
         calificacion.setComentario(comentario);
         calificacionRepositorio.save(calificacion);
     }
+    // Censurar comentarios calificacion
+    @Transactional
+    public void censurarComentario(String id, String comentario) throws Exception {
+        Calificacion calificacion = calificacionRepositorio.findById(id).orElseThrow(() -> new Exception("Calificación no encontrada"));
+        calificacion.setComentario(comentario);
+        calificacion.setEstadoCalificacion(EstadoCalificacion.CENSURADA);
+        calificacionRepositorio.save(calificacion);
+    }
     // Eliminar comentario calificacion
     @Transactional
     public void eliminarComentarioCalificacion(String id) throws MiExcepcion {
+        System.out.println("entre al servicio");
         Calificacion calificacion = calificacionRepositorio.findById(id)
                 .orElseThrow(() -> new MiExcepcion("La calificación no existe"));
         String comentario = " ";
