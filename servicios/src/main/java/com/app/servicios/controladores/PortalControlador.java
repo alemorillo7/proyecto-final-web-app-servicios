@@ -173,7 +173,7 @@ public class PortalControlador {
     public String registrarClienteProveedor(@PathVariable String id, ModelMap modelo) {
         List<Servicio> servicios = servicioServicios.listarServiciosActivos();
         modelo.addAttribute("servicios", servicios);
-        return "registrarClienteProveedor.html";
+        return "formularioClienteProveedor.html";
     }
 
     @PostMapping("/registroClienteProveedor/{id}")

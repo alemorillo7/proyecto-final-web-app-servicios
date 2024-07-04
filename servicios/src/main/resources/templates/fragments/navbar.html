@@ -40,10 +40,20 @@
             <a class="nav-link active text-light" aria-current="page" href="/logout" id="my-text5">Cerrar sesión</a>
           </li>
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+          <form id="searchForm" class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" id="nombreServicio" name="nombreServicio" th:value="${nombreServicio}">
             <button class="btn btn-outline-info btnBuscar" type="submit"><b>Buscar</b></button>
-          </form>
+        </form>
+        
+        <script>
+            document.getElementById("searchForm").onsubmit = function(event) {
+                event.preventDefault();
+                var nombreServicio = document.getElementById("nombreServicio").value;
+                var actionUrl = "/proveedores/" + encodeURIComponent(nombreServicio);
+                this.action = actionUrl;
+                this.submit();
+            };
+        </script>
         </div>
       </div>
     </div>
