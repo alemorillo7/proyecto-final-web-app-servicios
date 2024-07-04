@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+         <!-- <link rel="stylesheet" href="/css/estilos-panel-usuario.css">  -->
+          <link rel="stylesheet" href="/css/estilos-index.css">
+        <link rel="stylesheet" href="/css/nav-fragment.css">
+    <link rel="stylesheet" href="css/estilosForm.css">
+    <link rel="stylesheet" href="/css/vistaProveedores.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    
+    <title>Proveedores</title>    
+
+</head>
+
+<header>
+  <nav th:replace="~{fragments/navbar :: nav}" sec:authorize="isAuthenticated()"></nav>
+  <div th:replace="~{fragments/nav-vista-proveedor-por-servicio :: div}" sec:authorize="!isAuthenticated()"></div>
+</header>
+
+<body>
+  <h1 class="titulo">Proveedores disponibles</h1>
+
+  <div class="contenedor-tarjetas">
+    <div th:each="proveedor, iterStat : ${proveedores}">
+      <div class="card" style="width: 28rem" data-tilt data-tilt-glare data-tilt-max-glare="0.1" data-tilt-scale="1.0">
+        <div class="tarjeta-cuerpo-footer">
+          <div class="cuerpo-tarjeta">
+            <div class="cuerpo-tarjeta-columna">
+              <img th:src="@{/imagen/perfil/{id}(id=${proveedor.id})}" class="card-img-top" alt="...">
+              <h5 class="card-title" th:text="${proveedor.getNombre() + ' ' + proveedor.getApellido()}"></h5>
+              <p class="card-text" th:text="${'Años de experiencia:' + ' ' + proveedor.getExperiencia()}"></p>
+              <p class="card-text" th:text="${proveedor.descripcion}"></p>
+              <p th:if="${session.usuariosession != null}" class="card-text"
+                th:text="'Teléfono: ' + ${proveedor.getTelefono()}"></p>
+              <p th:if="${session.usuariosession != null}" class="card-text"
+                th:text="'Email: ' + ${proveedor.getEmail()}"></p>
+            </div>
+            <div class="cuerpo-tarjeta-columna">
+              <p class="card-text" th:text="'Calificación promedio: ' + ${promedios[proveedor.getId()]}"></p>
+              <p class="card-text" th:text="'Total de calificaciones: ' + ${cantidades[proveedor.getId()]}"></p>
+              <p class="card-text">Servicios:
+              <div class="servicios">
+                <ul class="servicios-columnas">
+                  <li th:each="servicioNombre : ${listaDeNombresDeServicios[iterStat.index]}"
+                    th:text="${servicioNombre}">
+                  </li>
+                </ul>
+              </div>
+              </p>
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <div th:if="${session.usuariosession != null}" class="mt-3">
+              <a th:href="@{/bandeja/crearOrdenTrabajo/{id}(id=${proveedor.id})}" class="btn btn-info">Solicitar
+                Servicio</a>
+            </div>
+            <div th:if="${session.usuariosession != null}" class="mt-3">
+              <button type="button" class="btn btn-info" data-bs-toggle="modal" th:data-bs-target="'#calificacionesModal' + ${proveedor.id}">Ver Calificaciones</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+   <!-- Modales de calificaciones -->
+   <div th:each="proveedor, iterStat : ${proveedores}">
+    <div th:id="'calificacionesModal' + ${proveedor.id}" class="modal fade" tabindex="-1" aria-labelledby="calificacionesModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" th:text="'Calificaciones de ' + ${proveedor.getNombre()} + ' ' + ${proveedor.getApellido()}"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div th:each="calificacion : ${calificacionesPorProveedor[proveedor.getId()]}">
+              <p><strong>Cliente:</strong> <span th:text="${calificacion.cliente.getNombre()} + ' ' + ${calificacion.cliente.getApellido()}"></span></p>
+              <p><strong>Comentario:</strong> <span th:text="${calificacion.comentario}"></span></p>
+              <p><strong>Puntaje:</strong> <span th:text="${calificacion.puntaje}"></span></p>
+              <hr>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<<<<<<< HEAD
+  <!-- Modal
+    <div class="modal fade" id="solicitarServicioModal" tabindex="-1" aria-labelledby="solicitarServicioModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header solicitarHeader">
+                  <h1 class="modal-title h6" style="color: azure;" id="solicitarServicioModalLabel">Solicitar Servicio</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+          <div class="modal-body solicitarServicio" >
+              <form class="form-wrapper" th:action="@{/solicitarServicio}" method="post" enctype="multipart/form-data">
+                      <div class="mb-3">
+                          <label for="titulo" class="form-label">Título</label>
+                      <input type="text" class="form-control" style="border: 1px solid var(--color-septenary);" id="titulo" name="titulo" placeholder="Titulo del pedido" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="descripcion" class="form-label">Descripción</label>
+                      <textarea class="form-control" style="border: 1px solid var(--color-septenary);"  id="descripcion" name="descripcion" rows="3" placeholder="Escriba la descripción detallada" required></textarea>
+                      </div>
+                      <div th:each="proveedor, iterStat : ${proveedores}">
+                        <div th:each="servicio, iterStat : ${proveedor.servicios}">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox"  name="serviciosIds" th:value="${servicio}" required>
+                          <label class="form-check-label" th:for="${'servicio-' + servicio.id}" th:text="${servicio.getNombre()}"></label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                      <div class="mb-3">
+                          <label for="imagen" class="form-label">Imagen (opcional)</label>
+                          <input type="file" class="form-control" style="border: 1px solid var(--color-septenary);" id="imagen" name="imagen">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                      <button type="button" class="btn btn-secondary" style="background: #647F86;" data-bs-dismiss="modal">Cerrar</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div> --><br><br>
+=======
+  <br><br>
+>>>>>>> developer
+  <footer th:replace="~{fragments/footer :: footer}" class="footer">
+
+  </footer>
+
+<<<<<<< HEAD
+
+ 
+=======
+  
+>>>>>>> developer
+  <script type="text/javascript" src="/javascript/vanilla-tilt.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  
+
+<script>
+  document.getElementById('linkRegistro').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevenir la acción por defecto del enlace
+      
+      // Obtener el modal de inicio de sesión
+      var loginModalElement = document.getElementById('inicioSesion');
+      var loginModal = bootstrap.Modal.getInstance(loginModalElement);
+      
+      // Escuchar el evento 'hidden.bs.modal' para abrir el otro modal después de cerrar el actual
+      loginModalElement.addEventListener('hidden.bs.modal', function () {
+          var registroModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+          registroModal.show();
+      }, { once: true }); // Usar { once: true } para asegurarse de que el evento se escuche solo una vez
+      
+      // Cerrar el modal de inicio de sesión
+      loginModal.hide();
+  });
+  </script>
+    <script type="text/javascript" src="/javascript/vanilla-tilt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
+  <script src="/javascript/rough-inicio.js"></script>
+</body>
+
+</html>

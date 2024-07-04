@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.72.0">
+  <title>Servicios</title>
+
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/album/">
+
+
+
+  <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link rel="stylesheet" href="css/tablaServicios.css">
+
+
+</head>
+
+<body>
+
+  <header>
+    
+  </header>
+
+  <main>
+    <h1>Lista de Servicios</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="servicio : ${servicios}">
+                <td th:text="${servicio.id}">ID</td>
+                <td th:text="${servicio.nombre}">Nombre</td>
+                <td>
+                  <span th:if="${servicio.activo}" th:text="'Activo'">Activo</span>
+                  <span th:if="${!servicio.activo}" th:text="'Inactivo'">Inactivo</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+<footer th:replace="~{fragments/footer :: footer}" class="footer">
+        
+</footer>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  
+  <script>
+      
+  </script>
+  
+
+</body>
+
+</html>

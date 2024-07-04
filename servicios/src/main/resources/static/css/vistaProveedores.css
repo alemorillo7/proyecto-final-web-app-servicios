@@ -1,0 +1,401 @@
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+    --color-septenary: #2cffce;
+  }
+  .titulo {
+    justify-content: center;
+    text-align: center;
+    margin-top: 150px;
+    /* margin-bottom: 170px; */
+    font-family: 'Amsterdam';
+    color: #455B66;
+    font-size: 350%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    background: linear-gradient( #0683C2, #96B8CD, #d3d9d9,  #ffff);
+    
+}
+@media (max-width: 767px) {
+    .titulo {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .titulo {
+        font-size: 35px;
+   
+    }
+}
+
+.navbar {
+    margin: 0;
+    padding: 0;
+
+}
+.navbar :hover{
+    background-color: #0683C2; 
+    opacity: 80%; 
+
+}
+#my-text1 {
+    display:inline;
+ }
+
+
+#my-text2 {
+    display:inline;
+ }
+
+ .textoBoton {
+    color: #455B66;
+ }
+
+ #my-text1:hover .textoBoton{
+    color: #ffff;
+    opacity: 100%;
+ }
+
+ #my-text2:hover .textoBoton{
+    color: #ffff;
+    opacity: 100%;
+ }
+
+.navIndex {
+    width: 100%;
+    display: flex;    
+    align-items: center;
+    position: relative;
+
+}
+
+
+.logo {
+    width: 80px;
+    height: 80px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.serviHogar {
+    padding-top: 100px;
+    text-decoration: none;
+    font-family:'Amsterdam';
+}
+
+.btnIndex {
+    text-decoration: none;
+    font-family:"Montserrat", sans-serif;
+    background-color: transparent;
+    border: none;
+    font-weight: bolder;
+    justify-items: flex-end;
+    font-size: larger;
+}
+
+.btnInicio {
+    text-decoration: none;
+    color: black;
+    font-family:"Montserrat", sans-serif;
+    background-color: transparent;
+}
+.contenedorLogo {
+    width: 60%;
+}
+.contenedorBtnInicio {
+    justify-items: flex-end;
+    margin: 10px;
+    width: 20%;
+}
+.btnInicioSesion{
+    justify-items: flex-end;
+    margin: 10px;
+    width: 20%;
+}
+
+
+@media (max-width: 800px) {
+    .contenedorLogo{
+        width: 25%;
+    }
+    .serviHogar{
+        visibility:hidden;
+    }
+    .contenedorBtnInicio {
+        width: 25%;
+        
+    }
+    .btnInicioSesion {
+        width: 30%;
+    }
+}
+
+.visitanteBoton {
+    background-color: #0683C2;
+}
+.btnModal1 {
+    text-decoration: none;
+    color: black;
+    font-family:"Montserrat", sans-serif;
+    font-size: small;
+    width: 50%;
+    font-weight: bolder;
+}
+/* css modal calificaciones*/
+.modal-content {
+    background-color: white;
+    color: black;
+  }
+  
+  .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .modal-body p {
+    color: black;
+  }
+
+.visitanteHeader {
+    background-color: #0683C2;
+}
+.visitanteTitle {
+    padding-left: 180px;
+    font-weight: bolder;
+}
+.visitanteBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.visitanteFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.visitanteContent {
+    font-family:"Montserrat", sans-serif;
+}
+
+.gif-hover {
+    cursor: pointer;
+}
+
+.visitanteFade {
+    font-family:"Montserrat", sans-serif;
+}
+
+.btnIngresar {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: #0683C2;
+    font-weight: bolder;
+}
+
+.contenedor-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin-top: 30px;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.card {
+    background: var(--color-background);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0px 4px 5px var(--color-septenary);
+    border-radius: 10px;
+    transition: transform 0.2s;
+    margin: 10px;
+    width: 500px; /* Ancho fijo para todas las tarjetas */
+    max-height: 500px; /* Altura máxima */
+    display: flex;
+    flex-direction: row; /* Cambiar a fila para disposición horizontal */
+    overflow: hidden; /* Evita que el contenido desborde */
+}
+
+.card-img-top {
+    width: 150px; /* Ancho de la imagen */
+    height: 150px; /* Ajusta la altura automáticamente */
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+    border-right: 1px solid #0683C2; /* Borde derecho para separar la imagen */
+}
+.tarjeta-cuerpo-footer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 500px;
+}
+.cuerpo-tarjeta {
+    padding: 10px;
+    display: flex;
+    flex: 1; /* Permite que el contenido se expanda para llenar el espacio disponible */
+    flex-direction: row; /* Distribuye las dos columnas horizontalmente */
+}
+
+.cuerpo-tarjeta-columna {
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido se distribuya verticalmente */
+    flex: 1; /* Permite que ambas columnas ocupen el mismo espacio */
+}
+
+.cuerpo-tarjeta-columna + .cuerpo-tarjeta-columna {
+    margin-left: 20px; /* Añade un espacio entre las dos columnas */
+}
+
+.cuerpo-tarjeta-columna p {
+    margin: 5px 0; /* Añade un pequeño margen vertical a los párrafos */
+}
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+
+.servicios-columnas {
+    columns: 2; /* Divide el contenido en 2 columnas */
+    -webkit-columns: 2; 
+    padding: 0;
+
+    list-style: none;
+
+
+}
+
+.servicios-columnas li {
+    break-inside: avoid; /* Evita que los elementos se dividan entre columnas */
+    padding: 5px 0;
+    list-style-position: outside; /* Asegura que los puntos estén fuera del contenido de los <li> */
+}
+
+
+
+.btn {
+    color: #D3D9D9;
+    /* margin-top: 10px; */
+    background-color: #0683C2;
+    width: 100%; /* Ocupa todo el ancho disponible dentro de la tarjeta */
+    border-radius: var(--color-septenary);
+    border-radius: 10px;
+}
+ .solicitarHeader {
+    background-color: #0683C2;
+ }
+
+.solicitarServicio {
+    
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    /* color: inherit; /
+    / padding: 14px 20px; /
+    / position: relative; /
+    / line-height: 1.2em; */
+    font-size: 16px;
+    font-weight: 300;
+    border: solid 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+    background: transparent;
+    /* outline: none;
+    user-select: none;
+    margin-bottom: 20px;  */
+    color: #000000;
+    font-weight: 700;
+    height: auto;
+    border-radius: 10px;
+    appearance: none;
+    /* -webkit-appearance: none;
+    -moz-appearance: none;  */
+
+}
+
+/* Placeholder styling */
+textarea::placeholder,
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="file"]::placeholder,
+input[type="password"]::placeholder,
+select::placeholder {
+  font-weight: 700;  /* Makes the placeholder text bold */
+  color: #10090969;  /* Placeholder color */
+  opacity: 1;  /* Ensures color is fully applied */
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="file"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #2cffce;
+}
+
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+  }
+  
+  /* Estilos para la barra de desplazamiento */
+  body::-webkit-scrollbar {
+      width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  body::-webkit-scrollbar-track {
+      background: var(--color-quinary); /* Color de fondo del track */
+
+  }
+  
+  body::-webkit-scrollbar-thumb {
+      background: var(--color-primary); /* Color del thumb */
+      border-radius: 10px; /* Bordes redondeados */
+      border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  body {
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  /* Animación de fondo */
+  @keyframes oscillateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }

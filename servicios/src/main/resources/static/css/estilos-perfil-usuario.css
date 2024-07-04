@@ -1,0 +1,144 @@
+@font-face {
+    font-family:'Amsterdam';
+    src: url('/fuentes/Amsterdam.ttf') format('truetype');
+    /* Agrega más formatos de fuente según sea necesario */
+
+  }
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( #0683C2, #96B8CD, #d3d9d9,  #ffff);
+    font-family:"Montserrat", sans-serif;
+}
+.titulo {
+    text-align: center;
+    margin-top: 70px;
+    font-family:"Amsterdam";
+    padding-top: 60px;
+    color: #455B66;
+
+    padding-bottom: 30px;
+    
+}
+
+.textoPerfil {
+    font-family:"Montserrat", sans-serif;
+    color:black;
+}
+.container {
+    font-family:"Montserrat", sans-serif;
+}
+.tituloTarjeta {
+    font-weight: bolder;
+    text-align: center;
+}
+
+.botonAct {
+    background-color:aqua;
+}
+.botonAct :hover{
+    background-color:#0683C2;
+}
+
+
+
+
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+  }
+  
+  /* Estilos para la barra de desplazamiento */
+  body::-webkit-scrollbar {
+      width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  body::-webkit-scrollbar-track {
+      background: var(--color-quinary); /* Color de fondo del track */
+
+  }
+  
+  body::-webkit-scrollbar-thumb {
+      background: var(--color-primary); /* Color del thumb */
+      border-radius: 10px; /* Bordes redondeados */
+      border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  body {
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  /* Animación de fondo */
+  @keyframes oscillateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }
+
+  /* Estilo del subrayado */
+  #my-text1, #my-text2, #my-text3, #my-text4, #my-text5, #my-text6, #my-text7, #my-text8 {
+    display: inline; /* Asegura que el subrayado se ajuste al contenido del texto */
+  }
+
+  .perfil {
+    margin-top: 100px;
+}
+.card.widget-card {
+    background-color: var(--color-background);
+border-color: var(--color-secondary);
+}
+
+.card-header text-bg-primary {
+    background-color: var(--color-secondary) !important; /* Importante para sobrescribir otras clases */
+    color: white;
+}
+
+
+button.btn.btn-primary.btn-block.mt-4 {
+    display: block;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--color-background);
+    border: 5px solid var(--color-primary);
+    box-shadow: 0px 4px 30px var(--color-tertiary);
+    border-radius: 15px;
+    margin: 10px;
+    transition: transform 0.2s;
+    border-color: #0683C2;
+  }
+  
+
+  
+  .card-body {
+    padding: 20px;
+    border-color: #0683C2;
+  }
+  
+  .card-title {
+    color: var(--color-primary);
+  }
+  
+  .card-text {
+    color: var(--color-senary);
+  }
+
+  

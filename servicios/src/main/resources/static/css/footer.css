@@ -1,0 +1,163 @@
+footer {
+    width: 100%;
+    height: 100%;
+    background-color: #0683C2;
+    color: white;
+    font-family:"Montserrat", sans-serif;
+    padding: 20px;
+}
+.footerSuperior {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+
+@media (max-width: 1500px) {
+    .footerSuperior {
+        grid-template-columns: repeat(2, 3fr);
+    }
+    .textoFooter {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+
+
+
+@media (max-width: 800px) {
+    .footerSuperior {
+        flex-direction: column;
+    }
+    .btnFArriba {
+        text-align: end;
+    }
+    .textoFooter {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+}
+
+
+
+@media (max-width: 400px) {
+    .btnFArriba {
+        padding-left: 150px;
+    }
+
+}
+
+.textoFooter {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.ingresar {
+    text-decoration: none;
+    margin-left: auto 10px;
+    margin-right: auto 10px;
+}
+.preguntas {
+    text-decoration: none;
+    margin-left: auto 10px;
+    margin-right: auto 10px;
+}
+.ayuda{
+    text-decoration: none;
+    margin-left: auto 10px;
+    margin-right: auto 10px;
+}
+.politicas {
+    text-decoration: none;
+    margin-left: auto 10px;
+    margin-right: auto 10px;
+}
+.terminos{
+    text-decoration: none;
+    margin-left: auto 10px;
+    margin-right: auto 10px;
+}
+
+.sectionWhat {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.item{
+    height: 40px;
+    border-radius: 40%;
+    text-align: end;
+    margin-left: 200px;
+
+}
+
+.itemW{
+    height: 90px;
+    padding: 1.5rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 1rem;
+    opacity: 80%;
+}
+
+
+.sectionIcon {
+    list-style: none;
+    margin: 20px auto;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.item1 {
+    list-style: none;
+    display: inline-block;
+    padding: 1rem;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.icono{
+    height: 30px;
+    justify-content: center;
+}
+.sectionLogo {
+    list-style: none;
+    text-align: center;
+}
+.logoFooter {
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.copyright {
+    font-size: small;
+    justify-content: center;
+    text-align: center;    
+}
+
+
+.btnAyuda {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
+
+.btnEnviar {
+    background-color:#0683C2;
+    font-weight: bolder;
+    color: black;
+}
+
+.btnPreguntasF {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
+
+.btnPoliticas {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
+.btnTerminos {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}

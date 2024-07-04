@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- HAY QUE SEGURIZAR ESTA PAGINA CON THYMELEAF, YA ESTA CARGADO ARRIBA,
+ PERMITE PONER CONDICIONALES DE QUIEN VE CUAL COSA-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="path/to/atropos.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/testimonials/testimonial-3/assets/css/testimonial-3.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos-inicio.css">
+    <link rel="stylesheet" href="css/estilosForm.css">
+    <link rel="stylesheet" href="css/nav-fragment.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <title>Inicio</title>
+</head>
+
+<body>
+    <header>
+        <nav th:replace="~{fragments/navbar :: nav}"></nav>
+    </header>
+    
+      <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeErrorInicio" id="error-message">
+        <div class="card-body">
+            <h5 class="card-title">Error</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExitoInicio" id="exito-message">
+        <div class="card-body">
+            <h5 class="card-title">Exito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+    <h1 class="tituloServicios">Servicios disponibles</h1>
+    <div class="contenedor-servicios">
+        <a href="/proveedores/Agua" name="nombreServicio"><img src="imagenes/servicios/estaticas/agua-estatica.png" alt="Plomería" id="plomeria" data-gif="imagenes/servicios/agua.gif" class="gif-hover"></a>
+
+            <a href="/proveedores/Carpinteria" name="nombreServicio"><img src="imagenes/servicios/estaticas/sierra-estatica.png" alt="Carpinteria" id="carpinteria" data-gif="imagenes/servicios/sierra.gif" class="gif-hover"></a>
+            
+            <a href="/proveedores/Limpieza" name="nombreServicio"><img src="imagenes/servicios/estaticas/limpieza-estatica.png" alt="Limpieza" id="limpieza" data-gif="imagenes/servicios/limpieza.gif" class="gif-hover"></a>
+            <a href="/proveedores/Pintura" name="nombreServicio"><img src="imagenes/servicios/estaticas/rodillo-estatica.png" alt="Pintura" id="pintura" data-gif="imagenes/servicios/rodillo.gif" class="gif-hover"></a>
+            <a href="/proveedores/Albañileria" name="nombreServicio"><img src="imagenes/servicios/estaticas/ladrillos-estatica.png" alt="Albañileria" id="albanileria" data-gif="imagenes/servicios/ladrillos.gif" class="gif-hover"></a>
+            <a href="/proveedores/Jardinería" name="nombreServicio"><img src="imagenes/servicios/estaticas/jardineria-estatica.png" alt="Jardineria" id="jardineria" data-gif="imagenes/servicios/jardineria.gif" class="gif-hover"></a>
+            <a href="/proveedores/Pequeñas reparaciones" name="nombreServicio"><img src="imagenes/servicios/estaticas/herramientas-estatica.png" alt="Pequeñas reparaciones" id="reparaciones" data-gif="imagenes/servicios/herramientas.gif" class="gif-hover"></a>
+            <a href="/proveedores/Gas" name="nombreServicio"><img src="imagenes/servicios/estaticas/gas-estatica.png" alt="Gas" id="gas" data-gif="imagenes/servicios/gas.gif" class="gif-hover"></a>
+            <a href="/proveedores/Electricidad" name="nombreServicio"><img src="imagenes/servicios/estaticas/enchufe-estatica.png" alt="Electricidad" id="electricidad" data-gif="imagenes/servicios/enchufe.gif" class="gif-hover"></a>
+            <a href="/proveedores/Electrodomésticos" name="nombreServicio"><img src="imagenes/servicios/estaticas/electrodomestico-estatica.png" alt="Electrodomesticos" id="electrodomesticos" data-gif="imagenes/servicios/electrodomestico.gif" class="gif-hover"></a>
+            <a href="/proveedores/Informática" name="nombreServicio"><img src="imagenes/servicios/estaticas/computadora-estatica.png" alt="Informatica" id="informatica" data-gif="imagenes/servicios/computadora.gif" class="gif-hover"></a>
+            <a href="/proveedores/Aire Acondicionado" name="nombreServicio"><img src="imagenes/servicios/estaticas/aire-acondicionado-estatica.png" alt="Aire acondicionado" id="aire-acondicionado" data-gif="imagenes/servicios/aire-acondicionado.gif" class="gif-hover"></a>
+            <a href="/proveedores/Techo" name="nombreServicio"><img src="imagenes/servicios/estaticas/techo-estatica.png" alt="Techista" id="techo" data-gif="imagenes/servicios/techo.gif" class="gif-hover"></a>
+            <a href="/proveedores/Decoración" name="nombreServicio"><img src="imagenes/servicios/estaticas/sillon-estatica.png" alt="Decoración" id="decoracion" data-gif="imagenes/servicios/sillon.gif" class="gif-hover"></a>
+            <a href="/proveedores/Herrería y Soldadura" name="nombreServicio"><img src="imagenes/servicios/estaticas/soldadura-estatica.png" alt="Herrería y soldadura" id="herreria-soldadura" data-gif="imagenes/servicios/soldadura.gif" class="gif-hover"></a>
+            <a href="/proveedores/Arquitectura y Construcción" name="nombreServicio"><img src="imagenes/servicios/estaticas/plano-estatica.png" alt="Arquitectura y construcción" id="arquitectura-construccion" data-gif="imagenes/servicios/plano.gif" class="gif-hover"></a>
+            <a href="/proveedores/Cerrajería" name="nombreServicio"><img src="imagenes/servicios/estaticas/cerrajeria-estatica.png" alt="Cerrajería" id="cerrajeria" data-gif="imagenes/servicios/cerrajeria.gif" class="gif-hover"></a>
+            <a href="/proveedores/Otros" name="nombreServicio"><img src="imagenes/servicios/estaticas/perforar-estatica.png" alt="Otos" id="otros" data-gif="imagenes/servicios/perforar.gif" class="gif-hover"></a>
+    </div>
+
+    <!-- Testimonial 3 - Bootstrap Brain Component -->
+<section class="py-5 ">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="UsuariosCalif">
+          <h2 class="text-center tituloUsuario">Usuarios felices</h2>
+          <p class="text-center textoUsuarios">Nosotros prometemos, hacemos y ustedes opinan...</p>
+          <hr class="border-dark-subtle">
+        </div>
+      </div>
+    </div>
+  
+    <div class="container overflow-hidden">
+  <div class="row gy-4 gy-md-0 gx-xxl-5" >
+        <div class="col-12 col-md-4">
+          <div class="card border-0 border-bottom border-primary shadow-sm">
+            <div class="card-body p-4 p-xxl-5" style="background-color: #dfe7e8; border-radius: 10px;">
+              <figure>
+                <img class="img-fluid rounded rounded-circle mb-4 border border-5" loading="lazy" src="/imagenes/hombre.jpeg" alt="" style="max-width: 100px;">
+                <figcaption>
+                  <div class="bsb-ratings text-warning mb-3" data-bsb-star="5" data-bsb-star-off="0"></div>
+                  <blockquote class="bsb-blockquote-icon mb-4">"Estoy encantado con el servicio recibido. El equipo entendió perfectamente mi visión y la convirtió en una realidad. ¡Altamente recomendados!"</blockquote>
+                  <h4 class="mb-2">Roberto Crespo</h4>
+                  <h5 class="fs-6 text-secondary mb-0">Barrio 3</h5>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card border-0 border-bottom border-primary shadow-sm">
+            <div class="card-body p-4 p-xxl-5" style="background-color: #dfe7e8; border-radius: 10px;" >
+              <figure>
+                <img class="img-fluid rounded rounded-circle mb-4 border border-5" loading="lazy" src="/imagenes/mujer2.jpeg" alt="" style="max-width: 100px;">
+                <figcaption>
+                  <div class="bsb-ratings text-warning mb-3" data-bsb-star="4" data-bsb-star-off="1"></div>
+                  <blockquote class="bsb-blockquote-icon mb-4">"La asesoría que recibimos fue impecable. Nos ayudaron a optimizar nuestros recursos y a planificar mejor nuestras finanzas. Sin duda, son unos profesionales de primera."</blockquote>
+                  <h4 class="mb-2">María Gonzalez</h4>
+                  <h5 class="fs-6 text-secondary mb-0">Barrio 1</h5>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card border-0 border-bottom border-primary shadow-sm">
+            <div class="card-body p-4 p-xxl-5" style="background-color: #dfe7e8; border-radius: 10px;">
+              <figure>
+                <img class="img-fluid rounded rounded-circle mb-4 border border-5" loading="lazy" src="/imagenes/mujer1.jpeg" alt="" style="max-width: 100px;">
+                <figcaption>
+                  <div class="bsb-ratings text-warning mb-3" data-bsb-star="5" data-bsb-star-off="0"></div>
+                  <blockquote class="bsb-blockquote-icon mb-4">"Desde que empezamos a trabajar con ellos, nuestros procesos se han vuelto mucho más eficientes. La atención al cliente es excelente y siempre están dispuestos a ayudar."</blockquote>
+                  <h4 class="mb-2">Clara Ferro</h4>
+                  <h5 class="fs-6 text-secondary mb-0">Barrio 2</h5>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+    
+    <footer th:replace="~{fragments/footer :: footer}" class="footer">
+        
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="javascript/modalregistro.js"></script>
+
+        <!-- Script para los tippy -->
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <script src="javascript/inicio.js"></script>
+        <script src="javascript/mensajes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
+        <script src="javascript/rough-inicio.js"></script>
+</body>
+
+
+
+</html>

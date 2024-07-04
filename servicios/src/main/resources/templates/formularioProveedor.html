@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrate</title>
+    <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
+    <link rel="stylesheet" href="css/estilosForm.css">
+    <link rel="stylesheet" href="css/icon-font.css">
+    <link rel="stylesheet" href="css/fancybox.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/odometer.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body class="form-body">
+        <!-- MENSAJE DE ERROR O EXITO -->
+    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeErrorInicio">
+        <div class="card-body">
+            <h5 class="card-title">Error</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+
+    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExitoInicio">
+        <div class="card-body">
+            <h5 class="card-title">Exito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+    <!-- FORMULARIO PROVEEDOR -->
+    <header>
+        <div class="form-wrapper d-flex align-items-center justify-content-center">
+            <div class="form card p-6">
+                <div class="header">
+                    <h1>Registrarse como proveedor</h1>
+                </div><br>
+                <form th:action="@{/registroProveedor}" method="POST" enctype="multipart/form-data" >
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Apellido:</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" required placeholder="Ingrese su apellido">
+                            </div>
+                            <div class="form-group">
+                                <label for="dni">DNI:</label>
+                                <input type="number" class="form-control" id="dni" name="dni" required placeholder="Documento de Identidad">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-MAIL:</label>
+                                <input type="email" class="form-control" id="email" name="email" required placeholder="ejemplo@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Número de teléfono">
+                            </div>
+                            <div class="form-group">
+                                <label for="localidad">Localidad:</label>
+                                <input type="text" class="form-control" id="localidad" name="localidad" required placeholder="Localidad">
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" class="form-control" id="direccion" name="direccion" required placeholder="Calle 123">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Servicios:</label>
+                                <div class="custom-checkbox-container">
+                                <div th:each="servicio : ${servicios}" class="custom-checkbox">
+                                    <input type="checkbox" class="form-control" id="servicios" name="serviciosIds" th:value="${servicio.id}" />
+                                    <label th:for="servicios" th:text="${servicio.nombre}"></label>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripción:</label>
+                                <textarea class="form-control" id="descripcion" name="descripcion" required placeholder="Descripción de los servicios" maxlength="500"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="experiencia">Años de Experiencia:</label>
+                                <input type="number" class="form-control" id="experiencia" name="experiencia" required placeholder="Años de experiencia">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password" required placeholder="mín. 8 caracteres">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Repetir Contraseña:</label>
+                                <input type="password" class="form-control" id="confirm-password" name="password2" required placeholder="mín. 8 caracteres">
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Crear usuario</button>
+                </form>
+            </div>
+        </div>
+        
+    </header>
+    
+    
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-right mb-1">
+                <a th:href="@{/}">Volver a la página principal</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="/javascript/team.js"></script>
+    <script src="/javascript/fancybox.min.js"></script>
+    <script src="/javascript/swiper.min.js"></script>
+    <script src="/javascript/odometer.min.js"></script>
+    <script src="/javascript/wow.min.js"></script>
+    <script src="/javascript/3d.jquery.js"></script>
+    <script src="/javascript/pointer.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+</body>
+
+</html>

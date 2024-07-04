@@ -1,0 +1,390 @@
+@font-face {
+    font-family:'Amsterdam';
+    src: url('/fuentes/Amsterdam.ttf') format('truetype');
+    /* Agrega más formatos de fuente según sea necesario */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bienvenida {
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    background-image: url(/imagenes/clara.png);
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 60%;
+}
+
+.presentacion{
+    margin: 30px;
+    font-size: 25px; 
+    color: black;
+    opacity: 100%;
+    padding-top: 30px;
+    justify-self: center;  
+    width: 70%;  
+}
+
+
+.eslogan {
+    width: 100%;
+}
+.cierre {
+    text-align: center;
+    margin: 30px;
+    color: black;
+    font-size: 300%; 
+    font-family: 'Amsterdam';
+    margin-bottom: 50px;
+
+}
+
+@media (max-width: 990px) {
+    .bienvenida {
+        background-size: 300%;
+        height: 600px;
+
+    }
+    .presentacion {
+        font-size: 20px; 
+    }
+
+    .cierre {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 880px) {
+    .bienvenida {
+        background-size: 200%;
+        height: 800px;
+    }
+    .presentacion {
+        font-size: 20px; 
+    }
+
+    .cierre {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    .bienvenida {
+        background-size: 350%;
+        height: 700px;
+    }
+    .presentacion {
+        font-size: 15px; 
+    }
+
+    .cierre {
+        font-size: 15px;
+    }
+}
+
+
+
+.contenedorContiene {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contenedor-servicios {
+    width: 90%;
+    align-self: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    gap: 30px;
+    margin-bottom: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    justify-content: center;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    background: linear-gradient( #0683C2, #96B8CD, #d3d9d9,  #ffff);
+    
+}
+
+.contenedor-servicios img {
+    width: 80%;
+    height: 90%;
+}
+
+.tituloUsuario-comentario{
+    font-size: 72px;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    font-family: 'Amsterdam';
+    color: #455B66;
+}
+
+.textoUsuarios {
+    margin-bottom: 100px;
+}
+
+
+@media (max-width: 767px) {
+    .contenedor-servicios {
+        grid-template-columns: repeat(3, 0.5fr);
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .contenedor-servicios {
+        grid-template-columns: repeat(2, 0.1fr);
+    }
+    
+}
+
+
+#top {
+    width: 100%;
+    background-image: url(/imagenes/portada.png);
+    height: 650px;
+    background-size: cover;
+}
+.navbar {
+    margin: 0;
+    padding: 0;
+
+}
+.navbar :hover{
+    background-color: #0683C2; 
+    opacity: 80%; 
+
+}
+#my-text1 {
+    display:inline;
+ }
+
+
+#my-text2 {
+    display:inline;
+ }
+
+ .textoBoton {
+    color: #455B66;
+ }
+
+ #my-text1:hover .textoBoton{
+    color: #ffff;
+    opacity: 100%;
+ }
+
+ #my-text2:hover .textoBoton{
+    color: #ffff;
+    opacity: 100%;
+ }
+
+.navIndex {
+    width: 100%;
+    display: flex;    
+    align-items: center;
+    position: relative;
+
+}
+
+
+.logo {
+    width: 80px;
+    height: 80px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.serviHogar {
+    padding-top: 100px;
+    text-decoration: none;
+    font-family:'Amsterdam';
+}
+
+.btnIndex {
+    text-decoration: none;
+    font-family:"Montserrat", sans-serif;
+    background-color: transparent;
+    border: none;
+    font-weight: bolder;
+    justify-items: flex-end;
+    font-size: larger;
+}
+
+.btnInicio {
+    text-decoration: none;
+    color: black;
+    font-family:"Montserrat", sans-serif;
+    background-color: transparent;
+}
+.contenedorLogo {
+    width: 60%;
+}
+.contenedorBtnInicio {
+    justify-items: flex-end;
+    margin: 10px;
+    width: 20%;
+}
+.btnInicioSesion{
+    justify-items: flex-end;
+    margin: 10px;
+    width: 20%;
+}
+
+
+@media (max-width: 800px) {
+    .contenedorLogo{
+        width: 25%;
+    }
+    .serviHogar{
+        visibility:hidden;
+    }
+    .contenedorBtnInicio {
+        width: 25%;
+        
+    }
+    .btnInicioSesion {
+        width: 30%;
+    }
+}
+
+.tituloServicios {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 170px;
+    font-family: 'Amsterdam';
+    color: #455B66;
+    font-size: 450%;
+}
+
+
+@media (max-width: 767px) {
+    .tituloServicios {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloServicios {
+        font-size: 35px;
+   
+    }
+}
+
+
+
+.boton {
+    background-color: #0683C2;
+}
+.btnModal {
+    text-decoration: none;
+    color: black;
+    font-family:"Montserrat", sans-serif;
+    font-size: small;
+    width: 50%;
+    font-weight: bolder;
+}
+.modal-header {
+    background-color: #0683C2;
+}
+.modal-title {
+    padding-left: 180px;
+    font-weight: bolder;
+}
+.modal-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    font-family:"Montserrat", sans-serif;
+}
+
+.gif-hover {
+    cursor: pointer;
+}
+
+.modal-fade {
+    font-family:"Montserrat", sans-serif;
+}
+
+.btnIngresar {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    background-color: #0683C2;
+    font-weight: bolder;
+}
+
+
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+  }
+  
+  /* Estilos para la barra de desplazamiento */
+  body::-webkit-scrollbar {
+      width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  body::-webkit-scrollbar-track {
+      background: var(--color-quinary); /* Color de fondo del track */
+
+  }
+  
+  body::-webkit-scrollbar-thumb {
+      background: var(--color-primary); /* Color del thumb */
+      border-radius: 10px; /* Bordes redondeados */
+      border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  body {
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  /* Animación de fondo */
+  @keyframes oscillateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }

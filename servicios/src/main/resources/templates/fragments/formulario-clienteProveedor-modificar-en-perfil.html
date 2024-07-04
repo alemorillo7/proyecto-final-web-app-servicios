@@ -1,0 +1,86 @@
+<form th:action="@{/modificarPerfil/clienteproveedor/{id}(id=${session.usuariosession.id})}" method="POST" class="row gy-3 gy-xxl-4">
+    <div class="col-12">
+      <div class="row gy-2">
+        
+       
+      </div>
+    </div>
+    <input type="hidden" name="id" th:value="${session.usuariosession.id}">
+
+    <div class="col-12 col-md-6">
+      <label for="inputFirstName" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="inputFirstName" name="nombre" th:value="${session.usuariosession.nombre}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputLastName" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="inputLastName" name="apellido" th:value="${session.usuariosession.apellido}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputEducation" class="form-label">DNI</label>
+      <input type="text" class="form-control" id="inputEducation" name="dni" th:value="${session.usuariosession.dni}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputSkills" class="form-label">Localidad</label>
+      <input type="text" class="form-control" id="inputSkills" name="localidad" th:value="${session.usuariosession.localidad}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputCountry" class="form-label">Barrio</label>
+      <select class="form-select" id="inputCountry" name="barrio">
+        <option value="Barrio 1" th:selected="${session.usuariosession.getBarrio() == 'Barrio 1'}">Barrio 1</option>
+        <option value="Barrio 2" th:selected="${session.usuariosession.getBarrio() == 'Barrio 2'}">Barrio 2</option>
+        <option value="Barrio 3" th:selected="${session.usuariosession.getBarrio() == 'Barrio 3'}">Barrio 3</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputYouTube" class="form-label">Direccion</label>
+      <input type="text" class="form-control" id="inputYouTube" name="direccion" th:value="${session.usuariosession.direccion}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputX" class="form-label">Email</label>
+      <input type="text" class="form-control" id="inputX" name="email" th:value="${session.usuariosession.email}">
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="inputFacebook" class="form-label">Telefono</label>
+      <input type="text" class="form-control" id="inputFacebook" name="telefono" th:value="${session.usuariosession.telefono}">
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="experiencia" class="form-label">Experiencia</label>
+        <input type="text" class="form-control" id="experiencia" name="experiencia" th:value="${session.usuariosession.experiencia}">
+      </div>
+  
+      <div class="col-12">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea class="form-control" id="descripcion" name="descripcion" rows="3" th:text="${session.usuariosession.getDescripcion()}"></textarea>
+      </div>
+  
+  
+  
+      <div class="col-12">
+          <label for="servicios" class="form-label">Servicios</label>
+          <div class="row">
+              <div th:each="servicio : ${servicios}" class="col-md-4 mb-3">
+                  <div class="form-check">
+                      <input type="checkbox" class="form-check-input" 
+                             th:id="${'servicio-' + servicio.id}" 
+                             name="serviciosIds" 
+                             th:value="${servicio.id}"
+                             th:checked="${#lists.contains(serviciosUsuario, servicio)}">
+                      <label th:for="${'servicio-' + servicio.id}" 
+                             th:text="${servicio.nombre}" 
+                             class="form-check-label"></label>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <div class="col-12 col-md-6">
+      <label for="inputFacebook" class="form-label">Password</label>
+      <input type="password" class="form-control" id="inputFacebook" name="password" required placeholder="Ingrese su password">
+    </div><div class="col-12 col-md-6">
+      <label for="inputFacebook" class="form-label">Repetir password</label>
+      <input type="password" class="form-control" id="inputFacebook" name="password2" required placeholder="Confirme su password">
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </div>
+  </form>

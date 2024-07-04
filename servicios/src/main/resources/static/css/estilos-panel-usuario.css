@@ -1,0 +1,166 @@
+.titulo{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.contenedor-ordenes{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.ordenes-abiertas, .ordenes-cerradas{
+    width: 500px;
+    height: auto;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  background: #D3D9D9;
+  border-radius: 10px;
+  overflow-y: auto; /* Permite el desplazamiento en dispositivos móviles */
+  border-color:#455B66
+}
+
+.ordenes-abiertas-contenedor, .ordenes-cerradas-contenedor{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+@import "https://fonts.googleapis.com/css?family=Raleway:300,400,500,900,700,300|Montserrat:300,400,700";
+
+:root {
+  --color-primary: #0683C2;
+  --color-secondary: #96B8CD;
+  --color-tertiary: #AED5D6;
+  --color-quaternary: #598F92;
+  --color-quinary: #647F86;
+  --color-senary: #455B66;
+  --color-background: #D3D9D9;
+}
+
+.form-body {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--color-senary);
+  background: linear-gradient(310deg, var(--color-quinary));
+  background-size: 600% 600%;
+  position: relative;
+  background-color: var(--color-background);
+  transition: all 0.3s ease-in-out;
+  animation: oscillateBG 10s ease infinite;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.contenedor-ordenes {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+.contenedor-ordenes h2 {
+  color: var(--color-primary);
+}
+
+.card {
+  background: var(--color-background);
+  border: 2px solid var(--color-primary);
+  box-shadow: 0px 4px 30px var(--color-secondary);
+  border-radius: 15px;
+  margin: 10px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  color: var(--color-primary);
+}
+
+.card-text {
+  color: var(--color-senary);
+}
+
+.btn-primary {
+  background: linear-gradient(310deg, var(--color-secondary), var(--color-quaternary), var(--color-primary));
+  background-size: 600% 600%;
+  border: none;
+  border-radius: 15px;
+  color: rgba(11, 11, 11, 0.62);
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btn-primary:hover {
+  background-position: 100% 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+}
+
+@keyframes oscillateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hidden {
+  opacity: 0;
+}
+
+
+/* Estilo para la barra de desplazamiento en todo el documento */
+::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--color-quinary); /* Color de fondo del track */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary); /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }

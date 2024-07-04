@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
+    <title>Servicios</title>
+    <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
+    <link rel="stylesheet" href="/css/estilosForm.css">
+    <link rel="stylesheet" href="/css/icon-font.css">
+    <link rel="stylesheet" href="/css/fancybox.min.css">
+    <link rel="stylesheet" href="/css/swiper.min.css">
+    <link rel="stylesheet" href="/css/odometer.min.css">
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body class="form-body">
+      <!-- MENSAJE DE ERROR O EXITO -->
+      <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeErrorInicio">
+        <div class="card-body">
+            <h5 class="card-title">Error</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+
+    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExitoInicio">
+        <div class="card-body">
+            <h5 class="card-title">Exito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+
+    <header>
+        <div class="form-wrapper d-flex align-items-center justify-content-center">
+            <div class="form card">
+                <div class="header">
+                    <h1>Formulario Crear Servicio</h1>
+                </div>
+                <form th:action="@{/servicios/guardar}" method="POST" >
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="nombre del servicio">
+                            </div>
+                        </div>
+                        </div>
+                  
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Crear Servicio</button>
+            </form>
+            </div>
+        </div>
+    </header>
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-right mb-1">
+                <a th:href="@{/admin/panel}">Volver al panel de administrador</a>
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="/javascript/team.js"></script>
+    <script src="/javascript/fancybox.min.js"></script>
+    <script src="/javascript/swiper.min.js"></script>
+    <script src="/javascript/odometer.min.js"></script>
+    <script src="/javascript/wow.min.js"></script>
+    <script src="/javascript/3d.jquery.js"></script>
+    <script src="/javascript/pointer.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script> -->
+</body>
+
+</html>

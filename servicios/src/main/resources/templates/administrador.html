@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/nav-fragment.css" />
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/bandeja-ordenes.css">
+  <link rel="stylesheet" href="/css/estilosForm.css">
+
+  <title>Panel de administrador</title>
+
+</head>
+<header>
+  <nav th:replace="~{fragments/navbar :: nav}"></nav>
+</header>
+
+<body>
+  <section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+          <h1 class="titulo">Panel de administrador</h1>
+          <h2 class="text-center lead fs-4 subtitulo"
+            th:text="'Panel de administrador de ' + ${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}">
+          </h2>
+          <p class="text-center lead fs-4 mb-5 subsubtitulo">Desde aquí puedes ver y modificar servicios, listar
+            clientes y proveedores, modificar comentarios ofensivos</p>
+          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row gy-4 gy-lg-0">
+        <div class="col-12 col-lg-4 col-xl-3">
+          <div class="row gy-4">
+            <div class="col-12">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-header text-bg-info mjeBienvenida"
+                  th:text="${'Bienvenid@' + ' ' + session.usuariosession.nombre + ' ' + session.usuariosession.apellido}">
+                </div>
+                <div class="card-body bg-light">
+                  <div class="text-center mb-3 mjeBienvenida">
+                    <img th:src="@{/imagen/perfil/{id}(id=${session.usuariosession.id})}" class="img-fluid rounded"
+                      th:alt="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}">
+                  </div>
+                  <h5 class="text-center mb-1 mjeBienvenida"
+                    th:text="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
+                  <p class="text-center text-secondary mb-4" th:text="${session.usuariosession.rol}"></p>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+        <div class="col-12 col-lg-8 col-xl-9">
+          <div class="card widget-card border-light shadow-sm">
+            <div class="card-body p-4 bg-light">
+              <ul class="nav nav-tabs" id="profileTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                    data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane"
+                    aria-selected="true">Servicios</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                    type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Clientes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email-tab-pane"
+                    type="button" role="tab" aria-controls="email-tab-pane" aria-selected="false">Proveedores</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane"
+                    type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Clientes
+                    Proveedores</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="calificaciones-tab" data-bs-toggle="tab"
+                    data-bs-target="#calificaciones-tab-pane" type="button" role="tab"
+                    aria-controls="calificaciones-tab-pane" aria-selected="false">Calificaciones denunciadas</button>
+                </li>
+              </ul>
+              <div class="tab-content pt-4" id="profileTabContent">
+
+                <!-- ************************************************************************************************************************************************************************************************ -->
+
+
+                <!-- Primera pestaña - Servicios -->
+                <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel"
+                  aria-labelledby="overview-tab" tabindex="0">
+                  <h5 class="mb-3">Servicios</h5>
+                  <div class="mb-3">
+                    <button type="button" class="btn btn-primary">
+                      <a th:href="@{/servicios/nuevo}" class="text-white">Nuevo Servicio</a>
+                    </button>
+                  </div>
+                    
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="servicio : ${servicios}">
+                        <td th:text="${servicio.nombre}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Segunda pestaña - Clientes -->
+                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                  tabindex="0">
+                  <h5 class="mb-3">Clientes</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.apellido}"></td>
+                        <td th:text="${cliente.email}"></td>
+                        <td sec:authorize="hasRole('SUPERADMIN')">
+                          <form th:action="@{/superadmin/usuarios/{id} (id=${cliente.id})}" method="post">
+                          <button type="submit" class="btn btn-primary">
+                              CONVERTIR EN ADMIN
+                            </button>
+                            </form>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Tercera pestaña - Proveedores -->
+                <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab"
+                  tabindex="0">
+                  <h5 class="mb-3">Proveedores</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="proveedor : ${proveedor}">
+                        <td th:text="${proveedor.nombre}"></td>
+                        <td th:text="${proveedor.apellido}"></td>
+                        <td th:text="${proveedor.email}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Cuarta pestaña - Clientes Proveedores -->
+                <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab"
+                  tabindex="0">
+                  <h5 class="mb-3">Clientes Proveedores</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="clienteProveedor : ${clienteproveedor}">
+                        <td th:text="${clienteProveedor.nombre}"></td>
+                        <td th:text="${clienteProveedor.apellido}"></td>
+                        <td th:text="${clienteProveedor.email}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- ************************************************************************************************************************************************************************************************ -->
+                <!-- Quinta pestaña -->
+                <div class="tab-pane fade" id="calificaciones-tab-pane" role="tabpanel"
+                  aria-labelledby="calificaciones-tab" tabindex="0">
+                  <h5 class="mb-3">Calificaciones Denunciadas</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Comentario</th>
+                        <th scope="col">Puntaje</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="calificacion, iterStat : ${denuncias}">
+                        <td th:text="${calificacion.cliente.nombre} + ' ' + ${calificacion.cliente.apellido}"></td>
+                        <td th:text="${calificacion.comentario}"></td>
+                        <td th:text="${calificacion.puntaje}"></td>
+                        <td>
+                          <!-- Botón que abre el modal -->
+                          <button class="btn btn-danger" th:data-bs-toggle="modal"
+                            th:data-bs-target="'#denunciarModal' + ${iterStat.index}">
+                            Ver
+                          </button>
+
+                          <!-- Modal de denuncia -->
+                          <div class="modal fade" th:id="'denunciarModal' + ${iterStat.index}" tabindex="-1"
+                            aria-labelledby="denunciarModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="denunciarModalLabel">Denunciar Calificación</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6
+                                    th:text="'Cliente: ' + ${calificacion.cliente.nombre} + ' ' + ${calificacion.cliente.apellido}">
+                                  </h6>
+                                  <p th:text="'Comentario: ' + ${calificacion.comentario}"></p>
+                                  <p th:text="'Puntaje: ' + ${calificacion.puntaje}"></p>
+                                  <p>¿Desea censurar el comentario?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Desestimar
+                                    denuncia</button>
+                                  <button type="button" class="btn btn-danger" th:data-bs-toggle="modal"
+                                    th:data-bs-target="'#censurarModal' + ${iterStat.index}">Censurar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Modal de censura -->
+                          <div class="modal fade" th:id="'censurarModal' + ${iterStat.index}" tabindex="-1"
+                            aria-labelledby="censurarModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="censurarModalLabel">Censurar Calificación</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6
+                                    th:text="'Cliente: ' + ${calificacion.cliente.nombre} + ' ' + ${calificacion.cliente.apellido}">
+                                  </h6>
+                                  <form th:action="@{/admin/censurarComentario}" method="post">
+                                    <input type="hidden" th:name="id" th:value="${calificacion.id}" />
+                                    <div class="mb-3">
+                                      <label for="comentario" class="form-label">Comentario</label>
+                                      <textarea class="form-control" id="comentario" name="comentario" rows="3"
+                                        th:text="${calificacion.comentario}"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Volver</button>
+                                      <button type="submit" class="btn btn-danger">Guardar cambios</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+  <footer th:replace="~{fragments/footer :: footer}" class="footer">
+
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
+  <script src="/javascript/rough-inicio.js"></script>
+  <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<nav class="navbar fixed-top">
+    <div class="container-fluid navInicio">
+      <div>
+        <img class="logo" src="/imagenes/logo-fondo-transparente.png" alt="">
+        <a class="nvbar-brand serviHogar" style="color: #ffffff" th:href="@{/inicio}">ServiHogar</a>
+      </div>
+      <button class="navbar-toggler" style="color: #ffffff" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="offcanvas offcanvas-end desplegable" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header headerDesplegable">
+          <h5 class="offcanvas-title tituloDesplegable" id="offcanvasNavbarLabel" th:text="'Hola, ' + ${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
+          <img th:src="${session.usuariosession.imagen != null} ? @{/imagen/perfil/{id}(id=${session.usuariosession.id})} : @{/imagenes/default-profile.jpg}" class="rounded-circle imagenPerfil" width="50" height="50">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body headerBody">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 listaBodyNV">
+            <li>
+              <a th:href="@{/inicio}" class="nav-link active text-light" aria-current="page" id="my-text1">Inicio</a>
+            </li>
+            <li>
+              <a th:href="@{/perfil}" class="nav-link active text-light" aria-current="page" id="my-text2">Mi perfil</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" th:href="@{/bandeja/{id}(id=${session.usuariosession.nombre})}" id="my-text3">Bandeja de ordenes</a>
+            </li>
+            
+
+            <li class="nav-item" sec:authorize="hasRole('CLIENTE')">
+              <a class="nav-link active text-light" aria-current="page" th:href="@{/registrarClienteProveedor/{id}(id=${session.usuariosession.id})}" id="my-text6">Quiero ser proveedor de servicios</a>
+            </li>
+
+
+            
+
+          <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')">
+            <a class="nav-link active text-light" aria-current="page" th:href="@{/admin/panel}" id="my-text4">Panel de administrador</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="/logout" id="my-text5">Cerrar sesión</a>
+          </li>
+          </ul>
+          <form id="searchForm" class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" id="nombreServicio" name="nombreServicio" th:value="${nombreServicio}">
+            <button class="btn btn-outline-info btnBuscarNav" type="submit"><b>Buscar</b></button>
+        </form>
+        
+        <script>
+            document.getElementById("searchForm").onsubmit = function(event) {
+                event.preventDefault();
+                var nombreServicio = document.getElementById("nombreServicio").value;
+                var actionUrl = "/proveedores/" + encodeURIComponent(nombreServicio);
+                this.action = actionUrl;
+                this.submit();
+            };
+        </script>
+        </div>
+      </div>
+    </div>
+  </nav>

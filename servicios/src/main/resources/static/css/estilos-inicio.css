@@ -1,0 +1,217 @@
+.contenedor-servicios {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+body {
+    background: linear-gradient( #0683C2, #d3d9d9, #D3D9D9,  #ffff);
+}
+.contenedor-servicios img {
+    width: 100px;
+    height: 100px;
+
+}
+
+@media (max-width: 767px) {
+    .contenedor-servicios {
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
+@media (max-width: 480px) {
+    .contenedor-servicios {
+        grid-template-columns: repeat(2, 0.1fr);
+
+    }
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.serviHogar {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family:"Montserrat", sans-serif;
+}
+
+.nav-bar {
+    padding-bottom: 100px;
+}
+
+.navIndex {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnIndex {
+    border-radius: 10px;
+    margin-inline: 30px;
+    text-decoration: none;
+    font-family:"Montserrat", sans-serif;
+}
+
+.btnInicio {
+    text-decoration: none;
+    color: black;
+    font-family:"Montserrat", sans-serif;
+}
+.contenedorBtnInicio {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.tituloServicios {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 170px;
+    font-family: 'Amsterdam';
+    color: #455B66;
+    font-size: 450%;
+}
+@media (max-width: 767px) {
+    .tituloServicios {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloServicios {
+        font-size: 35px;
+   
+}
+}
+    .boton {
+    background-color: #0683C2;
+    font:bolder;
+}
+    .btnModal {
+    text-decoration: none;
+    color: black;
+    font-family:"Montserrat", sans-serif;
+    font-size: small;
+    width: 50%;
+    font-weight: bolder;
+}
+.modal-header {
+    background-color: #0683C2;
+}
+.modal-title {
+    padding-left: 190px;
+    font-weight: bolder;
+}
+.modal-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    font-family:"Montserrat", sans-serif;
+}
+
+.gif-hover {
+    cursor: pointer;
+}
+
+.container {
+    font-family:"Montserrat", sans-serif; 
+}
+
+.tituloUsuario {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 40px;
+    font-family: 'Amsterdam';
+    color: #455B66;
+    font-size: 450%;
+}
+@media (max-width: 767px) {
+    .tituloServicios {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloServicios {
+        font-size: 35px;
+   
+}
+}
+
+.textoUsuarios {
+    margin: 0px;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+
+
+
+:root {
+    --color-primary: #0683C2;
+    --color-secondary: #96B8CD;
+    --color-tertiary: #AED5D6;
+    --color-quaternary: #598F92;
+    --color-quinary: #647F86;
+    --color-senary: #455B66;
+    --color-background: #D3D9D9;
+  }
+  
+  /* Estilos para la barra de desplazamiento */
+  body::-webkit-scrollbar {
+      width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  body::-webkit-scrollbar-track {
+      background: var(--color-quinary); /* Color de fondo del track */
+
+  }
+  
+  body::-webkit-scrollbar-thumb {
+      background: var(--color-primary); /* Color del thumb */
+      border-radius: 10px; /* Bordes redondeados */
+      border: 3px solid var(--color-quinary); /* Espacio entre el thumb y el track */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-secondary); /* Color del thumb al pasar el mouse */
+  }
+  
+  body {
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--color-primary) var(--color-quinary); /* Firefox */
+  }
+  
+  /* Animación de fondo */
+  @keyframes oscillateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }
+
+ 

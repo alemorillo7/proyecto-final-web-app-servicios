@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> 
+<!-- HAY QUE SEGURIZAR ESTA PAGINA CON THYMELEAF, YA ESTA CARGADO ARRIBA,
+ PERMITE PONER CONDICIONALES DE QUIEN VE CUAL COSA-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
+    <title>Panel de Usuario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos-panel-usuario.css">
+    <link rel="stylesheet" href="css/estilos-inicio.css">
+    <link rel="stylesheet" href="css/nav-fragment.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+    <header>
+      <nav th:replace="~{fragments/navbar :: nav}"></nav>
+    </header>
+
+    <h1 th:if="${session.usuariosession != null}" th:text="'Bandeja de mensajes de ' + ${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}" class="titulo"></h1>
+
+<div class="contenedor-ordenes">
+  <div class="ordenes-abiertas">
+    <h2>Ordenes Abiertas</h2>
+    <div class="ordenes-abiertas-contenedor">
+        <div th:each="proveedor : ${proveedores}">
+            <div class="card" style="width: 13rem;" data-tilt data-tilt-glare data-tilt-max-glare="0.8" data-tilt-scale="1.3">
+                <img th:src="@{/imagen/perfil/{id}(id=${proveedor.id})}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${proveedor.getNombre() + ' ' + proveedor.getApellido()}"></h5>
+                    <p class="card-text" th:text="${'Años de experiencia:' + ' ' + proveedor.getExperiencia()}"></p>
+                    <p class="card-text" th:text="${proveedor.descripcion}"></p>
+                    <p class="card-text">Servicios:
+                        <div class="servicios">
+                            <ul class="servicios-columnas">
+                                <li th:each="servicioNombre : ${proveedor.getServicios()}" th:text="${servicioNombre}"></li>
+                            </ul>
+                        </div>
+                    </p>
+                    <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Teléfono:' + ' ' + proveedor.getTelefono()}"></p>
+                    <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Email:' + ' ' + proveedor.getEmail()}"></p>
+                    <a th:if="${session.usuariosession != null}" href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#solicitarServicioModal">Solicitar Servicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ordenes-abiertas-contenedor">
+      <div th:each="proveedor : ${proveedores}">
+          <div class="card" style="width: 13rem;" data-tilt data-tilt-glare data-tilt-max-glare="0.8" data-tilt-scale="1.3">
+              <img th:src="@{/imagen/perfil/{id}(id=${proveedor.id})}" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title" th:text="${proveedor.getNombre() + ' ' + proveedor.getApellido()}"></h5>
+                  <p class="card-text" th:text="${'Años de experiencia:' + ' ' + proveedor.getExperiencia()}"></p>
+                  <p class="card-text" th:text="${proveedor.descripcion}"></p>
+                  <p class="card-text">Servicios:
+                      <div class="servicios">
+                          <ul class="servicios-columnas">
+                              <li th:each="servicioNombre : ${proveedor.getServicios()}" th:text="${servicioNombre}"></li>
+                          </ul>
+                      </div>
+                  </p>
+                  <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Teléfono:' + ' ' + proveedor.getTelefono()}"></p>
+                  <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Email:' + ' ' + proveedor.getEmail()}"></p>
+                  <a th:if="${session.usuariosession != null}" href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#solicitarServicioModal">Solicitar Servicio</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+    <div class="ordenes-cerradas">
+        <h2>Ordenes Cerradas</h2>
+        <div class="ordenes-cerradas-contenedor">
+            <div class="card" style="width: 13rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div><div class="card" style="width: 13rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div><div class="card" style="width: 13rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div><div class="card" style="width: 13rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}" class="footer">
+        
+</footer>
+
+<script type="text/javascript" src="javascript/vanilla-tilt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
+    <script src="javascript/rough-inicio.js"></script>
+    
+</body>
+</html>
