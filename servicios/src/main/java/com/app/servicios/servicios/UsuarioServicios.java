@@ -19,11 +19,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.servicios.entidades.Calificacion;
 import com.app.servicios.entidades.Imagen;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.enumeraciones.Rol;
 import com.app.servicios.excepciones.MiExcepcion;
+import com.app.servicios.repositorios.CalificacionRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +37,8 @@ public class UsuarioServicios implements UserDetailsService {
     private UsuarioRepositorio usuarioRepositorio;
     @Autowired
     private ImagenServicios imagenServicios;
+    @Autowired
+    private CalificacionRepositorio calificacionRepositorio;
 
     // Crear Clientes y Proveedores//
     @Transactional
@@ -248,20 +252,29 @@ public class UsuarioServicios implements UserDetailsService {
 
         usuarioRepositorio.save(clienteProveedor);
     }
+// obtener promedio
+public String obtenerPromedioCalificaciones(Usuario proveedor) throws MiExcepcion {
+        List<Calificacion> calificaciones = calificacionRepositorio.buscarCalificacionesPorProveedor(proveedor); 
+        String mostrarPromedio;
+        if (calificaciones.isEmpty()) {
+            mostrarPromedio = "El profesional aun no ha recibido calificaciones";
+        } else{
+        double sumaPuntajes = calificaciones.stream()
+                                            .mapToInt(Calificacion::getPuntaje)
+                                            .sum();
 
-    // Setea promedio
-    @Transactional
-    public void actualizarPromedioCalificacion(String proveedorId, Integer promedio) throws MiExcepcion {
+        double apromediar = sumaPuntajes / calificaciones.size();
 
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(proveedorId);
-        if (respuesta.isPresent()) {
-            Usuario proveedor = respuesta.get();
-            proveedor.setPromedioCalificacion(promedio);
-            System.out.println("promedio seteado");
-            usuarioRepositorio.save(proveedor);
-        } else {
-            throw new MiExcepcion("No se encontro el proveedor");
+        Integer promedio = (int) Math.round(apromediar);
+        mostrarPromedio = promedio.toString();
         }
+        return mostrarPromedio;
+    
+    }
+    // Contar calificaciones
+    public int contarCalificaciones(Usuario proveedor) {
+        Integer cantidadCalificaciones =calificacionRepositorio.buscarCalificacionesPorProveedor(proveedor).size();
+        return cantidadCalificaciones;
     }
 
     @Transactional
