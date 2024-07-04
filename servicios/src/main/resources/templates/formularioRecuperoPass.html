@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña</title>
+    <link rel="stylesheet" href="css/estilosForm.css">
+</head>
+<body>
+    <form action="/recuperoPass" method="post">
+        <h1>Crear nueva contraseña</h1>
+        <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="email" required placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" class="form-control" id="inputPassword" name="password" required placeholder="Contraseña">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword2">Repetir contraseña</label>
+            <input type="password" class="form-control" id="inputPassword2" name="password2" required placeholder="Repetir contraseña">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-right mb-1">
+                <a th:href="@{/}">Volver a la página principal</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
