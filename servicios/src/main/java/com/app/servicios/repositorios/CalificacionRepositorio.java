@@ -32,6 +32,9 @@ public interface CalificacionRepositorio extends JpaRepository<Calificacion, Str
 
     @Query("SELECT AVG(c.puntaje) FROM Calificacion c WHERE c.proveedor.id = :proveedorId")
     Double promedioCalificacionProveedor(@Param("proveedorId") String proveedorId);
+
+    @Query("SELECT c FROM Calificacion c WHERE c.estadoCalificacion = DENUNCIADA")
+    public List<Calificacion> listarCalificacionesDenunciadas();
    
 
 
