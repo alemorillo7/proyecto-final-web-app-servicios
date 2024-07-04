@@ -30,7 +30,6 @@ public class CalificacionControlador {
                                     @RequestParam String ordenTrabajoId, ModelMap modelo) {
         try {
             calificacionServicios.crearCalificacion(puntaje, comentario, clienteId, proveedorId, ordenTrabajoId);
-            calificacionServicios.obtenerPromedioCalificaciones(proveedorId);
             return "redirect:/bandeja/session.usuariosession.nombre";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
@@ -100,6 +99,12 @@ public class CalificacionControlador {
         modelo.put("calificaciones", calificaciones);
         return "tablaCalificaciones";
     }
+    @GetMapping("proveedor/{proveedorId}/calificaciones")
+    public String buscarCalificacionesPorProveedor(@PathVariable String proveedorId, ModelMap modelo) {
+        List<Calificacion> calificaciones = calificacionServicios.buscarCalificacionesPorProveedor(proveedorId);
+        modelo.put("calificaciones", calificaciones);
+        return "bandeja-ordenes";
+    }
 
     // Mostrar calificaciones por cliente
     @GetMapping("/cliente/{clienteId}")
@@ -108,4 +113,5 @@ public class CalificacionControlador {
         modelo.put("calificaciones", calificaciones);
         return "tablaCalificaciones";
     }
+    
 }

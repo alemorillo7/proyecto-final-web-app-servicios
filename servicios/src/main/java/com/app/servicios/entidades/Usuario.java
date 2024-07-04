@@ -67,7 +67,5 @@ public class Usuario {
 
     private String descripcion;
 
-    private Integer promedioCalificacion;
-
     private Boolean estado;
 }

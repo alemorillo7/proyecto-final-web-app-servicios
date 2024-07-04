@@ -2,8 +2,10 @@ package com.app.servicios.controladores;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.servicios.entidades.Calificacion;
 import com.app.servicios.entidades.Servicio;
 import com.app.servicios.entidades.Usuario;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.ServicioRepositorio;
+import com.app.servicios.servicios.CalificacionServicios;
 import com.app.servicios.servicios.ServicioServicios;
 import com.app.servicios.servicios.UsuarioServicios;
 
@@ -40,6 +44,9 @@ public class PortalControlador {
 
     @Autowired
     private ServicioRepositorio servicioRepositorio;
+
+    @Autowired
+    private CalificacionServicios calificacionServicios;
 
     @GetMapping("/")
     public String index(ModelMap modelo) {
@@ -181,7 +188,7 @@ public class PortalControlador {
             @RequestParam Integer experiencia,
             @RequestParam String descripcion,
             @RequestParam List<String> serviciosIds,
-            ModelMap modelo) {
+            ModelMap modelo, HttpSession session) {
         try {
             Set<Servicio> servicios = new HashSet<>();
             for (String servicioId : serviciosIds) {
@@ -191,7 +198,9 @@ public class PortalControlador {
                 }
             }
             usuarioServicios.crearClienteProveedor(experiencia, descripcion, servicios, id);
-            return "inicio.html";
+            Usuario usuario = usuarioServicios.buscarUsuario(id);
+            session.setAttribute("usuariosession", usuario.getRol());
+            return "perfilUsuario.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             List<Servicio> servicios = servicioServicios.listarServiciosActivos();
@@ -211,13 +220,13 @@ public class PortalControlador {
             case "CLIENTE":
                 return "redirect:/inicio";
             case "PROVEEDOR":
-                return "redirect:/panelUsuario";
+                return "redirect:/perfil";
             case "CLIENTEPROVEEDOR":
-                return "redirect:/panelUsuario";
-            case "ADMIN":
                 return "redirect:/inicio";
+            case "ADMIN":
+                return "redirect:/admin/panel";
             case "SUPERADMIN":
-                return "redirect:/superadmin";
+                return "redirect:/admin/panel";
             default:
                 return "redirect:/login"; // Manejar caso de roles no esperados
         }
@@ -230,7 +239,7 @@ public class PortalControlador {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
-            return "redirect:/superadmin";
+            return "redirect:/admin/panel";
         }
         modelo.put("exito", "Bienvenido " + logueado.getNombre());
 
@@ -242,10 +251,10 @@ public class PortalControlador {
     public String panelUsuario(HttpSession session, ModelMap modelo) {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
         if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/admin";
+            return "redirect:/admin/panel";
         }
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
-            return "redirect:/superadmin";
+            return "redirect:/admin/panel";
         }
         return "panelUsuario.html";
     }
@@ -259,7 +268,7 @@ public class PortalControlador {
     }
 
     @GetMapping("/proveedores/{nombreServicio}")
-    public String mostrarProveedoresPorServicio(@PathVariable String nombreServicio, ModelMap modelo) {
+    public String mostrarProveedoresPorServicio(@PathVariable String nombreServicio, ModelMap modelo) throws MiExcepcion {
 
         Servicio servicio = new Servicio();
 
@@ -278,7 +287,22 @@ public class PortalControlador {
                     .collect(Collectors.toList());
             listaDeNombresDeServicios.add(nombresServicios);
         }
+        //probando
+        Map<String, String> promedios = new HashMap<>();
+        Map<String, Integer> cantidades = new HashMap<>();
+        Map<String, List<Calificacion>> calificacionesPorProveedor = new HashMap<>();
 
+        for (Usuario proveedor : proveedores) {
+            String promedio = usuarioServicios.obtenerPromedioCalificaciones(proveedor);
+            int cantidad = usuarioServicios.contarCalificaciones(proveedor);
+            promedios.put(proveedor.getId(), promedio);
+            cantidades.put(proveedor.getId(), cantidad);
+            List<Calificacion> calificaciones = calificacionServicios.buscarCalificacionesPorProveedor(proveedor.getId());
+            calificacionesPorProveedor.put(proveedor.getId(), calificaciones);
+        }
+        modelo.addAttribute("promedios", promedios);
+        modelo.addAttribute("cantidades", cantidades);
+        modelo.addAttribute("calificacionesPorProveedor", calificacionesPorProveedor);
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("servicio", id);
         modelo.addAttribute("listaDeNombresDeServicios", listaDeNombresDeServicios);
