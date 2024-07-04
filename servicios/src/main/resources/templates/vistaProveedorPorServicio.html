@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="/css/footer.css">
 
   <title>Proveedores</title>
+
 </head>
 
 <header>
@@ -103,6 +105,30 @@
   
   <script type="text/javascript" src="/javascript/vanilla-tilt.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+
+  
+<!-- Para que se abra el segundo modal cuando hacemos click en registrate -->
+<script>
+  document.getElementById('linkRegistro').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevenir la acción por defecto del enlace
+      
+      // Obtener el modal de inicio de sesión
+      var loginModalElement = document.getElementById('inicioSesion');
+      var loginModal = bootstrap.Modal.getInstance(loginModalElement);
+      
+      // Escuchar el evento 'hidden.bs.modal' para abrir el otro modal después de cerrar el actual
+      loginModalElement.addEventListener('hidden.bs.modal', function () {
+          var registroModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+          registroModal.show();
+      }, { once: true }); // Usar { once: true } para asegurarse de que el evento se escuche solo una vez
+      
+      // Cerrar el modal de inicio de sesión
+      loginModal.hide();
+  });
+  </script>
+    <script type="text/javascript" src="/javascript/vanilla-tilt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>

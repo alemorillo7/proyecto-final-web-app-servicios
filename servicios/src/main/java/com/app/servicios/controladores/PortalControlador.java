@@ -176,11 +176,11 @@ public class PortalControlador {
         }
     }
 
-    @GetMapping("/registarClienteProveedor/{id}")
+    @GetMapping("/registrarClienteProveedor/{id}")
     public String registrarClienteProveedor(@PathVariable String id, ModelMap modelo) {
         List<Servicio> servicios = servicioServicios.listarServiciosActivos();
         modelo.addAttribute("servicios", servicios);
-        return "registrarClienteProveedor.html";
+        return "formularioClienteProveedor.html";
     }
 
     @PostMapping("/registroClienteProveedor/{id}")
@@ -441,4 +441,25 @@ public class PortalControlador {
             return "error.html";
         }
     }
+
+
+@GetMapping("/recuperarPass")
+public String recuperarPass() {
+    return "formularioRecuperoPass.html";
+}
+
+@PostMapping("/recuperoPass")
+public String recuperarPassPost(@RequestParam String email, ModelMap modelo, @RequestParam String password, @RequestParam String password2) throws MiExcepcion{
+    try {
+        usuarioServicios.recuperarPass(email, password, password2);
+        return "index.html";
+    } catch (MiExcepcion e) {
+        modelo.put("error", e.getMessage());
+        return "redirect:/recuperarPass";
+    }
+
+}
+
+
+
 }
