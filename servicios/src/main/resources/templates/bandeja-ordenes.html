@@ -952,7 +952,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-canceladoCliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Trabajos cancelados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -1012,7 +1012,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-presupuestoRechazado"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Presupuestos rechazados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -1072,7 +1072,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-canceladoProveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Trabajos cancelados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -1133,7 +1133,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-rechazadoProveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Trabajos rechazados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
