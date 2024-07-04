@@ -41,14 +41,15 @@
                   </p>
                   <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Teléfono:' + ' ' + proveedor.getTelefono()}"></p>
                   <p th:if="${session.usuariosession != null}" class="card-text" th:text="${'Email:' + ' ' + proveedor.getEmail()}"></p>
-                  <a th:if="${session.usuariosession != null}" href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#solicitarServicioModal">Solicitar Servicio</a>
+                  <a th:if="${session.usuariosession != null}" th:href="@{/bandeja/crearOrdenTrabajo/{id}(id=${proveedor.id})}" class="btn btn-info">Solicitar Servicio</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade " id="solicitarServicioModal" tabindex="-1" aria-labelledby="solicitarServicioModalLabel" aria-hidden="true">
+
+    <!-- Modal
+    <div class="modal fade" id="solicitarServicioModal" tabindex="-1" aria-labelledby="solicitarServicioModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header solicitarHeader">
@@ -65,18 +66,18 @@
                           <label for="descripcion" class="form-label">Descripción</label>
                       <textarea class="form-control" style="border: 1px solid var(--color-septenary);"  id="descripcion" name="descripcion" rows="3" placeholder="Escriba la descripción detallada" required></textarea>
                       </div>
-                      <div th:each="servicio, iterStat : ${listaDeNombresDeServicios}">
-                        <input type="checkbox" th:id="'servicio_' + ${iterStat.index}" th:name="'servicio_' + ${iterStat.index}" th:value="${servicio}"/>
-                        <label th:for="'servicio_' + ${iterStat.index}" th:text="${servicioNombre}"></label>
+                      <div th:each="proveedor, iterStat : ${proveedores}">
+                        <div th:each="servicio, iterStat : ${proveedor.servicios}">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox"  name="serviciosIds" th:value="${servicio}" required>
+                          <label class="form-check-label" th:for="${'servicio-' + servicio.id}" th:text="${servicio.getNombre()}"></label>
+                        </div>
+                      </div>
                     </div>
                     
                       <div class="mb-3">
                           <label for="imagen" class="form-label">Imagen (opcional)</label>
                           <input type="file" class="form-control" style="border: 1px solid var(--color-septenary);" id="imagen" name="imagen">
-                      </div>
-                      <div class="mb-3">
-                          <label for="video" class="form-label">Video (opcional)</label>
-                          <input type="file" class="form-control" style="border: 1px solid var(--color-septenary);" id="video" name="video">
                       </div>
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
@@ -86,7 +87,7 @@
               </div>
           </div>
       </div>
-  </div><br><br>
+  </div> --><br><br>
   <footer th:replace="~{fragments/footer :: footer}" class="footer">
         
   </footer>
