@@ -1,321 +1,45 @@
+@font-face {
+    font-family:'Amsterdam';
+    src: url('/fuentes/Amsterdam.ttf') format('truetype');
+    /* Agrega más formatos de fuente según sea necesario */
 
+  }
 
-
-
-.contenedor-servicios {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    justify-items: center;
-    align-items: center;
-    margin-top: 50px;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border: 1px solid black;
-    background-color: white;
-    margin-bottom: 100px;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-image: url(/imagenes/fondo.png)
-}
-.contenedor-servicios img {
-    width: 100px;
-    height: 100px;
-    background-color: white;
-}
-
-@media (max-width: 767px) {
-    .contenedor-servicios {
-        grid-template-columns: repeat(3, 1fr);
-    background-color: white;
-    }
-}
-
-@media (max-width: 480px) {
-    .contenedor-servicios {
-        grid-template-columns: repeat(2, 0.1fr);
-        background-color: white;
-    }
-}
-
-.logo {
-    width: 80px;
-    height: 80px;
-    padding: 0px;
-    margin: 0px;
-}
-
-.serviHogar {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    font-family:"Montserrat", sans-serif;
-}
-
-.nav-bar {
-    padding-bottom: 100px;
-}
-
-.navIndex {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btnIndex {
-    border-radius: 10px;
-    margin-inline: 30px;
-    text-decoration: none;
-    font-family:"Montserrat", sans-serif;
-}
-
-.btnInicio {
-    text-decoration: none;
-    color: black;
-    font-family:"Montserrat", sans-serif;
-}
-.contenedorBtnInicio {
-    width: 100%;
-    display: flex;
-    justify-content: end;
-}
-
-.tituloServicios {
-    text-align: center;
-    margin-top: 70px;
-    font-family:"Montserrat", sans-serif;
-    padding-top: 60px;
-}
-.boton {
-    background-color: #0683C2;
-}
-.btnModal {
-    text-decoration: none;
-    color: black;
-    font-family:"Montserrat", sans-serif;
-    font-size: small;
-    width: 50%;
-    font-weight: bolder;
-}
-.modal-header {
-    background-color: #0683C2;
-}
-.modal-title {
-    padding-left: 190px;
-    font-weight: bolder;
-}
-.modal-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    font-family:"Montserrat", sans-serif;
-}
-
-.gif-hover {
-    cursor: pointer;
-}
-
-.logo {
-    width: 80px;
-    height: 80px;
-    padding: 0px;
-    margin: 0px;
-}
-
-.serviHogar {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    font-family:"Montserrat", sans-serif;
-    font-size: medium;
-}
-
-.navInicio {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.desplegable {
-    font-family:"Montserrat", sans-serif;
-    background-color: #647F86;
-
-}
-
-.headerDesplegable {
-    background-color: #0683C2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    padding: 0 20px;
-}
-
-.imagenPerfil {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 35px;
-}
-
-
-.tituloDesplegable {
-    color:aliceblue;
-    margin-left: 30px;
-}
-
-
-.btnBuscar {
-    background-color: #0683C2;
-    color: black;
-}
-
-footer {
     width: 100%;
     height: 100%;
-    background-color: #455B66;
-    color: white;
+    background: linear-gradient( #0683C2, #96B8CD, #d3d9d9,  #ffff);
     font-family:"Montserrat", sans-serif;
-    padding: 20px;
 }
-.footerSuperior {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-}
-
-
-
-@media (max-width: 1500px) {
-    .footerSuperior {
-        grid-template-columns: repeat(2, 3fr);
-    }
-    .textoFooter {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-}
-
-@media (max-width: 800px) {
-    .footerSuperior {
-        flex-direction: column;
-    }
-    .btnFArriba {
-        text-align: end;
-    }
-    .textoFooter {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-}
-
-.textoFooter {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-.ingresar {
-    text-decoration: none;
-    margin-left: auto 10px;
-    margin-right: auto 10px;
-}
-.preguntas {
-    text-decoration: none;
-    margin-left: auto 10px;
-    margin-right: auto 10px;
-}
-.ayuda{
-    text-decoration: none;
-    margin-left: auto 10px;
-    margin-right: auto 10px;
-}
-.politicas {
-    text-decoration: none;
-    margin-left: auto 10px;
-    margin-right: auto 10px;
-}
-.terminos{
-    text-decoration: none;
-    margin-left: auto 10px;
-    margin-right: auto 10px;
-}
-
-.sectionWhat {
-    margin: 0;
-    padding: 0;
-    text-align: right;
-}
-
-.item{
-    height: 40px;
-    background-color:  #455B66;
-    border-radius: 40%;
-    text-align: end;
-    margin-left: 200px;
-
-}
-
-.itemW{
-    height: 90px;
-    padding: 1.5rem;
-    position: fixed;
-    right: 3rem;
-    bottom: 1rem;
-    opacity: 80%;
-}
-
-
-.sectionIcon {
-    list-style: none;
-    margin: 20px auto;
+.titulo {
     text-align: center;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: 70px;
+    font-family:"Amsterdam";
+    padding-top: 60px;
 }
-.item1 {
-    list-style: none;
-    display: inline-block;
-    padding: 1rem;
-    padding-bottom: 0px;
-    padding-top: 0px;
+
+.textoPerfil {
+    font-family:"Montserrat", sans-serif;
 }
-.icono{
-    height: 30px;
-    justify-content: center;
+.container {
+    font-family:"Montserrat", sans-serif;
 }
-.sectionLogo {
-    list-style: none;
+.tituloTarjeta {
+    font-weight: bolder;
     text-align: center;
 }
-.logoFooter {
-    width: 80px;
-    height: 80px;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 0px;
-    margin-top: 0px;
+
+.botonAct {
+    background-color:aqua;
 }
-.copyright {
-    font-size: small;
-    justify-content: center;
-    text-align: center;    
+.botonAct :hover{
+    background-color:#0683C2;
 }
 
 

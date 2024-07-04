@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/estilosForm.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/estilos-inicio.css">
-    <link rel="stylesheet" href="/css/estilos-index.css">
+    <!-- <link rel="stylesheet" href="/css/estilos-index.css"> -->
     <link rel="icon" type="image/x-icon" href="imagenes/logo-fondo-transparente.png" />
     </head>
 
@@ -23,9 +23,9 @@
 <body>
     <h1 class="titulo">Proveedores disponibles</h1>
 
-    <div class="contenedor-tarjetas">
+    <div class="contenedor-tarjetas"  >
         <div th:each="proveedor, iterStat : ${proveedores}">
-            <div class="card" style="width: 13rem;" data-tilt data-tilt-glare data-tilt-max-glare="0.8" data-tilt-scale="1.1">
+            <div class="card" style="width: 16rem;" data-tilt data-tilt-glare data-tilt-max-glare="0.1" data-tilt-scale="1.0">
                 <img th:src="@{/imagen/perfil/{id}(id=${proveedor.id})}" class="card-img-top" alt="...">
                 <div class="card-body cuerpo-tarjeta">
                   <h5 class="card-title" th:text="${proveedor.getNombre() + ' ' + proveedor.getApellido()}"></h5>
@@ -68,7 +68,7 @@
                       </div>
                       <div th:each="servicio, iterStat : ${listaDeNombresDeServicios}">
                         <input type="checkbox" th:id="'servicio_' + ${iterStat.index}" th:name="'servicio_' + ${iterStat.index}" th:value="${servicio}"/>
-                        <label th:for="'servicio_' + ${iterStat.index}" th:text="${servicio}"></label>
+                        <label th:for="'servicio_' + ${iterStat.index}" th:text="${servicioNombre}"></label>
                     </div>
                     
                       <div class="mb-3">

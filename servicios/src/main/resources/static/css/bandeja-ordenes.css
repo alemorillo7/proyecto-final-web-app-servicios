@@ -5,6 +5,15 @@ body {
   .perfil {
     margin-top: 100px;
 }
+
+
+.titulo {
+  text-align: center;
+  margin-top: 70px;
+  font-family:"Amsterdam";
+  padding-top: 60px;
+}
+
 .card.widget-card {
     background-color: var(--color-background);
 border-color: var(--color-secondary);
@@ -46,4 +55,5 @@ button.btn.btn-primary.btn-block.mt-4 {
   
   .card-text {
     color: var(--color-senary);
+   
   }
