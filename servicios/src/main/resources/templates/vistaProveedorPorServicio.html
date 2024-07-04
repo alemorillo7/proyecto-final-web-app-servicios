@@ -93,61 +93,14 @@
     </div>
   </div>
 
-  <footer th:replace="~{fragments/footer :: footer}" class="footer"></footer>
 
-  <script type="text/javascript" src="/javascript/vanilla-tilt.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
-  <script src="/javascript/rough-inicio.js"></script>
-</body>
 
-</html>
-
-  <!-- Modal
-    <div class="modal fade" id="solicitarServicioModal" tabindex="-1" aria-labelledby="solicitarServicioModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header solicitarHeader">
-                  <h1 class="modal-title h6" style="color: azure;" id="solicitarServicioModalLabel">Solicitar Servicio</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-          <div class="modal-body solicitarServicio" >
-              <form class="form-wrapper" th:action="@{/solicitarServicio}" method="post" enctype="multipart/form-data">
-                      <div class="mb-3">
-                          <label for="titulo" class="form-label">Título</label>
-                      <input type="text" class="form-control" style="border: 1px solid var(--color-septenary);" id="titulo" name="titulo" placeholder="Titulo del pedido" required>
-                      </div>
-                      <div class="mb-3">
-                          <label for="descripcion" class="form-label">Descripción</label>
-                      <textarea class="form-control" style="border: 1px solid var(--color-septenary);"  id="descripcion" name="descripcion" rows="3" placeholder="Escriba la descripción detallada" required></textarea>
-                      </div>
-                      <div th:each="proveedor, iterStat : ${proveedores}">
-                        <div th:each="servicio, iterStat : ${proveedor.servicios}">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox"  name="serviciosIds" th:value="${servicio}" required>
-                          <label class="form-check-label" th:for="${'servicio-' + servicio.id}" th:text="${servicio.getNombre()}"></label>
-                        </div>
-                      </div>
-                    </div>
-                    
-                      <div class="mb-3">
-                          <label for="imagen" class="form-label">Imagen (opcional)</label>
-                          <input type="file" class="form-control" style="border: 1px solid var(--color-septenary);" id="imagen" name="imagen">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
-                      <button type="button" class="btn btn-secondary" style="background: #647F86;" data-bs-dismiss="modal">Cerrar</button>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div> --><br><br>
+  <br><br>
   <footer th:replace="~{fragments/footer :: footer}" class="footer">
 
   </footer>
 
-  <script></script>
+  
   <script type="text/javascript" src="/javascript/vanilla-tilt.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
