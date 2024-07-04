@@ -20,8 +20,8 @@ import com.app.servicios.entidades.Usuario;
 import com.app.servicios.excepciones.MiExcepcion;
 import com.app.servicios.repositorios.ServicioRepositorio;
 import com.app.servicios.repositorios.UsuarioRepositorio;
-import com.app.servicios.servicios.CalificacionServicios;
 import com.app.servicios.servicios.OrdenTrabajoServicios;
+import com.app.servicios.servicios.UsuarioServicios;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -38,7 +38,7 @@ public class OrdenTrabajoControlador {
     @Autowired
     private ServicioRepositorio servicioRepositorio;
     @Autowired
-    private CalificacionServicios calificacionServicios;
+    private UsuarioServicios usuarioServicios;
 //Crear Orden Trabajo
 
     @GetMapping("/crearOrdenTrabajo/{proveedorId}")
@@ -156,8 +156,8 @@ public class OrdenTrabajoControlador {
 
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-        Integer promedioCalificacion = calificacionServicios.obtenerPromedioCalificaciones(logueado.getId());
-        modelo.addAttribute("promedioCalificacion", promedioCalificacion);
+        String mostrarPromedio = usuarioServicios.obtenerPromedioCalificaciones(logueado);
+        modelo.addAttribute("promedioCalificacion", mostrarPromedio);
         List<OrdenTrabajo> ordenesAbiertoPresupuestar = ordenTrabajoServicios.buscarOrdenesAbiertoPresupuestar(logueado);
         List<OrdenTrabajo> ordenesAbiertoPresupuestado = ordenTrabajoServicios.buscarOrdenesAbiertoPresupuestado(logueado);
         List<OrdenTrabajo> ordenesAbiertoAceptado = ordenTrabajoServicios.buscarOrdenesAbiertoAceptado(logueado);
