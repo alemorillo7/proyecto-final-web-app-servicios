@@ -31,10 +31,11 @@
               <a class="nav-link active text-light" aria-current="page" th:href="@{/registrarClienteProveedor/{id}(id=${session.usuariosession.id})}" id="my-text6">Quiero ser proveedor de servicios</a>
             </li>
 
+
             
 
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#" id="my-text4">Desactivar cuenta</a>
+          <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')">
+            <a class="nav-link active text-light" aria-current="page" th:href="@{/admin/panel}" id="my-text4">Panel de administrador</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="/logout" id="my-text5">Cerrar sesión</a>
