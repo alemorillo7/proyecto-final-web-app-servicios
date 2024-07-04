@@ -56,7 +56,7 @@ public class CalificacionControlador {
     public String denunciarCalificacion(@PathVariable String id, ModelMap modelo) {
         try {
             calificacionServicios.denunciarCalificacion(id);
-            return "redirect:/calificaciones/listar";
+            return "redirect:/bandeja/session.usuariosession.nombre";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
             return "redirect:/calificaciones/denunciar/" + id;
