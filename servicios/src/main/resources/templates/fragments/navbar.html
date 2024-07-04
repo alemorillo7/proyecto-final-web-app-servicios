@@ -2,7 +2,7 @@
     <div class="container-fluid navInicio">
       <div>
         <img class="logo" src="/imagenes/logo-fondo-transparente.png" alt="">
-        <a class="navbar-brand serviHogar" style="color: #ffffff" th:href="@{/inicio}">ServiHogar</a>
+        <a class="nvbar-brand serviHogar" style="color: #ffffff" th:href="@{/inicio}">ServiHogar</a>
       </div>
       <button class="navbar-toggler" style="color: #ffffff" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -31,10 +31,11 @@
               <a class="nav-link active text-light" aria-current="page" th:href="@{/registrarClienteProveedor/{id}(id=${session.usuariosession.id})}" id="my-text6">Quiero ser proveedor de servicios</a>
             </li>
 
+
             
 
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#" id="my-text4">Desactivar cuenta</a>
+          <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')">
+            <a class="nav-link active text-light" aria-current="page" th:href="@{/admin/panel}" id="my-text4">Panel de administrador</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="/logout" id="my-text5">Cerrar sesión</a>
@@ -42,7 +43,7 @@
           </ul>
           <form id="searchForm" class="d-flex mt-3" role="search">
             <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" id="nombreServicio" name="nombreServicio" th:value="${nombreServicio}">
-            <button class="btn btn-outline-info btnBuscar" type="submit"><b>Buscar</b></button>
+            <button class="btn btn-outline-info btnBuscarNav" type="submit"><b>Buscar</b></button>
         </form>
         
         <script>

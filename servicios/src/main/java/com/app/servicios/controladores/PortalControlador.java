@@ -188,7 +188,7 @@ public class PortalControlador {
             @RequestParam Integer experiencia,
             @RequestParam String descripcion,
             @RequestParam List<String> serviciosIds,
-            ModelMap modelo) {
+            ModelMap modelo, HttpSession session) {
         try {
             Set<Servicio> servicios = new HashSet<>();
             for (String servicioId : serviciosIds) {
@@ -198,7 +198,9 @@ public class PortalControlador {
                 }
             }
             usuarioServicios.crearClienteProveedor(experiencia, descripcion, servicios, id);
-            return "inicio.html";
+            Usuario usuario = usuarioServicios.buscarUsuario(id);
+            session.setAttribute("usuariosession", usuario.getRol());
+            return "perfilUsuario.html";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             List<Servicio> servicios = servicioServicios.listarServiciosActivos();
@@ -218,13 +220,13 @@ public class PortalControlador {
             case "CLIENTE":
                 return "redirect:/inicio";
             case "PROVEEDOR":
-                return "redirect:/panelUsuario";
+                return "redirect:/perfil";
             case "CLIENTEPROVEEDOR":
-                return "redirect:/panelUsuario";
-            case "ADMIN":
                 return "redirect:/inicio";
+            case "ADMIN":
+                return "redirect:/admin/panel";
             case "SUPERADMIN":
-                return "redirect:/superadmin";
+                return "redirect:/admin/panel";
             default:
                 return "redirect:/login"; // Manejar caso de roles no esperados
         }
@@ -237,7 +239,7 @@ public class PortalControlador {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
-            return "redirect:/superadmin";
+            return "redirect:/admin/panel";
         }
         modelo.put("exito", "Bienvenido " + logueado.getNombre());
 
@@ -249,10 +251,10 @@ public class PortalControlador {
     public String panelUsuario(HttpSession session, ModelMap modelo) {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
         if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/admin";
+            return "redirect:/admin/panel";
         }
         if (logueado.getRol().toString().equals("SUPERADMIN")) {
-            return "redirect:/superadmin";
+            return "redirect:/admin/panel";
         }
         return "panelUsuario.html";
     }

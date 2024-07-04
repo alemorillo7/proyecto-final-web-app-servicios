@@ -41,15 +41,15 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
           <div class="row gy-4">
             <div class="col-12">
               <div class="card widget-card border-light shadow-sm">
-                <div class="card-header text-bg-info"
+                <div class="card-header text-bg-info mjeBienvenida"
                   th:text="${'Bienvenid@' + ' ' + session.usuariosession.nombre + ' ' + session.usuariosession.apellido}">
                 </div>
                 <div class="card-body bg-light">
-                  <div class="text-center mb-3">
+                  <div class="text-center mb-3 mjeBienvenida" >
                     <img th:src="@{/imagen/perfil/{id}(id=${session.usuariosession.id})}" class="img-fluid rounded"
                       th:alt="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}">
                   </div>
-                  <h5 class="text-center mb-1"
+                  <h5 class="text-center mb-1 mjeBienvenida"
                     th:text="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}"></h5>
                   <p class="text-center text-secondary mb-4" th:text="${session.usuariosession.rol}"></p>
 
@@ -61,7 +61,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
             <div class="col-12">
               <div class="card widget-card border-light shadow-sm">
-                <div class="card-header text-bg-info">Redes</div>
+                <div class="card-header text-bg-info mjeBienvenida">Redes</div>
                 <div class="card-body bg-light">
                   <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
                     <i class="bi bi-youtube"></i>
@@ -151,8 +151,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                               th:aria-labelledby="'exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
                               tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                  <div class="modal-header">
+                                <div class="modal-content modalBandeja">
+                                  <div class="modal-header modalHeader ">
                                     <h1 class="modal-title fs-5"
                                       th:id="'exampleModalToggleClienteABiertoPresupuestar' + ${iterStat.index}"
                                       th:text="${ordenAbiertoPresupuestar.titulo}"></h1>
@@ -952,7 +952,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-canceladoCliente"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Trabajos cancelados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -1012,7 +1012,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-presupuestoRechazado"
                     sec:authorize="hasRole('CLIENTE') or hasRole('CLIENTEPROVEEDOR') or hasRole('ADMIN')">
                     <h5 class="mb-3">Presupuestos rechazados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -1072,7 +1072,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-canceladoProveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Trabajos cancelados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>
@@ -1133,7 +1133,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                   <div id="contenedor-ordenes-cerrado-rechazadoProveedor"
                     sec:authorize="hasRole('PROVEEDOR') or hasRole('CLIENTEPROVEEDOR')">
                     <h5 class="mb-3">Trabajos rechazados por mi</h5>
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col">Titulo</th>

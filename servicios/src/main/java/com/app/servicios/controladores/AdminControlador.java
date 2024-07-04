@@ -32,6 +32,11 @@ public class AdminControlador {
     @Autowired
     private CalificacionServicios calificacionServicios;
 
+    @GetMapping("/panel")
+    public String panelAdministrador() {
+        return "administrador.html";
+    }
+
     // Mostrar lista de servicios
     @GetMapping("/servicios")
     public String listarServicios(ModelMap modelo) {
