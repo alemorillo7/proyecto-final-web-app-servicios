@@ -169,7 +169,7 @@ public class PortalControlador {
         }
     }
 
-    @GetMapping("/registarClienteProveedor/{id}")
+    @GetMapping("/registrarClienteProveedor/{id}")
     public String registrarClienteProveedor(@PathVariable String id, ModelMap modelo) {
         List<Servicio> servicios = servicioServicios.listarServiciosActivos();
         modelo.addAttribute("servicios", servicios);
