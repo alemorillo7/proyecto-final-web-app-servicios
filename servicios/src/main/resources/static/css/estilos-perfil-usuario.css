@@ -126,9 +126,7 @@ button.btn.btn-primary.btn-block.mt-4 {
     border-color: #0683C2;
   }
   
-  .card:hover {
-    transform: scale(1.05);
-  }
+
   
   .card-body {
     padding: 20px;
