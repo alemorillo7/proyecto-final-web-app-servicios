@@ -317,6 +317,11 @@ public String obtenerPromedioCalificaciones(Usuario proveedor) throws MiExcepcio
         List<Usuario> proveedores = usuarioRepositorio.buscarPorRol(Rol.PROVEEDOR);
         return proveedores;
     }
+    @Transactional(readOnly = true)
+    public List<Usuario> listarClienteProveedores(){
+        List<Usuario> clienteproveedores = usuarioRepositorio.buscarPorRol(Rol.CLIENTEPROVEEDOR);
+        return clienteproveedores;
+    }
 
     @Transactional(readOnly = true)
     public List<Usuario> listarClientesProveedores() {

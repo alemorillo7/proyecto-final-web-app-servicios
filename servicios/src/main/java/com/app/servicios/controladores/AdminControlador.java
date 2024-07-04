@@ -37,8 +37,17 @@ public class AdminControlador {
     @GetMapping("/panel")
     public String panelAdministrador(ModelMap modelo, HttpSession session) {
 
+        List<Servicio> servicios = servicioServicios.listarServiciosTodos();
+        modelo.addAttribute("servicios", servicios);
+        List<Usuario> cliente = usuarioServicios.listarClientes();
+        modelo.addAttribute("clientes", cliente);
+        List<Usuario> proveedor = usuarioServicios.listarProveedores();
+        modelo.addAttribute("proveedor", proveedor);
+        List<Usuario> clienteProveedor = usuarioServicios.listarClienteProveedores();
+        modelo.addAttribute("clienteproveedor", clienteProveedor);
         List<Calificacion> calificacionesDenunciadas = calificacionServicios.listarCalificacionesDenunciadas();
         modelo.addAttribute("denuncias", calificacionesDenunciadas);
+        
         return "administrador.html";
     }
 // censurar comentario

@@ -42,7 +42,7 @@ public class ServicioControlador {
 
         try {
             servicioServicios.crearServicio(nombre);
-            return "redirect:/servicios/listar";
+            return "redirect:/admin/panel";
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             return "redirect:/servicios/nuevo";

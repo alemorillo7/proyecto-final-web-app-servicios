@@ -97,41 +97,103 @@
                 <!-- ************************************************************************************************************************************************************************************************ -->
 
 
-                <!-- Primera pestaña -->
+                <!-- Primera pestaña - Servicios -->
                 <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel"
                   aria-labelledby="overview-tab" tabindex="0">
-
+                  <h5 class="mb-3">Servicios</h5>
+                  <div class="mb-3">
+                    <button type="button" class="btn btn-primary">
+                      <a th:href="@{/servicios/nuevo}" class="text-white">Nuevo Servicio</a>
+                    </button>
+                  </div>
+                    
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="servicio : ${servicios}">
+                        <td th:text="${servicio.nombre}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
-                <!-- ************************************************************************************************************************************************************************************************ -->
-
-                <!-- Segunda pestaña -->
+                <!-- Segunda pestaña - Clientes -->
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                   tabindex="0">
+                  <h5 class="mb-3">Clientes</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.apellido}"></td>
+                        <td th:text="${cliente.email}"></td>
+                        <td sec:authorize="hasRole('SUPERADMIN')">
+                          <form th:action="@{/superadmin/usuarios/{id} (id=${cliente.id})}" method="post">
+                          <button type="submit" class="btn btn-primary">
+                              CONVERTIR EN ADMIN
+                            </button>
+                            </form>
+                        </td>
 
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
-                <!-- ************************************************************************************************************************************************************************************************ -->
-
-
-                <!-- ************************************************************************************************************************************************************************************************ -->
-
-
-
-                <!-- Tercera pestaña -->
-                <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab" tabindex="0">
-
+                <!-- Tercera pestaña - Proveedores -->
+                <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab"
+                  tabindex="0">
+                  <h5 class="mb-3">Proveedores</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="proveedor : ${proveedor}">
+                        <td th:text="${proveedor.nombre}"></td>
+                        <td th:text="${proveedor.apellido}"></td>
+                        <td th:text="${proveedor.email}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
-
-                <!-- ************************************************************************************************************************************************************************************************ -->
-
-
-
-                <!-- Cuarta pestaña -->
+                <!-- Cuarta pestaña - Clientes Proveedores -->
                 <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab"
                   tabindex="0">
-
+                  <h5 class="mb-3">Clientes Proveedores</h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="clienteProveedor : ${clienteproveedor}">
+                        <td th:text="${clienteProveedor.nombre}"></td>
+                        <td th:text="${clienteProveedor.apellido}"></td>
+                        <td th:text="${clienteProveedor.email}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <!-- ************************************************************************************************************************************************************************************************ -->
                 <!-- Quinta pestaña -->
