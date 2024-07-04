@@ -106,13 +106,12 @@ public class OrdenTrabajoServicios {
         if (archivo != null && !archivo.isEmpty()) {
             try {
                 Imagen imagen = imagenServicios.guardarImagen(archivo);
-                cliente.setImagen(imagen);
+                ordenTrabajo.setImagen(imagen);
             } catch (MiExcepcion e) {
                 throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
             }
-        } else {
-            throw new MiExcepcion("El archivo no puede estar nulo o vacío");
-        }
+        } 
+        
         ordenTrabajo.setEstadoOrden(EstadoOrden.ABIERTO);
         ordenTrabajo.setEstadoTrabajo(EstadoTrabajo.PRESUPUESTAR);
         ordenTrabajo.setEstado(true);

@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,18 +40,40 @@ public class OrdenTrabajoControlador {
     @Autowired
     private CalificacionServicios calificacionServicios;
 //Crear Orden Trabajo
-    @PostMapping("/crearOrdenTrabajo")
+
+    @GetMapping("/crearOrdenTrabajo/{proveedorId}")
+    @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR', 'ADMIN')")
+    public String crearOrdenTrabajo(ModelMap modelo, 
+                                    HttpSession session,
+                                    @PathVariable String proveedorId) {
+        modelo.addAttribute("proveedorId", proveedorId);
+        modelo.addAttribute("servicios", servicioRepositorio.buscarServiciosPorIdUsuario(proveedorId));
+        return "crearOrdenTrabajo.html";
+    }
+
+
+
+
+
+
+
+
+
+    @PostMapping("/OrdenTrabajoCreada")
     @PreAuthorize("hasRole('CLIENTE' , 'CLIENTEPROVEEDOR' , 'ADMIN')")
     public String crearOrdenTrabajo(ModelMap modelo,
                                     HttpSession session,
                                     @RequestParam String titulo,
                                     @RequestParam String proveedorId,
-                                    @RequestParam String clienteId,
+                                    
                                     @RequestParam List<String> serviciosIds,
                                     @RequestParam String descripcion,
                                     MultipartFile archivo) throws MiExcepcion {
 
-        ordenTrabajoServicios.crearOrdenTrabajo(proveedorId, clienteId, titulo, serviciosIds, descripcion, archivo);
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        String clienteId = logueado.getId();
+
+        ordenTrabajoServicios.crearOrdenTrabajo(titulo, proveedorId, clienteId, serviciosIds, descripcion, archivo);
         
         return "redirect:/bandeja/session.usuariosession.nombre";//ver si funciona//
     }
